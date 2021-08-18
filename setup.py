@@ -166,7 +166,13 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
     ],
-    # Could also include keywords, download_url, project_urls, etc.
+    # CLI
+    entry_points={
+        "console_scripts": [
+            "benthicnet-download=benthicnet.download_images:main",
+            "benthicnet-download-tar=benthicnet.download_images_tar:main",
+        ],
+    },
     # Custom commands
     cmdclass={
         "test": PyTest,
