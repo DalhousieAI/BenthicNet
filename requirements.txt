@@ -1,3 +1,4 @@
+haversine
 numpy
 pandas>=1.0.0
 pillow

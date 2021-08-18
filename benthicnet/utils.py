@@ -4,6 +4,8 @@ Utility functions.
 
 import os
 
+import numpy as np
+
 
 def unique_map(arr):
     """
@@ -27,6 +29,23 @@ def unique_map(arr):
         else:
             mapping[x].append(i)
     return mapping
+
+
+def first_nonzero(arr, axis=-1, invalid_val=-1):
+    """
+    Find the index of the first non-zero element in an array.
+
+    Parameters
+    ----------
+    arr : numpy.ndarray
+        Array to search.
+    axis : int, optional
+        Axis along which to search for a non-zero element. Default is `-1`.
+    invalid_val : any, optional
+        Value to return if all elements are zero. Default is `-1`.
+    """
+    mask = arr != 0
+    return np.where(mask.any(axis=axis), mask.argmax(axis=axis), invalid_val)
 
 
 def clean_df(df, inplace=True):
