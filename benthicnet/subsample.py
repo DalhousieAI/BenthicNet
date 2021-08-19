@@ -125,7 +125,13 @@ def subsample_distance(
 
 
 def subsample_distance_sitewise(
-    df, distance=2.5, min_population=200, verbose=1, use_tqdm=True
+    df,
+    distance=2.5,
+    min_population=200,
+    target_population=1000,
+    max_factor=4,
+    verbose=1,
+    use_tqdm=True,
 ):
     """
     Subsample a dataframe by distance between entries, for each site separately.
@@ -138,6 +144,16 @@ def subsample_distance_sitewise(
         Target distance between consecutive entries in the dataframe.
     min_population : int, default=200
         Sites with fewer than this many entries will not be subsampled.
+    target_population : int or None, default=1000
+        Desired number of samples per site. The specified distance will
+        by multiplied by a factor 1, 2, 3, ..., `max_factor` until the population
+        falls below `target_population`; the largest factor before falling
+        below the `target_population` will be used.
+        Set to ``0``, ``-1``, or ``None`` to disable additional subsampling.
+    max_factor : int, default=4
+        Maximum distance factor to use when performing additional subsampling
+        for over populated sites.
+        The maximum distance at which to subsample is ``distance * max_factor``.
     verbose : int, default=1
         Verbosity level.
     use_tqdm : bool, optional
@@ -157,6 +173,7 @@ def subsample_distance_sitewise(
     n_below_thr = 0
     n_unchanged = 0
     n_changed = 0
+    tally_factors = {k: 0 for k in range(1, 1 + max_factor)}
 
     dfs_redacted = []
 
@@ -170,10 +187,28 @@ def subsample_distance_sitewise(
             n_below_thr += 1
         else:
             df_i = subsample_distance(df_i, threshold=distance, verbose=verbose - 1)
+            factor_used = 1
+            if target_population is not None and target_population > 0:
+                # Try further subsampling at increased distances to reduce pop
+                df_j = df_i
+                for factor in range(2, max_factor + 1):
+                    df_prev = df_j
+                    df_j = subsample_distance(
+                        df_i, threshold=distance * factor, verbose=verbose - 1
+                    )
+                    if len(df_j) < target_population:
+                        df_j = df_prev
+                        factor_used = factor - 1
+                        break
+                else:
+                    factor_used = factor
+                df_i = df_j
+
             if len(df_i) == pre_population:
                 n_unchanged += 1
             else:
                 n_changed += 1
+                tally_factors[factor_used] += 1
         dfs_redacted.append(df_i)
 
     df_redacted = pd.concat(dfs_redacted)
@@ -192,6 +227,9 @@ def subsample_distance_sitewise(
             f"\nThere were {n_unchanged} other sites which also remained unchanged."
         )
         out_str += f"\nThere were {n_changed} sites which were subsampled."
+        if target_population is not None and target_population > 0:
+            for k, v in tally_factors.items():
+                out_str += f"\n{v:8d} sites subsampled at factor={k} (distance={k * distance}m)"
         print(out_str, flush=True)
 
     return df_redacted
@@ -331,6 +369,34 @@ def get_parser():
             """
             Minimum number of samples in a single site for that site to be
             subsampled. Default is %(default)s.
+        """
+        ),
+    )
+    parser.add_argument(
+        "--target-population",
+        type=int,
+        default=1000,
+        help=textwrap.dedent(
+            """
+            Desired number of samples per site. The specified distance will
+            by multiplied by a factor 1, 2, 3, ..., MAX_FACTOR until the
+            population falls below TARGET_POPULATION; the largest factor before
+            falling below the TARGET_POPULATION will be used.
+            Set to 0 or -1 to disable.
+            Default is %(default)s.
+        """
+        ),
+    )
+    parser.add_argument(
+        "--max-factor",
+        type=int,
+        default=4,
+        help=textwrap.dedent(
+            """
+            Maximum distance factor to use when performing additional subsampling
+            for over populated sites.
+            The maximum distance at which to subsample is DISTANCE * MAX_FACTOR.
+            Default is %(default)s.
         """
         ),
     )
