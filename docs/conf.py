@@ -174,6 +174,7 @@ extensions = [
     "sphinx.ext.ifconfig",
     "sphinx.ext.viewcode",
     "sphinx.ext.napoleon",
+    "sphinxarg.ext",
 ]
 
 # Some extension features only available on later Python versions
