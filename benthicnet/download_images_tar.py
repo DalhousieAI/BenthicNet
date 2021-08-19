@@ -18,7 +18,7 @@ import PIL.Image
 import requests
 import tqdm
 
-from . import __meta__, utils
+from benthicnet import __meta__, utils
 
 
 def download_images(
