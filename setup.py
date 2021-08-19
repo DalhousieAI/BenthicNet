@@ -171,6 +171,7 @@ setup(
         "console_scripts": [
             "benthicnet-download=benthicnet.download_images:main",
             "benthicnet-download-tar=benthicnet.download_images_tar:main",
+            "benthicnet-subsample=benthicnet.subsample:main",
         ],
     },
     # Custom commands
