@@ -611,7 +611,7 @@ def get_parser():
         help="Quality to use when converting to JPEG. Default is %(default)s.",
     )
     parser.add_argument(
-        "--no-tqdm",
+        "--no-progress-bar",
         dest="use_tqdm",
         action="store_false",
         help="Disable tqdm progress bar.",
