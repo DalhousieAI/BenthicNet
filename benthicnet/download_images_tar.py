@@ -172,6 +172,8 @@ def download_images(
             )
 
         destination = row["image"]
+        if not destination:
+            destination = row["url"].rstrip("/").split("/")[-1]
         ext = os.path.splitext(destination)[1]
         expected_ext = os.path.splitext(row["url"].rstrip("/"))[1]
         if expected_ext and ext.lower() != expected_ext.lower():
