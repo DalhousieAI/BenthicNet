@@ -127,7 +127,7 @@ def subsample_distance(
 def subsample_distance_sitewise(
     df,
     distance=2.5,
-    min_population=200,
+    min_population=500,
     target_population=1000,
     max_factor=4,
     verbose=1,
@@ -142,7 +142,7 @@ def subsample_distance_sitewise(
         Must contain columns named ``latitude``, ``longitude``, and ``site``.
     distance : float, default=2.5
         Target distance between consecutive entries in the dataframe.
-    min_population : int, default=200
+    min_population : int, default=500
         Sites with fewer than this many entries will not be subsampled.
     target_population : int or None, default=1000
         Desired number of samples per site. The specified distance will
@@ -364,7 +364,7 @@ def get_parser():
     parser.add_argument(
         "--min-population",
         type=int,
-        default=200,
+        default=500,
         help=textwrap.dedent(
             """
             Minimum number of samples in a single site for that site to be
