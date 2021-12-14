@@ -68,7 +68,7 @@ def download_images(
     Returns
     -------
     pandas.DataFrame
-        Like `df`, but with the ``key`` column changed to the exact basename of
+        Like `df`, but with the ``image`` column changed to the exact basename of
         the output file within the tarball, including extension. Only entries
         which could be downloaded are included; URLs which could not be found
         are omitted.
@@ -89,7 +89,7 @@ def download_images(
 
     if verbose >= 3:
         print(
-            padding + "Sanitizing key and deployment fields",
+            padding + "Sanitizing dataset, site, image and url fields",
             flush=True,
         )
     df["dataset"] = utils.sanitize_filename_series(df["dataset"])
@@ -262,7 +262,7 @@ def download_images(
 
         # Record that this row was successfully downloaded
         is_valid[i_row] = True
-        # Update this row's key to be the actual destination basename
+        # Update this row's image field to be the actual destination basename
         df.at[index, "image"] = os.path.basename(destination)
 
     if verbose >= 1:
@@ -569,7 +569,7 @@ def get_parser():
             A tarfile (a.k.a. tarball) is created for each dataset. Within
             the tarfile, a directory for each deployment is created.
             Each image that is part of that dataset is downloaded as
-            deployment/key.jpg within the corresponding tarfile named as
+            site/image.jpg within the corresponding tarfile named as
             output_dir/dataset.tar.
         """,
         add_help=False,
