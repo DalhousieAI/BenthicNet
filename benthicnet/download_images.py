@@ -72,7 +72,7 @@ def download_images_from_dataframe(
         print(padding + "Downloading {} images".format(len(df)), flush=True)
 
     if not inplace:
-        df = df.copy
+        df = df.copy()
 
     if verbose >= 3:
         print(

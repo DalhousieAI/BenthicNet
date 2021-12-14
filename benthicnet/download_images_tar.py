@@ -85,7 +85,7 @@ def download_images(
         )
 
     if not inplace:
-        df = df.copy
+        df = df.copy()
 
     if verbose >= 3:
         print(
