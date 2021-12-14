@@ -59,7 +59,7 @@ def download_images_from_dataframe(
     Returns
     -------
     pandas.DataFrame
-        Like `df`, but with the ``key`` column changed to the exact basename of
+        Like `df`, but with the ``image`` column changed to the exact basename of
         the output file within the tarball, including extension. Only entries
         which could be downloaded are included; URLs which could not be found
         are omitted.
@@ -188,7 +188,7 @@ def download_images_from_dataframe(
 
         # Record that this row was successfully downloaded
         is_valid[i_row] = True
-        # Update this row's key to be the actual destination basename
+        # Update this row's image field to be the actual destination basename
         df.at[index, "image"] = os.path.basename(destination)
 
     if verbose >= 1:
