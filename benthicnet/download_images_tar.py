@@ -125,7 +125,7 @@ def download_images(
                 if t_wait % 1 > 0:
                     time.sleep(t_wait % 1)
             else:
-                time.sleep(5)
+                time.sleep(t_wait)
             os.remove(tar_fname)
             if verbose >= 1:
                 print(
