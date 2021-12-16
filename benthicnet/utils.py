@@ -5,6 +5,7 @@ Utility functions.
 import os
 
 import numpy as np
+import pandas as pd
 
 
 def unique_map(arr):
@@ -46,6 +47,28 @@ def first_nonzero(arr, axis=-1, invalid_val=-1):
     """
     mask = arr != 0
     return np.where(mask.any(axis=axis), mask.argmax(axis=axis), invalid_val)
+
+
+def read_csv(fname, **kwargs):
+    """
+    Load a BenthicNet CSV file with dtype set correctly for expected fields.
+    """
+    return pd.read_csv(
+        fname,
+        dtype={
+            "altitude": float,
+            "dataset": str,
+            "depth": float,
+            "image": str,
+            "latitude": float,
+            "longitude": float,
+            "site": str,
+            "timestamp": str,
+            "url": str,
+        },
+        parse_dates=["timestamp"],
+        **kwargs,
+    )
 
 
 def clean_df(df, inplace=True):

@@ -263,7 +263,7 @@ def subsample_distance_sitewise_from_csv(
         print(f"            -> {output_csv}")
         print("Reading CSV file ({})...".format(utils.file_size(input_csv)), flush=True)
 
-    df = pd.read_csv(input_csv)
+    df = utils.read_csv(input_csv)
 
     if verbose >= 1:
         print("Loaded CSV file in {:.1f} seconds".format(time.time() - t0), flush=True)

@@ -316,22 +316,7 @@ def download_images_from_csv(
             if os.path.isfile(output_csv):
                 print("The existing file {} will be overwritten.".format(output_csv))
         print("Reading CSV file ({})...".format(utils.file_size(input_csv)), flush=True)
-    df = pd.read_csv(
-        input_csv,
-        dtype={
-            "altitude": float,
-            "dataset": str,
-            "depth": float,
-            "image": str,
-            "latitude": float,
-            "longitude": float,
-            "site": str,
-            "timestamp": str,
-            "url": str,
-        },
-        parse_dates=["timestamp"],
-        skiprows=skiprows,
-    )
+    df = utils.read_csv(input_csv, skiprows=skiprows)
     if verbose >= 1:
         print("Loaded CSV file in {:.1f} seconds".format(time.time() - t0), flush=True)
     output_df = download_images_from_dataframe(
