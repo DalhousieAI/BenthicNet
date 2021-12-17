@@ -235,6 +235,9 @@ def download_images(
                 if verbose >= 4:
                     print(innerpad + "  Wrote to {}".format(fname_tmp))
 
+                # Check the image can be opened with PIL
+                im = PIL.Image.open(fname_tmp)
+
                 if needs_conversion:
                     fname_tmp_new = os.path.join(
                         dir_tmp,
@@ -247,7 +250,6 @@ def download_images(
                                 fname_tmp, fname_tmp_new
                             )
                         )
-                    im = PIL.Image.open(fname_tmp)
                     im = im.convert("RGB")
                     im.save(fname_tmp_new, quality=jpeg_quality)
                     fname_tmp = fname_tmp_new
