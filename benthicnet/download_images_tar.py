@@ -413,10 +413,11 @@ def download_images_by_dataset(
         )
         if n_proc:
             print(
-                "{}Worker {} of {}. Will process {} datasets.".format(
+                "{}Worker {} of {}. Will process {} datasets:".format(
                     padding, i_proc, n_proc, n_to_process
                 )
             )
+            print(datasets_to_process)
 
     using_tqdm = verbose = 1 and use_tqdm
 
