@@ -27,6 +27,7 @@ def download_images(
     convert_to_jpeg=False,
     jpeg_quality=95,
     skip_existing=True,
+    check_image=True,
     error_stream=None,
     inplace=True,
     verbose=1,
@@ -49,6 +50,9 @@ def download_images(
     skip_existing : bool, optional
         Whether to skip existing outputs. If ``False``, an error is raised when
         the destination already exists. Default is ``True``.
+    check_image : bool, default=True
+        Whether to check the image can be opened with PIL. If ``True``,
+        downloads which can not be opened are not added to the tarball.
     error_stream : text_stream or None, optional
         A text stream where errors should be recorded. If provided, all URLs
         which could not be downloaded due to an error will be written to this
@@ -235,6 +239,20 @@ def download_images(
                 if verbose >= 4:
                     print(innerpad + "  Wrote to {}".format(fname_tmp))
 
+                # Check the image can be opened with PIL
+                if check_image or needs_conversion:
+                    try:
+                        im = PIL.Image.open(fname_tmp)
+                    except BaseException as err:
+                        if isinstance(err, KeyboardInterrupt):
+                            raise
+                        print("Error while handling: {}".format(row["url"]))
+                        print(err)
+                        n_error += 1
+                        if error_stream:
+                            error_stream.write(row["url"] + "\n")
+                        continue
+
                 if needs_conversion:
                     fname_tmp_new = os.path.join(
                         dir_tmp,
@@ -247,7 +265,6 @@ def download_images(
                                 fname_tmp, fname_tmp_new
                             )
                         )
-                    im = PIL.Image.open(fname_tmp)
                     im = im.convert("RGB")
                     im.save(fname_tmp_new, quality=jpeg_quality)
                     fname_tmp = fname_tmp_new
