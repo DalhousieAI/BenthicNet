@@ -276,10 +276,14 @@ def subsample_distance_sitewise_from_csv(
         mapper = {"lat": "latitude"}
         if "long" in df.columns:
             mapper["long"] = "longitude"
-            df = df.rename(columns=mapper)
         elif "lon" in df.columns:
             mapper["lon"] = "longitude"
-            df = df.rename(columns=mapper)
+        else:
+            raise ValueError(
+                "Must have a column named 'longitude', 'lon', or 'long', but"
+                f" column names are: {df.columns}"
+            )
+        df = df.rename(columns=mapper)
         remapper = {v: k for k, v in mapper.items()}
     else:
         remapper = None
