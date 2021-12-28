@@ -419,7 +419,7 @@ def download_images_by_dataset(
             )
             print(datasets_to_process)
 
-    using_tqdm = verbose = 1 and use_tqdm
+    using_tqdm = verbose == 1 and use_tqdm
 
     for i_dataset, dataset in enumerate(
         tqdm.tqdm(datasets_to_process, disable=not using_tqdm)
