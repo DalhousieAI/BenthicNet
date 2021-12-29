@@ -177,6 +177,10 @@ def sanitize_filename_series(series, allow_dotfiles=False):
     series = series.copy()
     # Replace NaN values with empty string
     series[pd.isna(series)] = ""
+
+    # Remove non-ascii characters
+    series = series.str.encode("ascii", "ignore").str.decode("ascii")
+
     # Folder names cannot end with a period in Windows. In Unix, a leading
     # period means the file or folder is normally hidden.
     # For this reason, we trim away leading and trailing periods as well as
