@@ -290,7 +290,7 @@ def download_images_from_csv(
         part_str = "(part {} of {})".format(i_proc, n_proc)
         n_lines = utils.count_lines(input_csv) - 1
         partition_size = n_lines / n_proc
-        i_proc == 0 if i_proc == n_proc else i_proc
+        i_proc = 0 if i_proc == n_proc else i_proc
         start_idx = round(i_proc * partition_size)
         end_idx = round((i_proc + 1) * partition_size)
         skiprows = list(range(1, 1 + start_idx)) + list(range(1 + end_idx, 1 + n_lines))

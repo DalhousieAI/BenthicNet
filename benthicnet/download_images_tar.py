@@ -397,7 +397,7 @@ def download_images_by_dataset(
 
     if n_proc:
         partition_size = len(dataset2idx) / n_proc
-        i_proc == 0 if i_proc == n_proc else i_proc
+        i_proc = 0 if i_proc == n_proc else i_proc
         start_idx = round(i_proc * partition_size)
         end_idx = round((i_proc + 1) * partition_size)
         datasets_to_process = datasets_to_process[start_idx:end_idx]
