@@ -204,14 +204,39 @@ def download_images(
                 print(innerpad + "Already downloaded {}".format(destination))
             n_already_downloaded += 1
         else:
-            try:
-                r = requests.get(row["url"], stream=True)
-            except requests.exceptions.RequestException as err:
-                print("Error while handling: {}".format(row["url"]))
-                print(err)
-                n_error += 1
-                if error_stream:
-                    error_stream.write(row["url"] + "\n")
+            request_completed = False
+            for i_attempt in range(3):
+                try:
+                    r = requests.get(row["url"], stream=True)
+                    request_completed = True
+                except requests.exceptions.RequestException as err:
+                    request_completed = False
+                    print("Error while handling: {}".format(row["url"]))
+                    print(err)
+                    n_error += 1
+                    if error_stream:
+                        error_stream.write(row["url"] + "\n")
+                    break
+                if r.status_code in [429, 500, 503]:
+                    # Could also retry on [408, 502, 504, 599]
+                    if r.status_code == 429:
+                        # PANGAEA has a maximum of 180 requests within a 30s period
+                        # Wait for this to cool off
+                        t_wait = 30
+                    else:
+                        # Other errors indicate a server side error. Wait a
+                        # short period and then retries to see if it alleviates.
+                        t_wait = 2 ** i_attempt
+                    if verbose >= 1:
+                        print(
+                            "{}Retrying in {} seconds (HTTP Status {}): {}".format(
+                                innerpad, t_wait, r.status_code, row["url"]
+                            )
+                        )
+                    time.sleep(t_wait)
+                else:
+                    break
+            if not request_completed:
                 continue
             if r.status_code != 200:
                 if verbose >= 1:
