@@ -205,7 +205,7 @@ def download_images(
             n_already_downloaded += 1
         else:
             request_completed = False
-            for i_attempt in range(3):
+            for i_attempt in range(5):
                 try:
                     r = requests.get(row["url"], stream=True)
                     request_completed = True
