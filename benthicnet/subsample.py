@@ -89,7 +89,7 @@ def subsample_distance(
         )
     # Find where the distance travelled exceeds threshold
     while idx < len(df) - 1:
-        offset = utils.first_nonzero(cumulative_distances > threshold)
+        offset = utils.first_nonzero(cumulative_distances >= threshold)
         if offset < 0:
             break
         if method == "threshold":
