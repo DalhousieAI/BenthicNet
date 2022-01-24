@@ -129,7 +129,8 @@ def subsample_distance_sitewise(
     distance=2.5,
     min_population=500,
     target_population=1000,
-    max_factor=4,
+    max_factor=None,
+    factors=None,
     verbose=1,
     use_tqdm=True,
 ):
@@ -154,6 +155,11 @@ def subsample_distance_sitewise(
         Maximum distance factor to use when performing additional subsampling
         for over populated sites.
         The maximum distance at which to subsample is ``distance * max_factor``.
+    factors : list, default=None
+        Distance factors to use when performing additional subsampling
+        for over populated sites.
+        The distance will be multiplied by these factors to increase subsampling
+        for sites bearing more than the ``target_population``.
     verbose : int, default=1
         Verbosity level.
     use_tqdm : bool, optional
@@ -164,16 +170,35 @@ def subsample_distance_sitewise(
 
     site2indices = utils.unique_map(df["site"])
 
+    if factors is not None and max_factor is not None:
+        raise ValueError("Only one of factors and max_factor should be set.")
+    if factors is None and (max_factor is None or max_factor <= 0):
+        factors = [1]
+        max_factor = 1
+    if max_factor is not None:
+        factors = list(range(1, max_factor + 1))
+    else:
+        max_factor = max(factors)
+    factors = sorted(factors)
+    if factors[0] < 1:
+        raise ValueError("Factor can not be smaller than 1")
+    if factors[0] != 1:
+        factors.insert(0, 1)
+
     print(
         f"Will subsample {len(df)} records over {len(site2indices)} sites."
         f"\n  distance = {distance}m"
         f"\n  min_population = {min_population}"
+        f"\n  target_population = {target_population}"
+        f"\n  distance factors = {factors}"
     )
 
     n_below_thr = 0
     n_unchanged = 0
     n_changed = 0
-    tally_factors = {k: 0 for k in range(1, 1 + max_factor)}
+    tally_factors = {1: 0}
+    for k in factors:
+        tally_factors[k] = 0
 
     dfs_redacted = []
 
@@ -191,14 +216,16 @@ def subsample_distance_sitewise(
             if target_population is not None and target_population > 0:
                 # Try further subsampling at increased distances to reduce pop
                 df_j = df_i
-                for factor in range(2, max_factor + 1):
+                for i_factor, factor in enumerate(factors):
+                    if factor == 1:
+                        continue
                     df_prev = df_j
                     df_j = subsample_distance(
                         df_i, threshold=distance * factor, verbose=verbose - 1
                     )
                     if len(df_j) < target_population:
                         df_j = df_prev
-                        factor_used = factor - 1
+                        factor_used = factors[i_factor - 1]
                         break
                 else:
                     factor_used = factor
@@ -391,15 +418,28 @@ def get_parser():
         """
         ),
     )
-    parser.add_argument(
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument(
         "--max-factor",
         type=int,
-        default=4,
+        default=None,
         help=textwrap.dedent(
             """
             Maximum distance factor to use when performing additional subsampling
             for over populated sites.
             The maximum distance at which to subsample is DISTANCE * MAX_FACTOR.
+            Default is [2, 3, 4].
+        """
+        ),
+    )
+    group.add_argument(
+        "--factors",
+        type=int,
+        nargs="+",
+        help=textwrap.dedent(
+            """
+            Set of distance factors consider when performing additional
+            subsampling for over populated sites.
             Default is %(default)s.
         """
         ),
