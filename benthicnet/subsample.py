@@ -185,6 +185,9 @@ def subsample_distance_sitewise(
     if factors[0] != 1:
         factors.insert(0, 1)
 
+    if target_population is not None or target_population <= 0:
+        target_population = None
+
     print(
         f"Will subsample {len(df)} records over {len(site2indices)} sites."
         f"\n  distance = {distance}m"
@@ -213,7 +216,7 @@ def subsample_distance_sitewise(
         else:
             df_i = subsample_distance(df_i, threshold=distance, verbose=verbose - 1)
             factor_used = 1
-            if target_population is not None and target_population > 0:
+            if target_population:
                 # Try further subsampling at increased distances to reduce pop
                 df_j = df_i
                 for i_factor, factor in enumerate(factors):
