@@ -3,6 +3,7 @@ Utility functions.
 """
 
 import os
+import re
 
 import numpy as np
 import pandas as pd
@@ -154,6 +155,49 @@ def file_size(filename, sf=3):
             return fmt.format(num, unit)
 
     return convert_bytes(os.stat(filename).st_size)
+
+
+def sanitize_filename(text, allow_dotfiles=False):
+    """
+    Sanitise strings in a Series, to remove characters forbidden in filenames.
+
+    Parameters
+    ----------
+    text : str
+        A string.
+    allow_dotfiles : bool, optional
+        Whether to allow leading periods. Leading periods indicate hidden files
+        on Linux. Default is `False`.
+
+    Returns
+    -------
+    pandas.Series
+        Sanitised version of `series`.
+    """
+    # Replace NaN values with empty string
+    if pd.isna(text):
+        return ""
+
+    # Remove non-ascii characters
+    text = text.encode("ascii", "ignore").decode("ascii")
+
+    # Folder names cannot end with a period in Windows. In Unix, a leading
+    # period means the file or folder is normally hidden.
+    # For this reason, we trim away leading and trailing periods as well as
+    # spaces.
+    if allow_dotfiles:
+        text = text.strip().rstrip(".")
+    else:
+        text = text.strip(" .")
+
+    # On Windows, a filename cannot contain any of the following characters:
+    # \ / : * ? " < > |
+    # Other operating systems are more permissive.
+    # Replace / with a hyphen
+    text = text.replace("/", "-")
+    # Use a blacklist to remove any remaining forbidden characters
+    text = re.sub(r'[\/:*?"<>|]+', "", text)
+    return text
 
 
 def sanitize_filename_series(series, allow_dotfiles=False):
