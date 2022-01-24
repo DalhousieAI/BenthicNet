@@ -243,3 +243,66 @@ def sanitize_filename_series(series, allow_dotfiles=False):
     # Use a blacklist to remove any remaining forbidden characters
     series = series.str.replace(r'[\/:*?"<>|]+', "", regex=True)
     return series
+
+
+def row2basename(row):
+    """
+    Map row to image basename, with extension as per the URL.
+
+    The basename is taken from the image field, extension from the URL field.
+    If the image field is empty, the basename of the URL is used instead.
+
+    Parameters
+    ----------
+    row : dict
+        Pandas row or otherwise dictionary-like object with field ``"url"``
+        and, optionally, ``"image"``.
+
+    Returns
+    -------
+    basename : str
+        The basename of the image to download.
+    """
+    if "image" in row:
+        basename = row["image"]
+    else:
+        basename = ""
+    if pd.isna(basename) or not basename:
+        if pd.isna(row["url"]):
+            return ""
+        basename = row["url"].rstrip("/").split("/")[-1]
+    basename = sanitize_filename(basename)
+    ext = os.path.splitext(basename)[1]
+    expected_ext = os.path.splitext(row["url"].rstrip("/"))[1]
+    if expected_ext and ext.lower() != expected_ext.lower():
+        if ext.lower() in {".jpg", ".jpeg"}:
+            basename = os.path.splitext(basename)[0] + expected_ext
+        else:
+            basename = basename + expected_ext
+    return basename
+
+
+def determine_outpath(df):
+    """
+    Determine output path (assuming non-tar file output) to each image.
+
+    The output path is in the format <dataset>/<site>/<imagename.jpg>.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Dataset with columns ``"dataset"``,  ``"site"``, ``"url"`` and
+        (optionally) ``"image"``.
+
+    Returns
+    -------
+    df : pandas.Series of str
+        Output paths to each image in the dataset.
+    """
+    return (
+        sanitize_filename_series(df["dataset"])
+        + "/"
+        + sanitize_filename_series(df["site"])
+        + "/"
+        + df.apply(row2basename, axis=1)
+    )
