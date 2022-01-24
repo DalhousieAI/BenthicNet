@@ -124,10 +124,34 @@ def subsample_distance(
     return df.iloc[indices_to_keep]
 
 
+def subsample_index(df, target_population):
+    """
+    Subsample data based on distance between records.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Dataframe to process. Data is assumed to be ordered by sample datetime.
+    target_population : int
+        Desired number of samples.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Dataframe like `df`, but with only a subset of the rows included.
+    """
+    if len(df) <= target_population:
+        return df
+    idx = np.round(np.linspace(0, len(df) - 1, target_population)).astype(int)
+    idx = np.unique(idx)
+    return df.iloc[idx]
+
+
 def subsample_distance_sitewise(
     df,
     distance=2.5,
     min_population=500,
+    allow_nonspatial=True,
     target_population=1000,
     max_factor=None,
     factors=None,
@@ -145,6 +169,10 @@ def subsample_distance_sitewise(
         Target distance between consecutive entries in the dataframe.
     min_population : int, default=500
         Sites with fewer than this many entries will not be subsampled.
+    allow_nonspatial : bool, default=True
+        Handle sites with heavily duplicated coordinates with non-spatial
+        downsampling instead. The threshold is when the number of unique lat/lon
+        coordinates is higher than the number of samples per coordinate.
     target_population : int or None, default=1000
         Desired number of samples per site. The specified distance will
         by multiplied by a factor 1, 2, 3, ..., `max_factor` until the population
@@ -185,17 +213,22 @@ def subsample_distance_sitewise(
     if factors[0] != 1:
         factors.insert(0, 1)
 
+    if target_population is None or target_population <= 0:
+        target_population = None
+
     print(
         f"Will subsample {len(df)} records over {len(site2indices)} sites."
         f"\n  distance = {distance}m"
         f"\n  min_population = {min_population}"
         f"\n  target_population = {target_population}"
         f"\n  distance factors = {factors}"
+        f"\n  allow_nonspatial = {allow_nonspatial}"
     )
 
     n_below_thr = 0
     n_unchanged = 0
-    n_changed = 0
+    n_subspatial = 0
+    n_subindex = 0
     tally_factors = {1: 0}
     for k in factors:
         tally_factors[k] = 0
@@ -208,12 +241,30 @@ def subsample_distance_sitewise(
     for deployment in tqdm.tqdm(site2indices, disable=not use_tqdm):
         df_i = df.iloc[site2indices[deployment]]
         pre_population = len(df_i)
+
+        n_coords = len(df_i.drop_duplicates(subset=["latitude", "longitude"]))
+        samp_per_coord = pre_population / n_coords
+
+        if not allow_nonspatial or (
+            target_population and n_coords >= target_population
+        ):
+            use_spatial = True
+        else:
+            use_spatial = n_coords > samp_per_coord
+
         if len(df_i) <= min_population:
             n_below_thr += 1
+        elif not use_spatial:
+            if target_population:
+                df_i = subsample_index(df_i, target_population)
+            if len(df_i) == pre_population:
+                n_unchanged += 1
+            else:
+                n_subindex += 1
         else:
             df_i = subsample_distance(df_i, threshold=distance, verbose=verbose - 1)
             factor_used = 1
-            if target_population is not None and target_population > 0:
+            if target_population:
                 # Try further subsampling at increased distances to reduce pop
                 df_j = df_i
                 for i_factor, factor in enumerate(factors):
@@ -234,7 +285,7 @@ def subsample_distance_sitewise(
             if len(df_i) == pre_population:
                 n_unchanged += 1
             else:
-                n_changed += 1
+                n_subspatial += 1
                 tally_factors[factor_used] += 1
         dfs_redacted.append(df_i)
 
@@ -253,7 +304,11 @@ def subsample_distance_sitewise(
         out_str += (
             f"\nThere were {n_unchanged} other sites which also remained unchanged."
         )
-        out_str += f"\nThere were {n_changed} sites which were subsampled."
+        if allow_nonspatial:
+            out_str += (
+                f"\nThere were {n_subindex} sites which were subsampled non-spatially."
+            )
+        out_str += f"\nThere were {n_subspatial} sites which were subsampled spatially."
         if target_population is not None and target_population > 0:
             for k, v in tally_factors.items():
                 out_str += f"\n{v:8d} sites subsampled at factor={k} (distance={k * distance}m)"
@@ -393,9 +448,22 @@ def get_parser():
         ),
     )
     parser.add_argument(
+        "--forbid-nonspatial",
+        dest="allow_nonspatial",
+        action="store_false",
+        help=textwrap.dedent(
+            """
+            Disallow handling duplicated coordinates with non-spatial
+            downsampling.
+            If this is set, all sites will be spatially downsampled, even if
+            they have fewer samples per coordinate than unique coordinates.
+        """
+        ),
+    )
+    parser.add_argument(
         "--min-population",
         type=int,
-        default=500,
+        default=50,
         help=textwrap.dedent(
             """
             Minimum number of samples in a single site for that site to be
