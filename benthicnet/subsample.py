@@ -463,7 +463,7 @@ def get_parser():
     parser.add_argument(
         "--min-population",
         type=int,
-        default=500,
+        default=50,
         help=textwrap.dedent(
             """
             Minimum number of samples in a single site for that site to be
