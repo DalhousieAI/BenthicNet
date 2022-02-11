@@ -337,6 +337,8 @@ def fixup_repeated_output_paths(df, inplace=True, verbose=1):
     df["_outpath"] = determine_outpath(df)
     dup_outpaths = df[df.duplicated(subset="_outpath")]["_outpath"].unique()
     if len(dup_outpaths) == 0:
+        if verbose >= 1:
+            print("There are no duplicated output paths in this dataframe")
         df.drop(columns="_outpath", inplace=True)
         return df
     if verbose >= 1:
