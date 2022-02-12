@@ -59,15 +59,15 @@ def read_csv(fname, **kwargs):
         dtype={
             "altitude": float,
             "dataset": str,
+            "datetime": str,
             "depth": float,
             "image": str,
             "latitude": float,
             "longitude": float,
             "site": str,
-            "timestamp": str,
             "url": str,
         },
-        parse_dates=["timestamp"],
+        parse_dates=["datetime"],
         **kwargs,
     )
 
