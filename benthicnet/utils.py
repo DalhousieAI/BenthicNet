@@ -50,10 +50,26 @@ def first_nonzero(arr, axis=-1, invalid_val=-1):
     return np.where(mask.any(axis=axis), mask.argmax(axis=axis), invalid_val)
 
 
-def read_csv(fname, **kwargs):
+def read_csv(fname, expect_datetime=True, **kwargs):
     """
     Load a BenthicNet CSV file with dtype set correctly for expected fields.
+
+    Parameters
+    ----------
+    fname : str
+        Path to CSV file.
+    expect_datetime : bool, default=True
+        Whether to expect a datetime column. If ``True``, this will be parsed
+        as a datetime column. This must be set to ``False`` if the CSV file
+        does not have a ``datetime`` column.
+    **kwargs
+        Additional arguments as per :func:`pandas.read_csv`.
     """
+    extra_columns = {}
+    if expect_datetime:
+        if "parse_dates" not in kwargs:
+            kwargs["parse_dates"] = ["datetime"]
+
     return pd.read_csv(
         fname,
         dtype={
@@ -66,8 +82,8 @@ def read_csv(fname, **kwargs):
             "longitude": float,
             "site": str,
             "url": str,
+            **extra_columns,
         },
-        parse_dates=["datetime"],
         **kwargs,
     )
 
