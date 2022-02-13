@@ -104,7 +104,7 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
             print(f"Opening (write): {dest_tar_full_path}")
         if os.path.exists(dest_tar_full_path):
             print(f"Will overwrite existing file {dest_tar_full_path}")
-            t_wait = 3
+            t_wait = 5
             print("Overwriting in", end="", flush=True)
             for i in range(t_wait // 1):
                 print(" {}...".format(t_wait - i), end="", flush=True)
