@@ -37,7 +37,7 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
     verbose : bool, default=1
         Verbosity level.
     """
-    df_source = benthicnet.utils.read_csv(csv_source, expect_datetime=False)
+    df_source = pd.read_csv(csv_source)
     df_dest = benthicnet.utils.read_csv(csv_dest, expect_datetime=False)
 
     # Determine output paths
