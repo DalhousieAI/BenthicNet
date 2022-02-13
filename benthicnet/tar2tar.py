@@ -138,8 +138,8 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
                     contents = set(tar_source.getnames())
                     if verbose >= 2:
                         print(
-                            f"There are {len(contents)} files in {source_tar_fname}."
-                            f" Trying to copy {len(subdf_todo)} files."
+                            f"Trying to copy {len(subdf_todo)}/{len(contents)}"
+                            f" files in {source_tar_fname}."
                         )
                     for _, row in tqdm(
                         subdf_todo.iterrows(),
