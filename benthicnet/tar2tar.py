@@ -37,7 +37,30 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
     verbose : bool, default=1
         Verbosity level.
     """
+    if verbose >= 1:
+        print(
+            "Will copy images listed in"
+            f"\n    source {csv_source}"
+            f"\n    dest   {csv_dest}"
+            f"\nfrom tarfiles in directory {tar_dir_source}"
+            f"\nto directory {tar_dir_dest}"
+        )
+        print(
+            "Reading CSV file {} ({})...".format(
+                csv_source, benthicnet.utils.file_size(csv_source)
+            ),
+            flush=True,
+        )
+
     df_source = pd.read_csv(csv_source)
+
+    if verbose >= 1:
+        print(
+            "Reading CSV file {} ({})...".format(
+                csv_dest, benthicnet.utils.file_size(csv_dest)
+            ),
+            flush=True,
+        )
     df_dest = benthicnet.utils.read_csv(csv_dest, expect_datetime=False)
 
     # Determine output paths
@@ -78,7 +101,7 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
     ):
         dest_tar_full_path = os.path.join(tar_dir_dest, dest_tar_fname)
         if verbose >= 1:
-            print(f"Opening {dest_tar_full_path} to write to")
+            print(f"Opening (write): {dest_tar_full_path}")
         if os.path.exists(dest_tar_full_path):
             print(f"Will overwrite existing file {dest_tar_full_path}")
             t_wait = 3
@@ -103,7 +126,7 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
             ):
                 source_tar_full_path = os.path.join(tar_dir_source, source_tar_fname)
                 if verbose >= 1:
-                    print(f"Opening {source_tar_full_path} to copy from")
+                    print(f"Opening (read): {source_tar_full_path}")
                 subdf_todo = df_todo[
                     (df_todo["_outtar_dest"] == dest_tar_fname)
                     & (df_todo["_outtar_source"] == source_tar_fname)
@@ -113,7 +136,7 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
                     if verbose >= 2:
                         print(
                             f"There are {len(contents)} files in {source_tar_fname}."
-                            "Trying to copy {len(subdf_todo)} files."
+                            f" Trying to copy {len(subdf_todo)} files."
                         )
                     for _, row in tqdm(
                         subdf_todo.iterrows(),
@@ -124,10 +147,14 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
                         if row["_outinner_source"] not in contents:
                             if verbose >= 2:
                                 print(
-                                    f"{row['_outinner_source']} is missing from source"
+                                    f"{row['_outinner_source']} is missing from"
+                                    f" {source_tar_full_path}"
                                 )
                             continue
-                        # print(f"Copying {row['_outinner_source']} -> {row['_outinner_dest']}")
+                        if verbose >= 3:
+                            print(
+                                f"Copying {row['_outinner_source']} -> {row['_outinner_dest']}"
+                            )
                         member = tar_source.getmember(row["_outinner_source"])
                         member.name = row["_outinner_dest"]
                         tar_dest.addfile(
