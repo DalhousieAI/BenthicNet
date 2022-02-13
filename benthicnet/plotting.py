@@ -7,8 +7,74 @@ import matplotlib.cm
 import matplotlib.colors
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 from . import kde_tools
+
+DATASET2ORG = {
+    "dfo_eelgrass": "DFO",
+    "george2000": "DFO",
+    "george2002": "DFO",
+    "german2003": "DFO",
+    "german2006": "DFO",
+    "german2010": "DFO",
+    "noaa_habcam": "DFO",
+    "prnpr2018": "Hakai",
+    "hakai_rov": "Hakai",
+    "hakai_video": "Hakai",
+    "hogkins_H1685": "Merlin Best",
+    "dellwood_H1682": "Merlin Best",
+    "dellwood_H1683": "Merlin Best",
+    "dellwood_south_H1690": "Merlin Best",
+    "explorer_H1691": "Merlin Best",
+    "sgaan_H1684": "Merlin Best",
+    "sgaan_H1686": "Merlin Best",
+    "crocker2014": "USGS",
+    "frrp2011": "USGS",
+    "nantuckett": "USGS",
+    "tortugas2009": "USGS",
+    "tortugas2011": "USGS",
+    "bastos": "Other",
+    "bedford": "Other",
+    "chesterfield": "Other",
+    "eac": "Other",
+    "frobisher": "Other",
+    "julia": "Other",
+    "mgds": "Other",
+    "ngu": "Other",
+    "qik": "Other",
+    "sabrina": "Other",
+    "shreya": "Other",
+    "wager": "Other",
+}
+ORG2COLOR = {
+    "DFO": "#FB9A99",  # l.red / pink
+    "IMOS": "#4daf4a",  # green
+    "NOAA": "#0078BC",  # NOAA logo db/lb: #243C72, #0078BC
+    "NRCan": "#D32823",  # Canadian flag red: #D32823
+    "PANGAEA": "#009C84",  # PANGAEA Website d.teal/l.teal: #004D60 009C84
+    "RLS": "#984ea3",  # purple
+    "SQUIDLE": "#ff7f00",  # orange
+    "SOI": "#FECA2D",  # SOI logo y/b/lg: #FECA2D #0B61BE #C4C52A
+    "USGS": "#00264C",  # USGS d.blue: #00264C
+    "Other": "#777",  # grey
+    "Merlin Best": "#777",  # grey
+    "Hakai": "#777",  # grey
+}
+ORG2COLOR_BW = {
+    "DFO": "#FB9A99",
+    "IMOS": "#52BDEC",  # IMOS logo lb/b: #52BDEC #3A6F8F
+    "NOAA": "#0078BC",
+    "NRCan": "#D32823",
+    "PANGAEA": "#009C84",
+    "RLS": "#984ea3",
+    "SQUIDLE": "#ff7f00",
+    "SOI": "#FECA2D",
+    "USGS": "#4daf4a",  # green
+    "Other": "#a65628",  # brown
+    "Merlin Best": "#a65628",  # brown
+    "Hakai": "#a65628",  # brown
+}
 
 
 def rgb_white2alpha(
@@ -323,6 +389,164 @@ def plot_kde(
     )
     hcb = plt.colorbar(contours)
     hcb.set_label("Kernel Density Estimate")
+
+    # Ensure the full map is shown
+    ax.set_global()
+    return ax
+
+
+def row2organization(row):
+    """
+    Map from row to organization name.
+
+    Parameters
+    ----------
+    row : dict
+        With fields ``"dataset"`` and ``"url"``.
+
+    Returns
+    -------
+    organization : str
+        Name of the organization responsible for the dataset.
+    """
+    if row["dataset"] in DATASET2ORG:
+        return DATASET2ORG[row["dataset"]]
+    if row["dataset"].lower() in DATASET2ORG:
+        return DATASET2ORG[row["dataset"].lower()]
+    if row["dataset"].lower().startswith("pangaea"):
+        return "PANGAEA"
+    if row["dataset"].lower().startswith("nrcan"):
+        return "NRCan"
+    if row["dataset"].lower().startswith("rls_") or row["dataset"].lower().startswith(
+        "rls "
+    ):
+        return "RLS"
+
+    if "url" not in row or pd.isna(row["url"]):
+        if "repository" in row and not pd.isna(row["repository"]):
+            return row["repository"]
+        return "other"
+
+    if row["url"].startswith("https://s3-ap-southeast-2.amazonaws.com/imos-data"):
+        return "IMOS"
+    if row["url"].startswith("https://www.nodc.noaa.gov") or row["url"].startswith(
+        "https://accession.nodc.noaa.gov"
+    ):
+        return "NOAA"
+    if row["url"].startswith("http://rls.tpac.org.au"):
+        return "RLS"
+    if row["url"].startswith("http://soi-dfo-data.storage.googleapis.com"):
+        return "SOI"
+
+    if "repository" in row and not pd.isna(row["repository"]):
+        return row["repository"]
+
+    return "other"
+
+
+def plot_samples_by_organization(
+    df,
+    projection="EqualEarth",
+    figsize=(25, 8),
+    show_map=True,
+    s=1,
+    **kwargs,
+):
+    """
+    Scatter plot of sample locations, coloured by organization, overlaid on a map.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        DataFrame with columns ``"latitude"``, ``"longitude"``.
+    projection : str or cartopy.crs.Projection, default="EqualEarth"
+        The projection to use for the map.
+    figsize : tuple, default=(25, 8)
+        Size of the figure to create.
+    show_map : bool, default=True
+        Whether to show the map, otherwise coastlines are drawn instead.
+    s : float, default=1
+        The marker size in points**2.
+    **kwargs
+        Additional arguments as per :func:`matplotlib.pyplot.scatter`.
+
+    Returns
+    -------
+    ax : matplotlib.axes.Axes
+        The axes used to render the plot.
+    """
+    # Get the projection
+    if isinstance(projection, str):
+        projection = getattr(cartopy.crs, projection)
+    elif not isinstance(projection, callable):
+        raise ValueError("projection must be either a string or callable.")
+    projection = projection()
+
+    # Switch the colormap for better contrast against the background
+    org2color = ORG2COLOR if show_map else ORG2COLOR_BW
+
+    # Determine organization and colour
+    df = df.copy()
+    df["organization"] = df.apply(row2organization, axis=1)
+    df["org_color"] = df["organization"].apply(lambda x: org2color.get(x, "#888"))
+
+    # Create a plot using the projection
+    fig = plt.figure(figsize=figsize)
+    ax = fig.add_subplot(projection=projection)
+
+    # Display gridlines and either the world map, or outline of coastlines
+    ax.gridlines()
+    if show_map:
+        ax.stock_img()
+    else:
+        ax.coastlines()
+
+    # Make legend entries
+    df_singles = df.drop_duplicates(subset=["organization"]).sort_values("organization")
+
+    # Plot a marker for each organization value with a size of 0
+    leg_handles = []
+    leg_labels = []
+    for _, row in df_singles.iterrows():
+        if row["org_color"] == org2color["Other"] and row["organization"] != "Other":
+            continue
+        hsc = ax.scatter(
+            row["longitude"],
+            row["latitude"],
+            c=row["org_color"],
+            s=0,
+            transform=cartopy.crs.PlateCarree(),
+        )
+        leg_handles.append(hsc)
+        leg_labels.append(row["organization"])
+
+    # Move the "Other" label to the end of the list
+    for key in ["Misc", "Other", "other"]:
+        if key in leg_labels:
+            i = leg_labels.index(key)
+            leg_handles.append(leg_handles.pop(i))
+            leg_labels.append(leg_labels.pop(i))
+    # Show legend
+    hlegend = ax.legend(
+        leg_handles, leg_labels, loc="center left", bbox_to_anchor=(1, 0.5)
+    )
+    # Set the size of the markers in the legend to be large
+    for h_entry in hlegend.legendHandles:
+        h_entry._sizes = [50]
+    hlegend.get_frame().set_edgecolor("k")
+
+    # Shuffle the order of the samples, so overlapping sites can show through
+    df_rand = df.sample(frac=1)
+
+    # Plot the datapoints
+    ax.scatter(
+        df_rand["longitude"],
+        df_rand["latitude"],
+        s=s,
+        c=df_rand["org_color"],
+        transform=cartopy.crs.PlateCarree(),
+        **kwargs,
+    )
 
     # Ensure the full map is shown
     ax.set_global()
