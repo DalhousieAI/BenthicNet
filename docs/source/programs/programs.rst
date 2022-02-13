@@ -7,3 +7,4 @@ CLI Reference
     download_images
     download_images_tar
     subsample
+    tar2tar
