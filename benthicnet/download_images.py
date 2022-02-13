@@ -15,7 +15,8 @@ import numpy as np
 import pandas as pd
 import tqdm
 
-from benthicnet import __meta__, utils
+import benthicnet.io
+from benthicnet import __meta__
 
 
 def download_images_from_dataframe(
@@ -79,9 +80,9 @@ def download_images_from_dataframe(
             padding + "Sanitizing fields used to build filenames",
             flush=True,
         )
-    df["dataset"] = utils.sanitize_filename_series(df["dataset"])
-    df["site"] = utils.sanitize_filename_series(df["site"])
-    df["image"] = utils.sanitize_filename_series(df["image"])
+    df["dataset"] = benthicnet.io.sanitize_filename_series(df["dataset"])
+    df["site"] = benthicnet.io.sanitize_filename_series(df["site"])
+    df["image"] = benthicnet.io.sanitize_filename_series(df["image"])
     df["url"] = df["url"].str.strip()
 
     if verbose != 1:
@@ -288,7 +289,7 @@ def download_images_from_csv(
     skiprows = []
     if n_proc:
         part_str = "(part {} of {})".format(i_proc, n_proc)
-        n_lines = utils.count_lines(input_csv) - 1
+        n_lines = benthicnet.io.count_lines(input_csv) - 1
         partition_size = n_lines / n_proc
         i_proc = 0 if i_proc == n_proc else i_proc
         start_idx = round(i_proc * partition_size)
@@ -315,8 +316,11 @@ def download_images_from_csv(
             )
             if os.path.isfile(output_csv):
                 print("The existing file {} will be overwritten.".format(output_csv))
-        print("Reading CSV file ({})...".format(utils.file_size(input_csv)), flush=True)
-    df = utils.read_csv(input_csv, skiprows=skiprows)
+        print(
+            "Reading CSV file ({})...".format(benthicnet.io.file_size(input_csv)),
+            flush=True,
+        )
+    df = benthicnet.io.read_csv(input_csv, skiprows=skiprows)
     if verbose >= 1:
         print("Loaded CSV file in {:.1f} seconds".format(time.time() - t0), flush=True)
     output_df = download_images_from_dataframe(

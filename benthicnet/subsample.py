@@ -14,7 +14,9 @@ import numpy as np
 import pandas as pd
 import tqdm
 
-from benthicnet import __meta__, utils
+import benthicnet.io
+import benthicnet.utils
+from benthicnet import __meta__
 
 
 def subsample_distance(
@@ -89,7 +91,7 @@ def subsample_distance(
         )
     # Find where the distance travelled exceeds threshold
     while idx < len(df) - 1:
-        offset = utils.first_nonzero(cumulative_distances >= threshold)
+        offset = benthicnet.utils.first_nonzero(cumulative_distances >= threshold)
         if offset < 0:
             break
         if method == "threshold":
@@ -196,7 +198,7 @@ def subsample_distance_sitewise(
     """
     t0 = time.time()
 
-    site2indices = utils.unique_map(df["site"])
+    site2indices = benthicnet.utils.unique_map(df["site"])
 
     if factors is not None and max_factor is not None:
         raise ValueError("Only one of factors and max_factor should be set.")
@@ -343,9 +345,12 @@ def subsample_distance_sitewise_from_csv(
     if verbose >= 1:
         print(f"Will subsample {input_csv}")
         print(f"            -> {output_csv}")
-        print("Reading CSV file ({})...".format(utils.file_size(input_csv)), flush=True)
+        print(
+            "Reading CSV file ({})...".format(benthicnet.io.file_size(input_csv)),
+            flush=True,
+        )
 
-    df = utils.read_csv(input_csv)
+    df = benthicnet.io.read_csv(input_csv)
 
     if verbose >= 1:
         print("Loaded CSV file in {:.1f} seconds".format(time.time() - t0), flush=True)

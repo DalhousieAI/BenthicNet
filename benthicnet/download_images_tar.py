@@ -18,7 +18,9 @@ import PIL.Image
 import requests
 import tqdm
 
-from benthicnet import __meta__, utils
+import benthicnet.io
+import benthicnet.utils
+from benthicnet import __meta__
 
 
 def download_images(
@@ -96,9 +98,9 @@ def download_images(
             padding + "Sanitizing dataset, site, image and url fields",
             flush=True,
         )
-    df["dataset"] = utils.sanitize_filename_series(df["dataset"])
-    df["site"] = utils.sanitize_filename_series(df["site"])
-    df["image"] = utils.sanitize_filename_series(df["image"])
+    df["dataset"] = benthicnet.io.sanitize_filename_series(df["dataset"])
+    df["site"] = benthicnet.io.sanitize_filename_series(df["site"])
+    df["image"] = benthicnet.io.sanitize_filename_series(df["image"])
     df["url"] = df["url"].str.strip()
 
     if verbose != 1:
@@ -178,7 +180,7 @@ def download_images(
         destination = row["image"]
         if not destination:
             destination = row["url"].rstrip("/").split("/")[-1]
-            destination = utils.sanitize_filename(destination)
+            destination = benthicnet.io.sanitize_filename(destination)
         ext = os.path.splitext(destination)[1]
         expected_ext = os.path.splitext(row["url"].rstrip("/"))[1]
         if expected_ext and ext.lower() != expected_ext.lower():
@@ -415,10 +417,10 @@ def download_images_by_dataset(
         print("Warning: Existing outputs will result in an error.", flush=True)
 
     # Sanitise dataset names
-    df["dataset"] = utils.sanitize_filename_series(df["dataset"])
+    df["dataset"] = benthicnet.io.sanitize_filename_series(df["dataset"])
 
     # Create mapping from unique datasets to rows which bear that dataset
-    dataset2idx = utils.unique_map(df["dataset"])
+    dataset2idx = benthicnet.utils.unique_map(df["dataset"])
     datasets_to_process = sorted(dataset2idx)
 
     if n_proc:
@@ -561,7 +563,10 @@ def download_images_by_dataset_from_csv(
             print("Existing outputs will be skipped.")
         else:
             print("Existing outputs will generate an error.")
-        print("Reading CSV file ({})...".format(utils.file_size(input_csv)), flush=True)
+        print(
+            "Reading CSV file ({})...".format(benthicnet.io.file_size(input_csv)),
+            flush=True,
+        )
     df = pd.read_csv(input_csv)
     if verbose >= 1:
         print("Loaded CSV file in {:.1f} seconds".format(time.time() - t0), flush=True)
