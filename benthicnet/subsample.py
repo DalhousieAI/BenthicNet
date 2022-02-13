@@ -15,7 +15,8 @@ import pandas as pd
 import tqdm
 
 import benthicnet.io
-from benthicnet import __meta__, utils
+import benthicnet.utils
+from benthicnet import __meta__
 
 
 def subsample_distance(
@@ -90,7 +91,7 @@ def subsample_distance(
         )
     # Find where the distance travelled exceeds threshold
     while idx < len(df) - 1:
-        offset = utils.first_nonzero(cumulative_distances >= threshold)
+        offset = benthicnet.utils.first_nonzero(cumulative_distances >= threshold)
         if offset < 0:
             break
         if method == "threshold":
@@ -197,7 +198,7 @@ def subsample_distance_sitewise(
     """
     t0 = time.time()
 
-    site2indices = utils.unique_map(df["site"])
+    site2indices = benthicnet.utils.unique_map(df["site"])
 
     if factors is not None and max_factor is not None:
         raise ValueError("Only one of factors and max_factor should be set.")

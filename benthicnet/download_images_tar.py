@@ -19,7 +19,8 @@ import requests
 import tqdm
 
 import benthicnet.io
-from benthicnet import __meta__, utils
+import benthicnet.utils
+from benthicnet import __meta__
 
 
 def download_images(
@@ -419,7 +420,7 @@ def download_images_by_dataset(
     df["dataset"] = benthicnet.io.sanitize_filename_series(df["dataset"])
 
     # Create mapping from unique datasets to rows which bear that dataset
-    dataset2idx = utils.unique_map(df["dataset"])
+    dataset2idx = benthicnet.utils.unique_map(df["dataset"])
     datasets_to_process = sorted(dataset2idx)
 
     if n_proc:
