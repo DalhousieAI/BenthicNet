@@ -97,7 +97,9 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
                 df_todo["_outtar_dest"] == dest_tar_fname, "_outtar_source"
             ].unique()
             for source_tar_fname in tqdm(
-                source_tar_fnames, desc="Sources", disable=verbose < 1
+                source_tar_fnames,
+                desc="Sources",
+                disable=verbose < 1 or len(source_tar_fnames) <= 1,
             ):
                 source_tar_full_path = os.path.join(tar_dir_source, source_tar_fname)
                 if verbose >= 1:
