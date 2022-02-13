@@ -4,6 +4,7 @@
 Move files from tarball of images to another, by matching on URL.
 """
 
+import copy
 import os
 import tarfile
 import time
@@ -156,6 +157,7 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
                                 f"Copying {row['_outinner_source']} -> {row['_outinner_dest']}"
                             )
                         member = tar_source.getmember(row["_outinner_source"])
+                        member = copy.copy(member)
                         member.name = row["_outinner_dest"]
                         try:
                             tar_dest.addfile(
