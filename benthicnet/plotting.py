@@ -174,7 +174,6 @@ def plot_samples(
     projection="EqualEarth",
     figsize=(25, 8),
     show_map=True,
-    alpha=0.15,
     s=1,
     color="r",
     **kwargs,
@@ -198,8 +197,6 @@ def plot_samples(
         The marker size in points**2.
     color : array-like or list of colors or color, default="r"
         The marker colors.
-    alpha : float, default=0.15
-        The alpha blending value, between 0 (transparent) and 1 (opaque).
     **kwargs
         Additional arguments as per :func:`matplotlib.pyplot.scatter`.
 
@@ -232,7 +229,6 @@ def plot_samples(
         latitude,
         s=s,
         color=color,
-        alpha=alpha,
         transform=cartopy.crs.PlateCarree(),
         **kwargs,
     )
