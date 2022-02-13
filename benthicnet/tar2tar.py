@@ -12,7 +12,7 @@ import time
 import pandas as pd
 from tqdm.auto import tqdm
 
-import benthicnet.utils
+import benthicnet.io
 from benthicnet import __meta__
 
 
@@ -21,7 +21,7 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
     Move files from tarball of images to another, by matching on URL.
 
     Tarfile names and member paths are generated using
-    :func:`benthicnet.utils.determine_outpath`.
+    :func:`benthicnet.io.determine_outpath`.
     Duplicated member paths in the source are dropped. Destination member paths
     must be unique.
 
@@ -48,7 +48,7 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
         )
         print(
             "Reading CSV file {} ({})...".format(
-                csv_source, benthicnet.utils.file_size(csv_source)
+                csv_source, benthicnet.io.file_size(csv_source)
             ),
             flush=True,
         )
@@ -58,15 +58,15 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
     if verbose >= 1:
         print(
             "Reading CSV file {} ({})...".format(
-                csv_dest, benthicnet.utils.file_size(csv_dest)
+                csv_dest, benthicnet.io.file_size(csv_dest)
             ),
             flush=True,
         )
-    df_dest = benthicnet.utils.read_csv(csv_dest, expect_datetime=False)
+    df_dest = benthicnet.io.read_csv(csv_dest, expect_datetime=False)
 
     # Determine output paths
-    df_source["_outpath"] = benthicnet.utils.determine_outpath(df_source)
-    df_dest["_outpath"] = benthicnet.utils.determine_outpath(df_dest)
+    df_source["_outpath"] = benthicnet.io.determine_outpath(df_source)
+    df_dest["_outpath"] = benthicnet.io.determine_outpath(df_dest)
 
     # Convert output paths into tarfile name and member path within the tarball
     df_source["_outtar"] = (

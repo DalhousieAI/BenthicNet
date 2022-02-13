@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 import tqdm
 
+import benthicnet.io
 from benthicnet import __meta__, utils
 
 
@@ -343,9 +344,12 @@ def subsample_distance_sitewise_from_csv(
     if verbose >= 1:
         print(f"Will subsample {input_csv}")
         print(f"            -> {output_csv}")
-        print("Reading CSV file ({})...".format(utils.file_size(input_csv)), flush=True)
+        print(
+            "Reading CSV file ({})...".format(benthicnet.io.file_size(input_csv)),
+            flush=True,
+        )
 
-    df = utils.read_csv(input_csv)
+    df = benthicnet.io.read_csv(input_csv)
 
     if verbose >= 1:
         print("Loaded CSV file in {:.1f} seconds".format(time.time() - t0), flush=True)
