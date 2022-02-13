@@ -157,9 +157,17 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
                             )
                         member = tar_source.getmember(row["_outinner_source"])
                         member.name = row["_outinner_dest"]
-                        tar_dest.addfile(
-                            member, tar_source.extractfile(row["_outinner_source"])
-                        )
+                        try:
+                            tar_dest.addfile(
+                                member, tar_source.extractfile(row["_outinner_source"])
+                            )
+                        except BaseException:
+                            if verbose >= 1:
+                                print(
+                                    f"{row['_outinner_source']} could not be copied"
+                                    f" from {source_tar_full_path}"
+                                )
+                            continue
 
 
 def get_parser():
