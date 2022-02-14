@@ -19,6 +19,12 @@ DATASET2ORG = {
     "german2006": "DFO",
     "german2010": "DFO",
     "noaa_habcam": "DFO",
+    "Doc Ricketts": "MBARI",
+    "i2MAP": "MBARI",
+    "Mini ROV": "MBARI",
+    "MiniROV": "MBARI",
+    "Tiburon": "MBARI",
+    "Ventana": "MBARI",
     "prnpr2018": "Hakai",
     "hakai_rov": "Hakai",
     "hakai_video": "Hakai",
@@ -49,7 +55,9 @@ DATASET2ORG = {
 }
 ORG2COLOR = {
     "DFO": "#FB9A99",  # l.red / pink
+    "FathomNet": "#a65628",  # brown
     "IMOS": "#4daf4a",  # green
+    "MBARI": "#7A7064",  # MBARI logo teal-blue: #004360, #7A7064
     "NOAA": "#0078BC",  # NOAA logo db/lb: #243C72, #0078BC
     "NRCan": "#D32823",  # Canadian flag red: #D32823
     "PANGAEA": "#009C84",  # PANGAEA Website d.teal/l.teal: #004D60 009C84
@@ -57,13 +65,15 @@ ORG2COLOR = {
     "SQUIDLE": "#ff7f00",  # orange
     "SOI": "#FECA2D",  # SOI logo y/b/lg: #FECA2D #0B61BE #C4C52A
     "USGS": "#00264C",  # USGS d.blue: #00264C
-    "Other": "#777",  # grey
-    "Merlin Best": "#777",  # grey
-    "Hakai": "#777",  # grey
+    "Other": "#555",  # grey
+    "Merlin Best": "#555",  # grey
+    "Hakai": "#555",  # grey
 }
 ORG2COLOR_BW = {
     "DFO": "#FB9A99",
+    "FathomNet": "#a65628",
     "IMOS": "#52BDEC",  # IMOS logo lb/b: #52BDEC #3A6F8F
+    "MBARI": "#7A7064",
     "NOAA": "#0078BC",
     "NRCan": "#D32823",
     "PANGAEA": "#009C84",
@@ -71,9 +81,9 @@ ORG2COLOR_BW = {
     "SQUIDLE": "#ff7f00",
     "SOI": "#FECA2D",
     "USGS": "#4daf4a",  # green
-    "Other": "#a65628",  # brown
-    "Merlin Best": "#a65628",  # brown
-    "Hakai": "#a65628",  # brown
+    "Other": "#909090",  # grey
+    "Merlin Best": "#909090",  # grey
+    "Hakai": "#909090",  # grey
 }
 
 
@@ -421,6 +431,8 @@ def row2organization(row):
         "rls "
     ):
         return "RLS"
+    if row["dataset"].lower().startswith("fathomnet"):
+        return "FathomNet"
 
     if "url" not in row or pd.isna(row["url"]):
         if "repository" in row and not pd.isna(row["repository"]):
