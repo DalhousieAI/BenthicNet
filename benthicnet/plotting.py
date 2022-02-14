@@ -40,6 +40,7 @@ DATASET2ORG = {
     "nantuckett": "USGS",
     "tortugas2009": "USGS",
     "tortugas2011": "USGS",
+    "AT18-12": "WHOI",
     "bastos": "Other",
     "bedford": "Other",
     "chesterfield": "Other",
@@ -68,6 +69,7 @@ ORG2COLOR = {
     "Other": "#555",  # grey
     "Merlin Best": "#555",  # grey
     "Hakai": "#555",  # grey
+    "WHOI": "#555",  # grey
 }
 ORG2COLOR_BW = {
     "DFO": "#FB9A99",
@@ -84,6 +86,7 @@ ORG2COLOR_BW = {
     "Other": "#909090",  # grey
     "Merlin Best": "#909090",  # grey
     "Hakai": "#909090",  # grey
+    "WHOI": "#909090",  # grey
 }
 
 
