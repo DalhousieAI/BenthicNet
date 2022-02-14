@@ -435,7 +435,11 @@ def row2organization(row):
         return "NOAA"
     if row["url"].startswith("http://rls.tpac.org.au"):
         return "RLS"
-    if row["url"].startswith("http://soi-dfo-data.storage.googleapis.com"):
+    if (
+        row["url"].startswith("http://soi-dfo-data.storage.googleapis.com")
+        or row["url"].startswith("http://soi-uos-data.storage.googleapis.com")
+        or "fkdata.storage.googleapis.com/FK" in row["url"]
+    ):
         return "SOI"
 
     if "repository" in row and not pd.isna(row["repository"]):
