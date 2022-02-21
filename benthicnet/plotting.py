@@ -12,6 +12,8 @@ import pandas as pd
 from . import kde_tools
 
 DATASET2ORG = {
+    "sabrina": "AADC",
+    "vms": "AADC",
     "dfo_eelgrass": "DFO",
     "george2000": "DFO",
     "george2002": "DFO",
@@ -40,9 +42,14 @@ DATASET2ORG = {
     "LISMARC13_SEABOSS": "MGDS",
     "LISMARC13_ROV": "MGDS",
     "mgds": "MGDS",
+    "lmg1311": "USAP-DC",
+    "lmg1703": "USAP-DC",
+    "nbp1402": "USAP-DC",
     "crocker2014": "USGS",
     "frrp2011": "USGS",
     "nantuckett": "USGS",
+    "pulley-ridge": "USGS",
+    "pulley_ridge": "USGS",
     "tortugas2009": "USGS",
     "tortugas2011": "USGS",
     "AT18-12": "WHOI",
@@ -54,7 +61,6 @@ DATASET2ORG = {
     "julia": "Other",
     "ngu": "Other",
     "qik": "Other",
-    "sabrina": "Other",
     "shreya": "Other",
     "wager": "Other",
 }
@@ -71,9 +77,11 @@ ORG2COLOR = {
     "SOI": "#FECA2D",  # SOI logo y/b/lg: #FECA2D #0B61BE #C4C52A
     "USGS": "#00264C",  # USGS d.blue: #00264C
     "Other": "#606060",  # grey
+    "AADC": "#606060",  # grey
+    "Hakai": "#606060",  # grey
     "Merlin Best": "#606060",  # grey
     "MGDS": "#606060",  # grey
-    "Hakai": "#606060",  # grey
+    "USAP-DC": "#606060",  # grey
     "WHOI": "#606060",  # grey
 }
 ORG2COLOR_BW = {
@@ -89,9 +97,11 @@ ORG2COLOR_BW = {
     "SOI": "#FECA2D",
     "USGS": "#4daf4a",  # green
     "Other": "#909090",  # grey
+    "AADC": "#909090",  # grey
+    "Hakai": "#909090",  # grey
     "Merlin Best": "#909090",  # grey
     "MGDS": "#909090",  # grey
-    "Hakai": "#909090",  # grey
+    "USAP-DC": "#909090",  # grey
     "WHOI": "#909090",  # grey
 }
 
