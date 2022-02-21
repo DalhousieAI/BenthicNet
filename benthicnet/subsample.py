@@ -12,11 +12,14 @@ import time
 import haversine
 import numpy as np
 import pandas as pd
+import sklearn.neighbors
 import tqdm
 
 import benthicnet.io
 import benthicnet.utils
 from benthicnet import __meta__
+
+from .kde_tools import EARTH_RADIUS
 
 
 def subsample_distance(
@@ -24,7 +27,6 @@ def subsample_distance(
     threshold=2.5,
     method="closest",
     exhaustive=False,
-    exhaustive_limit=1000,
     verbose=0,
     include_last=None,
 ):
@@ -53,9 +55,6 @@ def subsample_distance(
     exhaustive : bool, default=True
         Whether to check the distance to all previous points before marking a
         new point point to be included in the subsampled series.
-    exhaustive_limit : int, default=1000
-        Number of previous samples to compare against when doing exhaustive
-        search.
     verbose : int, optional
         Verbosity level. Default is ``0``.
     include_last : bool or None, optional
@@ -89,6 +88,12 @@ def subsample_distance(
         distances >= threshold
     ):
         return df
+    # Create ball tree for fast search
+    if exhaustive:
+        tree = sklearn.neighbors.BallTree(
+            np.radians(np.stack([df["latitude"], df["longitude"]], axis=-1)),
+            metric="haversine",
+        )
     # Create list of indices of entries to include
     # Always include the first image
     idx = 0
@@ -119,14 +124,7 @@ def subsample_distance(
         else:
             raise ValueError("Unsupported method: {}".format(method))
         if exhaustive:
-            # Ensure
-            previous_coords = np.stack(
-                [
-                    df.iloc[indices_to_keep[-exhaustive_limit:]]["latitude"],
-                    df.iloc[indices_to_keep[-exhaustive_limit:]]["longitude"],
-                ],
-                axis=-1,
-            )
+            set_to_keep = set(indices_to_keep)
             while True:
                 if idx + offset >= len(df):
                     break
@@ -134,13 +132,11 @@ def subsample_distance(
                     df.iloc[idx + offset]["latitude"],
                     df.iloc[idx + offset]["longitude"],
                 ]
-                doubleback_distances = haversine.haversine_vector(
-                    this_coord,
-                    previous_coords,
-                    unit=haversine.Unit.METERS,
-                    comb=True,
-                )
-                if np.min(doubleback_distances) > threshold / 2:
+                neighbours = tree.query_radius(
+                    [np.radians(this_coord)],
+                    threshold / 2 / EARTH_RADIUS,
+                )[0]
+                if len(set_to_keep.intersection(neighbours)) == 0:
                     break
                 offset += 1
                 if offset >= len(cumulative_distances):
@@ -199,7 +195,6 @@ def subsample_distance_sitewise(
     max_factor=None,
     factors=None,
     exhaustive=False,
-    exhaustive_limit=1000,
     verbose=1,
     use_tqdm=True,
 ):
@@ -240,9 +235,6 @@ def subsample_distance_sitewise(
         subsampling step.
         If this is ``2``, an exhaustive search is performed for subsequent
         subsampling steps to satisfy the target population limit as well.
-    exhaustive_limit : int, default=1000
-        Number of previous samples to compare against when doing exhaustive
-        search.
     verbose : int, default=1
         Verbosity level.
     use_tqdm : bool, optional
@@ -279,7 +271,6 @@ def subsample_distance_sitewise(
         f"\n  distance factors = {factors}"
         f"\n  allow_nonspatial = {allow_nonspatial}"
         f"\n  exhaustive = {exhaustive}"
-        f"\n  exhaustive_limit = {exhaustive_limit}"
     )
 
     n_below_thr = 0
@@ -324,7 +315,6 @@ def subsample_distance_sitewise(
                 threshold=distance,
                 verbose=verbose - 1,
                 exhaustive=exhaustive,
-                exhaustive_limit=exhaustive_limit,
             )
             factor_used = 1
             if target_population:
@@ -339,7 +329,6 @@ def subsample_distance_sitewise(
                         threshold=distance * factor,
                         verbose=verbose - 1,
                         exhaustive=exhaustive >= 2,
-                        exhaustive_limit=exhaustive_limit,
                     )
                     if len(df_j) < target_population:
                         df_j = df_prev
@@ -590,21 +579,9 @@ def get_parser():
         const=1,
         help=textwrap.dedent(
             """
-            Perform an exhaustive search of the previous EXHAUSTIVE_LIMIT
+            Perform an exhaustive search of the previous
             samples to ensure none are within DISTANCE/2 before including the
             next sample.
-        """
-        ),
-    )
-    parser.add_argument(
-        "--exhaustive-limit",
-        type=int,
-        default=1000,
-        help=textwrap.dedent(
-            """
-            Number of samples to scan back over when performing exhaustive
-            search for neighbours.
-            Default is %(default)s.
         """
         ),
     )
