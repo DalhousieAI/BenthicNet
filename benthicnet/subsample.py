@@ -20,7 +20,13 @@ from benthicnet import __meta__
 
 
 def subsample_distance(
-    df, threshold=2.5, method="closest", verbose=0, include_last=None
+    df,
+    threshold=2.5,
+    method="closest",
+    exhaustive=False,
+    exhaustive_limit=1000,
+    verbose=0,
+    include_last=None,
 ):
     """
     Subsample data based on distance between records.
@@ -44,6 +50,12 @@ def subsample_distance(
             is included. This may be closer or further away from the last row
             than ``threshold``.
 
+    exhaustive : bool, default=True
+        Whether to check the distance to all previous points before marking a
+        new point point to be included in the subsampled series.
+    exhaustive_limit : int, default=1000
+        Number of previous samples to compare against when doing exhaustive
+        search.
     verbose : int, optional
         Verbosity level. Default is ``0``.
     include_last : bool or None, optional
@@ -106,6 +118,35 @@ def subsample_distance(
                 offset += 1
         else:
             raise ValueError("Unsupported method: {}".format(method))
+        if exhaustive:
+            # Ensure
+            previous_coords = np.stack(
+                [
+                    df.iloc[indices_to_keep[-exhaustive_limit:]]["latitude"],
+                    df.iloc[indices_to_keep[-exhaustive_limit:]]["longitude"],
+                ],
+                axis=-1,
+            )
+            while True:
+                if idx + offset >= len(df):
+                    break
+                this_coord = [
+                    df.iloc[idx + offset]["latitude"],
+                    df.iloc[idx + offset]["longitude"],
+                ]
+                doubleback_distances = haversine.haversine_vector(
+                    this_coord,
+                    previous_coords,
+                    unit=haversine.Unit.METERS,
+                    comb=True,
+                )
+                if np.min(doubleback_distances) > threshold / 2:
+                    break
+                offset += 1
+                if offset >= len(cumulative_distances):
+                    break
+            if idx + offset >= len(df):
+                break
         idx += offset
         indices_to_keep.append(idx)
         this_distance = cumulative_distances[offset - 1]
@@ -157,6 +198,8 @@ def subsample_distance_sitewise(
     target_population=1000,
     max_factor=None,
     factors=None,
+    exhaustive=False,
+    exhaustive_limit=1000,
     verbose=1,
     use_tqdm=True,
 ):
@@ -190,6 +233,16 @@ def subsample_distance_sitewise(
         for over populated sites.
         The distance will be multiplied by these factors to increase subsampling
         for sites bearing more than the ``target_population``.
+    exhaustive : int, default=0
+        Whether to check the distance to all previous points before marking a
+        new point point to be included in the subsampled series.
+        If this is ``1``, an exhaustive search is performed for the initial
+        subsampling step.
+        If this is ``2``, an exhaustive search is performed for subsequent
+        subsampling steps to satisfy the target population limit as well.
+    exhaustive_limit : int, default=1000
+        Number of previous samples to compare against when doing exhaustive
+        search.
     verbose : int, default=1
         Verbosity level.
     use_tqdm : bool, optional
@@ -225,6 +278,8 @@ def subsample_distance_sitewise(
         f"\n  target_population = {target_population}"
         f"\n  distance factors = {factors}"
         f"\n  allow_nonspatial = {allow_nonspatial}"
+        f"\n  exhaustive = {exhaustive}"
+        f"\n  exhaustive_limit = {exhaustive_limit}"
     )
 
     n_below_thr = 0
@@ -264,7 +319,13 @@ def subsample_distance_sitewise(
             else:
                 n_subindex += 1
         else:
-            df_i = subsample_distance(df_i, threshold=distance, verbose=verbose - 1)
+            df_i = subsample_distance(
+                df_i,
+                threshold=distance,
+                verbose=verbose - 1,
+                exhaustive=exhaustive,
+                exhaustive_limit=exhaustive_limit,
+            )
             factor_used = 1
             if target_population:
                 # Try further subsampling at increased distances to reduce pop
@@ -274,7 +335,11 @@ def subsample_distance_sitewise(
                         continue
                     df_prev = df_j
                     df_j = subsample_distance(
-                        df_i, threshold=distance * factor, verbose=verbose - 1
+                        df_i,
+                        threshold=distance * factor,
+                        verbose=verbose - 1,
+                        exhaustive=exhaustive >= 2,
+                        exhaustive_limit=exhaustive_limit,
                     )
                     if len(df_j) < target_population:
                         df_j = df_prev
@@ -513,6 +578,32 @@ def get_parser():
             """
             Set of distance factors consider when performing additional
             subsampling for over populated sites.
+            Default is %(default)s.
+        """
+        ),
+    )
+    parser.add_argument(
+        "--exhaustive",
+        type=int,
+        nargs="?",
+        default=0,
+        const=1,
+        help=textwrap.dedent(
+            """
+            Perform an exhaustive search of the previous EXHAUSTIVE_LIMIT
+            samples to ensure none are within DISTANCE/2 before including the
+            next sample.
+        """
+        ),
+    )
+    parser.add_argument(
+        "--exhaustive-limit",
+        type=int,
+        default=1000,
+        help=textwrap.dedent(
+            """
+            Number of samples to scan back over when performing exhaustive
+            search for neighbours.
             Default is %(default)s.
         """
         ),
