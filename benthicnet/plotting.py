@@ -442,6 +442,8 @@ def row2organization(row):
         return "RLS"
     if row["dataset"].lower().startswith("fathomnet"):
         return "FathomNet"
+    if row["dataset"].startswith("FK200429"):
+        return "SOI"
 
     if "url" not in row or pd.isna(row["url"]):
         if "repository" in row and not pd.isna(row["repository"]):
