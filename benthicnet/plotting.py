@@ -253,6 +253,45 @@ def cmap_white2alpha(
     return cmap_alpha
 
 
+def show_land_sea_features(ax=None):
+    """
+    Show global land, sea, and lakes in one flat colour each.
+
+    Parameters
+    ----------
+    ax : matplotlib.Axes, optional
+        The axes onto which land, sea, and lakes will be added.
+    """
+    if ax is None:
+        ax = plt.gca()
+
+    scale = "10m"  # use data at this scale
+    land = cartopy.feature.NaturalEarthFeature(
+        "physical",
+        "land",
+        scale=scale,
+        edgecolor="none",
+        facecolor=cartopy.feature.COLORS["land"],
+    )
+    ocean = cartopy.feature.NaturalEarthFeature(
+        "physical",
+        "ocean",
+        scale=scale,
+        edgecolor="none",
+        facecolor=cartopy.feature.COLORS["water"],
+    )
+    lakes = cartopy.feature.NaturalEarthFeature(
+        "physical",
+        "lakes",
+        scale=scale,
+        edgecolor="none",
+        facecolor=cartopy.feature.COLORS["water"],
+    )
+    ax.add_feature(land)
+    ax.add_feature(ocean)
+    ax.add_feature(lakes)
+
+
 def plot_samples(
     latitude,
     longitude,
@@ -303,7 +342,9 @@ def plot_samples(
 
     # Display gridlines and either the world map, or outline of coastlines
     ax.gridlines()
-    if show_map:
+    if show_map == "two-tone":
+        show_land_sea_features(ax)
+    elif show_map:
         ax.stock_img()
     else:
         ax.coastlines()
@@ -391,7 +432,9 @@ def plot_kde(
 
     # Display gridlines and either the world map, or outline of coastlines
     ax.gridlines()
-    if show_map:
+    if show_map == "two-tone":
+        show_land_sea_features(ax)
+    elif show_map:
         ax.stock_img()
     else:
         ax.coastlines()
@@ -527,7 +570,9 @@ def plot_samples_by_organization(
 
     # Display gridlines and either the world map, or outline of coastlines
     ax.gridlines()
-    if show_map:
+    if show_map == "two-tone":
+        show_land_sea_features(ax)
+    elif show_map:
         ax.stock_img()
     else:
         ax.coastlines()
