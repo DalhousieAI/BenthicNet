@@ -610,7 +610,7 @@ def plot_samples_by_organization(
             leg_labels.append(leg_labels.pop(i))
     # Show legend
     hlegend = ax.legend(
-        leg_handles, leg_labels, loc="center left", bbox_to_anchor=(1, 0.5)
+        leg_handles, leg_labels, fontsize=16, loc="center left", bbox_to_anchor=(1, 0.5)
     )
     # Set the size of the markers in the legend to be large
     for h_entry in hlegend.legendHandles:
