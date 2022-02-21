@@ -476,7 +476,7 @@ def plot_samples_by_organization(
     projection="EqualEarth",
     figsize=(25, 8),
     show_map=True,
-    s=1,
+    s=10,
     **kwargs,
 ):
     """
@@ -571,6 +571,8 @@ def plot_samples_by_organization(
         df_rand["latitude"],
         s=s,
         c=df_rand["org_color"],
+        marker=".",
+        edgecolors="none",
         zorder=999,
         transform=cartopy.crs.PlateCarree(),
         **kwargs,
