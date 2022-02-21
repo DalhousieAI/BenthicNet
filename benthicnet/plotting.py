@@ -12,8 +12,12 @@ import pandas as pd
 from . import kde_tools
 
 DATASET2ORG = {
+    "julia": "4D Oceans",
+    "shreya": "4D Oceans",
     "sabrina": "AADC",
     "vms": "AADC",
+    "ngu": "Alex Schimel",
+    "bastos": "Bastos Lab",
     "dfo_eelgrass": "DFO",
     "george2000": "DFO",
     "george2002": "DFO",
@@ -21,6 +25,7 @@ DATASET2ORG = {
     "german2006": "DFO",
     "german2010": "DFO",
     "noaa_habcam": "DFO",
+    "eac": "EAC",
     "Doc Ricketts": "MBARI",
     "i2MAP": "MBARI",
     "Mini ROV": "MBARI",
@@ -42,6 +47,9 @@ DATASET2ORG = {
     "LISMARC13_SEABOSS": "MGDS",
     "LISMARC13_ROV": "MGDS",
     "mgds": "MGDS",
+    "bedford": "SEAM",
+    "bay_of_fundy": "SEAM",
+    "st_anns_bank": "SEAM",
     "lmg1311": "USAP-DC",
     "lmg1703": "USAP-DC",
     "nbp1402": "USAP-DC",
@@ -53,15 +61,9 @@ DATASET2ORG = {
     "tortugas2009": "USGS",
     "tortugas2011": "USGS",
     "AT18-12": "WHOI",
-    "bastos": "Other",
-    "bedford": "Other",
     "chesterfield": "Other",
-    "eac": "Other",
     "frobisher": "Other",
-    "julia": "Other",
-    "ngu": "Other",
     "qik": "Other",
-    "shreya": "Other",
     "wager": "Other",
 }
 ORG2COLOR = {
@@ -77,10 +79,15 @@ ORG2COLOR = {
     "SOI": "#FECA2D",  # SOI logo y/b/lg: #FECA2D #0B61BE #C4C52A
     "USGS": "#00264C",  # USGS d.blue: #00264C
     "Other": "#606060",  # grey
+    "4D Oceans": "#606060",  # grey
     "AADC": "#606060",  # grey
+    "Alex Schimel": "#606060",  # grey
+    "Bastos Lab": "#606060",  # grey
+    "EAC": "#606060",  # grey
     "Hakai": "#606060",  # grey
     "Merlin Best": "#606060",  # grey
     "MGDS": "#606060",  # grey
+    "SEAM": "#606060",  # grey
     "USAP-DC": "#606060",  # grey
     "WHOI": "#606060",  # grey
 }
@@ -97,10 +104,15 @@ ORG2COLOR_BW = {
     "SOI": "#FECA2D",
     "USGS": "#4daf4a",  # green
     "Other": "#909090",  # grey
+    "4D Oceans": "#909090",  # grey
     "AADC": "#909090",  # grey
+    "Alex Schimel": "#909090",  # grey
+    "Bastos Lab": "#909090",  # grey
+    "EAC": "#909090",  # grey
     "Hakai": "#909090",  # grey
     "Merlin Best": "#909090",  # grey
     "MGDS": "#909090",  # grey
+    "SEAM": "#909090",  # grey
     "USAP-DC": "#909090",  # grey
     "WHOI": "#909090",  # grey
 }
