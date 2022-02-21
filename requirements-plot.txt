@@ -1,0 +1,4 @@
+cartopy
+jupyter[notebook]
+matplotlib
+seaborn

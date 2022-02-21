@@ -11,3 +11,16 @@ BenthicNet is a dataset containing underwater photographs of benthic habitats on
 .. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/psf/black
    :alt: black
+
+Installing cartopy dependencies::
+
+    sudo apt-get install proj-bin
+
+    sudo apt-get install libproj-dev proj-data proj-bin libgeos-dev
+    pip uninstall -y shapely
+    pip install --no-binary shapely shapely
+
+    conda create --name benthicnet -y
+    conda activate benthicnet
+    conda install -c conda-forge cartopy -y
+    pip install -e .[plots]
