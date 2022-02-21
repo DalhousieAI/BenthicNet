@@ -342,7 +342,9 @@ def plot_samples(
 
     # Display gridlines and either the world map, or outline of coastlines
     ax.gridlines()
-    if show_map == "two-tone":
+    if show_map == "none":
+        pass
+    elif show_map == "two-tone":
         show_land_sea_features(ax)
     elif show_map:
         ax.stock_img()
@@ -432,7 +434,9 @@ def plot_kde(
 
     # Display gridlines and either the world map, or outline of coastlines
     ax.gridlines()
-    if show_map == "two-tone":
+    if show_map == "none":
+        pass
+    elif show_map == "two-tone":
         show_land_sea_features(ax)
     elif show_map:
         ax.stock_img()
@@ -570,7 +574,9 @@ def plot_samples_by_organization(
 
     # Display gridlines and either the world map, or outline of coastlines
     ax.gridlines()
-    if show_map == "two-tone":
+    if show_map == "none":
+        pass
+    elif show_map == "two-tone":
         show_land_sea_features(ax)
     elif show_map:
         ax.stock_img()
