@@ -5,6 +5,8 @@ Methods for spherical kernel density estimation.
 import numpy as np
 from sklearn.neighbors import KernelDensity
 
+EARTH_RADIUS = 6_371_000  # meters
+
 
 def fit_kde_spherical(
     latitude,
