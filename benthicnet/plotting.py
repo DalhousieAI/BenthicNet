@@ -35,6 +35,11 @@ DATASET2ORG = {
     "explorer_H1691": "Merlin Best",
     "sgaan_H1684": "Merlin Best",
     "sgaan_H1686": "Merlin Best",
+    "LISMARC12_SEABOSS": "MGDS",
+    "LISMARC12_ISIS": "MGDS",
+    "LISMARC13_SEABOSS": "MGDS",
+    "LISMARC13_ROV": "MGDS",
+    "mgds": "MGDS",
     "crocker2014": "USGS",
     "frrp2011": "USGS",
     "nantuckett": "USGS",
@@ -47,7 +52,6 @@ DATASET2ORG = {
     "eac": "Other",
     "frobisher": "Other",
     "julia": "Other",
-    "mgds": "Other",
     "ngu": "Other",
     "qik": "Other",
     "sabrina": "Other",
@@ -85,6 +89,7 @@ ORG2COLOR_BW = {
     "USGS": "#4daf4a",  # green
     "Other": "#909090",  # grey
     "Merlin Best": "#909090",  # grey
+    "MGDS": "#909090",  # grey
     "Hakai": "#909090",  # grey
     "WHOI": "#909090",  # grey
 }
