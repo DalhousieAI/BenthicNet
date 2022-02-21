@@ -70,10 +70,11 @@ ORG2COLOR = {
     "SQUIDLE": "#ff7f00",  # orange
     "SOI": "#FECA2D",  # SOI logo y/b/lg: #FECA2D #0B61BE #C4C52A
     "USGS": "#00264C",  # USGS d.blue: #00264C
-    "Other": "#555",  # grey
-    "Merlin Best": "#555",  # grey
-    "Hakai": "#555",  # grey
-    "WHOI": "#555",  # grey
+    "Other": "#606060",  # grey
+    "Merlin Best": "#606060",  # grey
+    "MGDS": "#606060",  # grey
+    "Hakai": "#606060",  # grey
+    "WHOI": "#606060",  # grey
 }
 ORG2COLOR_BW = {
     "DFO": "#FB9A99",
