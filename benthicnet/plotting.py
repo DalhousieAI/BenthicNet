@@ -402,6 +402,7 @@ def plot_kde(
         Z,
         cmap=cmap,
         levels=np.linspace(0, Z.max(), 25),
+        zorder=10,
         transform=cartopy.crs.PlateCarree(),
         antialiased=True,
     )
@@ -568,6 +569,7 @@ def plot_samples_by_organization(
         df_rand["latitude"],
         s=s,
         c=df_rand["org_color"],
+        zorder=999,
         transform=cartopy.crs.PlateCarree(),
         **kwargs,
     )
