@@ -512,8 +512,11 @@ def plot_samples_by_organization(
     # Switch the colormap for better contrast against the background
     org2color = ORG2COLOR if show_map else ORG2COLOR_BW
 
-    # Determine organization and colour
+    # Work on a copy of the dataframe
     df = df.copy()
+    # Remove samples which are missing coordinate information
+    df = df[~pd.isna(df["latitude"]) & ~pd.isna(df["longitude"])]
+    # Determine organization and colour
     df["organization"] = df.apply(row2organization, axis=1)
     df["org_color"] = df["organization"].apply(lambda x: org2color.get(x, "#888"))
 
