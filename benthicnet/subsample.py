@@ -78,11 +78,9 @@ def subsample_distance(
     if len(df) < 3:
         return df
     # Measure distance between entries using Haversine method
-    distances = haversine.haversine_vector(
-        np.stack([df["latitude"][:-1], df["longitude"][:-1]], axis=-1),
-        np.stack([df["latitude"][1:], df["longitude"][1:]], axis=-1),
-        unit=haversine.Unit.METERS,
-    )
+    xy = np.stack([df["latitude"], df["longitude"]], axis=-1)
+    distances = haversine.haversine_vector(xy[:-1], xy[1:], unit=haversine.Unit.METERS)
+
     # If all entries are further apart than the threshold, return everything
     if (method == "closest" and np.all(distances > threshold / 2)) or np.all(
         distances >= threshold
@@ -90,10 +88,7 @@ def subsample_distance(
         return df
     # Create ball tree for fast search
     if exhaustive:
-        tree = sklearn.neighbors.BallTree(
-            np.radians(np.stack([df["latitude"], df["longitude"]], axis=-1)),
-            metric="haversine",
-        )
+        tree = sklearn.neighbors.BallTree(np.radians(xy), metric="haversine")
     # Create list of indices of entries to include
     # Always include the first image
     idx = 0
