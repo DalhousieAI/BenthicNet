@@ -624,6 +624,9 @@ def subsample_distance_sitewise_from_csv(
     if verbose >= 1:
         print(f"Saving CSV file {output_csv}", flush=True)
 
+    dirname = os.path.dirname(output_csv)
+    if dirname:
+        os.makedirs(dirname, exist_ok=True)
     df.to_csv(output_csv, index=False)
 
     if verbose >= 1:
