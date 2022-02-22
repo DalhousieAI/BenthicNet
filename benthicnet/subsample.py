@@ -29,6 +29,7 @@ def subsample_distance(
     exhaustive=False,
     verbose=0,
     include_last=None,
+    tree=None,
 ):
     """
     Subsample data based on distance between records.
@@ -66,6 +67,9 @@ def subsample_distance(
         ``threshold / 2`` metres from the preceding included row.
         If ``True``, the last row in `df` is always included.
         Default is ``None``.
+    tree : sklearn.neighbors.BallTree or None, optional
+        Pre-built BallTree object, made from this set of latitude and longitude
+        coordinates.
 
     Returns
     -------
@@ -87,7 +91,7 @@ def subsample_distance(
     ):
         return df
     # Create ball tree for fast search
-    if exhaustive:
+    if exhaustive and not tree:
         tree = sklearn.neighbors.BallTree(np.radians(xy), metric="haversine")
     # Create list of indices of entries to include
     # Always include the first image
@@ -468,8 +472,9 @@ def subsample_distance_sitewise(
             use_spatial = n_coords > samp_per_coord
 
         target_population_i = target_population
+        tree = None
         if target_population and subsite_population_bonus:
-            n_subsite = count_subsites(df_i, subsite_distance)
+            n_subsite, tree = count_subsites(df_i, subsite_distance, return_tree=True)
             total_subsite += n_subsite
             n_subsite_check += 1
             if n_subsite > 1:
@@ -493,6 +498,7 @@ def subsample_distance_sitewise(
                 threshold=distance,
                 verbose=verbose - 1,
                 exhaustive=exhaustive,
+                tree=tree,
             )
             factor_used = 1
             if target_population:
