@@ -350,19 +350,19 @@ def subsample_distance_sitewise(
             n_kept / len(df) * 100.0, n_kept, len(df)
         )
         out_str += (
-            f"\nThere were {n_below_thr} sites below threshold ({min_population})."
+            f"\nThere were {n_below_thr:5d} sites below threshold ({min_population})."
         )
         out_str += (
-            f"\nThere were {n_unchanged} other sites which also remained unchanged."
+            f"\nThere were {n_unchanged:5d} other sites which also remained unchanged."
         )
         if allow_nonspatial:
-            out_str += (
-                f"\nThere were {n_subindex} sites which were subsampled non-spatially."
-            )
-        out_str += f"\nThere were {n_subspatial} sites which were subsampled spatially."
+            out_str += f"\nThere were {n_subindex:5d} sites which were subsampled non-spatially."
+        out_str += (
+            f"\nThere were {n_subspatial:5d} sites which were subsampled spatially."
+        )
         if target_population is not None and target_population > 0:
             for k, v in tally_factors.items():
-                out_str += f"\n{v:8d} sites subsampled at factor={k} (distance={k * distance}m)"
+                out_str += f"\n{v:8d} sites subsampled at factor={k:>2d} (distance={k * distance}m)"
         print(out_str, flush=True)
 
     return df_redacted
