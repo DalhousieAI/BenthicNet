@@ -347,6 +347,7 @@ def subsample_distance_sitewise(
     exhaustive=False,
     subsite_distance=500.0,
     subsite_population_bonus=None,
+    subsite_min_population_bonus=None,
     verbose=1,
     use_tqdm=True,
 ):
@@ -396,6 +397,13 @@ def subsample_distance_sitewise(
         ``subsite_distance`` between samples.
         Default is half of ``target_population``.
         Set to ``0`` or ``-1`` to disable.
+    subsite_min_population_bonus : int or None, optional
+        Amount of increase in minimum population for every additional subsite
+        within the site.
+        Subsites are detected when there is a gap of at least
+        ``subsite_distance`` between samples.
+        Default is half of ``min_population``.
+        Set to ``0`` or ``-1`` to disable.
     verbose : int, default=1
         Verbosity level.
     use_tqdm : bool, optional
@@ -426,8 +434,12 @@ def subsample_distance_sitewise(
         target_population = None
     if subsite_population_bonus is None:
         subsite_population_bonus = target_population / 2
+    if subsite_min_population_bonus is None:
+        subsite_min_population_bonus = min_population / 2
     if subsite_population_bonus <= 0:
         subsite_population_bonus = 0
+    if subsite_min_population_bonus <= 0:
+        subsite_min_population_bonus = 0
 
     print(
         f"Will subsample {len(df)} records over {n_site} sites."
@@ -472,6 +484,7 @@ def subsample_distance_sitewise(
             use_spatial = n_coords > samp_per_coord
 
         target_population_i = target_population
+        min_population_i = min_population
         tree = None
         if target_population and subsite_population_bonus:
             n_subsite, tree = count_subsites(df_i, subsite_distance, return_tree=True)
@@ -482,8 +495,11 @@ def subsample_distance_sitewise(
             target_population_i = target_population + subsite_population_bonus * (
                 n_subsite - 1
             )
+            min_population_i = min_population + subsite_min_population_bonus * (
+                n_subsite - 1
+            )
 
-        if len(df_i) <= min_population:
+        if len(df_i) <= min_population_i:
             n_below_thr += 1
         elif not use_spatial:
             if target_population:
@@ -802,6 +818,19 @@ def get_parser():
             Subsites are detected when there is a gap of at least
             SUBSITE_DISTANCE between samples.
             Default is half of TARGET_POPULATION.
+            Set to ``0`` or ``-1`` to disable.
+        """
+        ),
+    )
+    parser.add_argument(
+        "--subsite-min-population-bonus",
+        type=int,
+        default=None,
+        help=textwrap.dedent(
+            """
+            Amount of increase in minimum population threshold for every
+            additional subsite within the site.
+            Default is half of MIN_POPULATION.
             Set to ``0`` or ``-1`` to disable.
         """
         ),
