@@ -50,9 +50,11 @@ DATASET2ORG = {
     "bedford": "SEAM",
     "bay_of_fundy": "SEAM",
     "st_anns_bank": "SEAM",
+    "KingGeorge_Bransfield": "USAP-DC",
     "lmg1311": "USAP-DC",
     "lmg1703": "USAP-DC",
     "nbp1402": "USAP-DC",
+    "nbp1502": "USAP-DC",
     "crocker2014": "USGS",
     "frrp2011": "USGS",
     "nantuckett": "USGS",
@@ -77,6 +79,7 @@ ORG2COLOR = {
     "RLS": "#984ea3",  # purple
     "SQUIDLE": "#ff7f00",  # orange
     "SOI": "#FECA2D",  # SOI logo y/b/lg: #FECA2D #0B61BE #C4C52A
+    "USAP-DC": "#00264C",  # Banner/logo l.blue: #92B9C5
     "USGS": "#00264C",  # USGS d.blue: #00264C
     "Other": "#606060",  # grey
     "4D Oceans": "#606060",  # grey
@@ -88,7 +91,6 @@ ORG2COLOR = {
     "Merlin Best": "#606060",  # grey
     "MGDS": "#606060",  # grey
     "SEAM": "#606060",  # grey
-    "USAP-DC": "#606060",  # grey
     "WHOI": "#606060",  # grey
 }
 ORG2COLOR_BW = {
@@ -102,6 +104,7 @@ ORG2COLOR_BW = {
     "RLS": "#984ea3",
     "SQUIDLE": "#ff7f00",
     "SOI": "#FECA2D",
+    "USAP-DC": "#92B9C5",  # Banner/logo l.blue: #92B9C5
     "USGS": "#4daf4a",  # green
     "Other": "#909090",  # grey
     "4D Oceans": "#909090",  # grey
@@ -113,7 +116,6 @@ ORG2COLOR_BW = {
     "Merlin Best": "#909090",  # grey
     "MGDS": "#909090",  # grey
     "SEAM": "#909090",  # grey
-    "USAP-DC": "#909090",  # grey
     "WHOI": "#909090",  # grey
 }
 
