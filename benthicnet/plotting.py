@@ -77,7 +77,7 @@ ORG2COLOR = {
     "NRCan": "#D32823",  # Canadian flag red: #D32823
     "PANGAEA": "#009C84",  # PANGAEA Website d.teal/l.teal: #004D60 009C84
     "RLS": "#984ea3",  # purple
-    "SQUIDLE": "#ff7f00",  # orange
+    "SQUIDLE": "#606060",  # grey "#ff7f00",  # orange
     "SOI": "#FECA2D",  # SOI logo y/b/lg: #FECA2D #0B61BE #C4C52A
     "USAP-DC": "#00264C",  # Banner/logo l.blue: #92B9C5
     "USGS": "#00264C",  # USGS d.blue: #00264C
@@ -102,7 +102,7 @@ ORG2COLOR_BW = {
     "NRCan": "#D32823",
     "PANGAEA": "#009C84",
     "RLS": "#984ea3",
-    "SQUIDLE": "#ff7f00",
+    "SQUIDLE": "#909090",  # grey "#ff7f00",
     "SOI": "#FECA2D",
     "USAP-DC": "#92B9C5",  # Banner/logo l.blue: #92B9C5
     "USGS": "#4daf4a",  # green
