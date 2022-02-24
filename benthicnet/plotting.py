@@ -398,6 +398,7 @@ def plot_kde(
     show_map=False,
     cmap="Reds",
     extend_cmap=True,
+    n_grid=101,
     **kwargs,
 ):
     """
@@ -419,6 +420,9 @@ def plot_kde(
         The colormap to use.
     extend_cmap : bool, default=True
         Whether to extend the colormap to go to fully transparent.
+    n_grid : int, default=101
+        Number of grid points to use in the longitude dimension. Twice as many
+        samples will be used for the latitude.
     **kwargs
         Additional arguments as per :func:`fit_kde_spherical`.
 
@@ -449,7 +453,7 @@ def plot_kde(
 
     # Fit kernel density estimator and use it to measure samples on a grid
     X, Y, Z = kde_tools.fit_meshgrid_kde_spherical(
-        latitude, longitude, n_grid=101, **kwargs
+        latitude, longitude, n_grid=n_grid, **kwargs
     )
 
     # Create a plot using the projection
