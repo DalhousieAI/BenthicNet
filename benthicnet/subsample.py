@@ -451,6 +451,7 @@ def subsample_distance_sitewise(
         f"\n  exhaustive = {exhaustive}"
         f"\n  subsite_distance = {subsite_distance}m"
         f"\n  subsite_population_bonus = {subsite_population_bonus}"
+        f"\n  subsite_min_population_bonus = {subsite_min_population_bonus}"
     )
 
     n_below_thr = 0
