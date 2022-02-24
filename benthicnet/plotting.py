@@ -398,7 +398,7 @@ def plot_kde(
     show_map=False,
     cmap="Reds",
     extend_cmap=True,
-    n_grid=101,
+    n_grid=181,
     **kwargs,
 ):
     """
@@ -420,7 +420,7 @@ def plot_kde(
         The colormap to use.
     extend_cmap : bool, default=True
         Whether to extend the colormap to go to fully transparent.
-    n_grid : int, default=101
+    n_grid : int, default=181
         Number of grid points to use in the longitude dimension. Twice as many
         samples will be used for the latitude.
     **kwargs
