@@ -29,6 +29,7 @@ def subsample_distance(
     exhaustive=False,
     verbose=0,
     include_last=None,
+    tree=None,
 ):
     """
     Subsample data based on distance between records.
@@ -66,6 +67,9 @@ def subsample_distance(
         ``threshold / 2`` metres from the preceding included row.
         If ``True``, the last row in `df` is always included.
         Default is ``None``.
+    tree : sklearn.neighbors.BallTree or None, optional
+        Pre-built BallTree object, made from this set of latitude and longitude
+        coordinates.
 
     Returns
     -------
@@ -78,22 +82,17 @@ def subsample_distance(
     if len(df) < 3:
         return df
     # Measure distance between entries using Haversine method
-    distances = haversine.haversine_vector(
-        np.stack([df["latitude"][:-1], df["longitude"][:-1]], axis=-1),
-        np.stack([df["latitude"][1:], df["longitude"][1:]], axis=-1),
-        unit=haversine.Unit.METERS,
-    )
+    xy = np.stack([df["latitude"], df["longitude"]], axis=-1)
+    distances = haversine.haversine_vector(xy[:-1], xy[1:], unit=haversine.Unit.METERS)
+
     # If all entries are further apart than the threshold, return everything
     if (method == "closest" and np.all(distances > threshold / 2)) or np.all(
         distances >= threshold
     ):
         return df
     # Create ball tree for fast search
-    if exhaustive:
-        tree = sklearn.neighbors.BallTree(
-            np.radians(np.stack([df["latitude"], df["longitude"]], axis=-1)),
-            metric="haversine",
-        )
+    if exhaustive and not tree:
+        tree = sklearn.neighbors.BallTree(np.radians(xy), metric="haversine")
     # Create list of indices of entries to include
     # Always include the first image
     idx = 0
@@ -186,6 +185,157 @@ def subsample_index(df, target_population):
     return df.iloc[idx]
 
 
+def coordinate_centroid(latitudes, longitudes, degrees=True):
+    """
+    Take the center coordinate via normal vectors, $n_E$.
+
+    https://www.ffi.no/en/research/n-vector/n-vector-explained
+
+    Parameters
+    ----------
+    latitudes : array-like
+        Latitude of coordinates.
+    longitudes : array-like
+        Longitudes of coordinates.
+    degrees : bool, default=True
+        Whether the inputs are in degrees, otherwise they are expected to be
+        radians.
+
+    Returns
+    -------
+    c_latitude : float
+        The latitude of the centroid, in degrees if ``degrees=True``,
+        otherwise in radians.
+    c_longitude : float
+        The longitude of the centroid, in degrees if ``degrees=True``,
+        otherwise in radians.
+    """
+    if degrees:
+        latitudes = np.radians(latitudes)
+        longitudes = np.radians(longitudes)
+    x = np.mean(np.cos(latitudes) * np.cos(longitudes))
+    y = np.mean(np.cos(latitudes) * np.sin(longitudes))
+    z = np.mean(np.sin(latitudes))
+
+    c_longitude = np.arctan2(y, x)
+    c_norm = np.sqrt(x * x + y * y)
+    c_latitude = np.arctan2(z, c_norm)
+
+    if degrees:
+        c_latitude = np.degrees(c_latitude)
+        c_longitude = np.degrees(c_longitude)
+
+    return c_latitude, c_longitude
+
+
+def coordinate_center_independent(latitudes, longitudes, degrees=True):
+    """
+    Take the center of latitude and longitude, independently.
+
+    Parameters
+    ----------
+    latitudes : array-like
+        Latitude of coordinates.
+    longitudes : array-like
+        Longitudes of coordinates.
+    degrees : bool, default=True
+        Whether the inputs are in degrees, otherwise they are expected to be
+        radians.
+
+    Returns
+    -------
+    c_latitude : float
+        The central latitude, in degrees if ``degrees=True``,
+        otherwise in radians.
+    c_longitude : float
+        The central longitude, in degrees if ``degrees=True``,
+        otherwise in radians.
+    """
+    if degrees:
+        latitudes = np.radians(latitudes)
+        longitudes = np.radians(longitudes)
+
+    x = np.sum(np.cos(latitudes))
+    y = np.sum(np.sin(latitudes))
+    c_latitude = np.arctan2(y, x)
+
+    x = np.sum(np.cos(longitudes))
+    y = np.sum(np.sin(longitudes))
+    c_longitude = np.arctan2(y, x)
+
+    if degrees:
+        c_latitude = np.degrees(c_latitude)
+        c_longitude = np.degrees(c_longitude)
+    return c_latitude, c_longitude
+
+
+def count_subsites(df, subsite_distance=500.0, return_tree=False):
+    """
+    Count the number of subsites, detected by distance between consecutive samples.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+    subsite_distance : float, default=500.0
+    return_tree : bool, optional
+
+    Returns
+    -------
+    num_subsites : int
+        The number of subsites in the dataframe.
+    tree : sklearn.neighbors.BallTree or None, optional
+        The fitted BallTree object used to verify subsite, if there were any
+        to check.
+    """
+    # Ensure there are coordinates to compare
+    select = ~pd.isna(df["latitude"]) & ~pd.isna(df["longitude"])
+    if sum(select) < 2:
+        n_subsite = 1
+        # No lat/lon data to evaluate subsites with
+        if return_tree:
+            return n_subsite, None
+        return n_subsite
+    # Measure distance between entries using Haversine method
+    xy = np.stack([df[select]["latitude"], df[select]["longitude"]], axis=-1)
+    distances = haversine.haversine_vector(xy[:-1], xy[1:], unit=haversine.Unit.METERS)
+    # Check where the distance between consecutive samples exceeds the subsite
+    # distance
+    is_subsite_boundary = distances > subsite_distance
+    n_subsite = 1 + sum(is_subsite_boundary)
+
+    if n_subsite < 2:
+        # All datapoints are in one subsite
+        if return_tree:
+            return n_subsite, None
+        return n_subsite
+
+    # Check these subsites to make sure there's actually a gap with no samples
+    # in between this pair
+    xy_r = np.radians(xy)
+    tree = sklearn.neighbors.BallTree(xy_r, metric="haversine")
+    boundary_indices = np.nonzero(is_subsite_boundary)[0]
+
+    n_true_subsite = 1
+    for idx in boundary_indices:
+        # Find the point in the middle of these two coordinates
+        c_r = coordinate_centroid(
+            xy_r[idx : idx + 2][:, 0],
+            xy_r[idx : idx + 2][:, 1],
+            degrees=False,
+        )
+        # Check if there are any points within 40% of the subsite distance
+        # of the midpoint
+        neighbours = tree.query_radius([c_r], 0.4 * subsite_distance / EARTH_RADIUS)[0]
+        # If there are any neighbours, this is not a true change in subsite,
+        # just a bad ordering of the original coordinates.
+        if len(neighbours) == 0:
+            n_true_subsite += 1
+
+    if return_tree:
+        return n_true_subsite, tree
+    return n_true_subsite
+
+
 def subsample_distance_sitewise(
     df,
     distance=2.5,
@@ -195,6 +345,9 @@ def subsample_distance_sitewise(
     max_factor=None,
     factors=None,
     exhaustive=False,
+    subsite_distance=500.0,
+    subsite_population_bonus=None,
+    subsite_min_population_bonus=None,
     verbose=1,
     use_tqdm=True,
 ):
@@ -235,6 +388,22 @@ def subsample_distance_sitewise(
         subsampling step.
         If this is ``2``, an exhaustive search is performed for subsequent
         subsampling steps to satisfy the target population limit as well.
+    subsite_distance : float, default=500.0
+        Distance in meters between consecutive samples to detect a subsite.
+    subsite_population_bonus : int or None, optional
+        Amount of increase in target population for every additional subsite
+        within the site.
+        Subsites are detected when there is a gap of at least
+        ``subsite_distance`` between samples.
+        Default is half of ``target_population``.
+        Set to ``0`` or ``-1`` to disable.
+    subsite_min_population_bonus : int or None, optional
+        Amount of increase in minimum population for every additional subsite
+        within the site.
+        Subsites are detected when there is a gap of at least
+        ``subsite_distance`` between samples.
+        Default is half of ``min_population``.
+        Set to ``0`` or ``-1`` to disable.
     verbose : int, default=1
         Verbosity level.
     use_tqdm : bool, optional
@@ -244,6 +413,7 @@ def subsample_distance_sitewise(
     t0 = time.time()
 
     site2indices = benthicnet.utils.unique_map(df["site"])
+    n_site = len(site2indices)
 
     if factors is not None and max_factor is not None:
         raise ValueError("Only one of factors and max_factor should be set.")
@@ -262,21 +432,35 @@ def subsample_distance_sitewise(
 
     if target_population is None or target_population <= 0:
         target_population = None
+    if subsite_population_bonus is None:
+        subsite_population_bonus = target_population / 2
+    if subsite_min_population_bonus is None:
+        subsite_min_population_bonus = min_population / 2
+    if subsite_population_bonus <= 0:
+        subsite_population_bonus = 0
+    if subsite_min_population_bonus <= 0:
+        subsite_min_population_bonus = 0
 
     print(
-        f"Will subsample {len(df)} records over {len(site2indices)} sites."
+        f"Will subsample {len(df)} records over {n_site} sites."
         f"\n  distance = {distance}m"
         f"\n  min_population = {min_population}"
         f"\n  target_population = {target_population}"
         f"\n  distance factors = {factors}"
         f"\n  allow_nonspatial = {allow_nonspatial}"
         f"\n  exhaustive = {exhaustive}"
+        f"\n  subsite_distance = {subsite_distance}m"
+        f"\n  subsite_population_bonus = {subsite_population_bonus}"
+        f"\n  subsite_min_population_bonus = {subsite_min_population_bonus}"
     )
 
     n_below_thr = 0
     n_unchanged = 0
     n_subspatial = 0
     n_subindex = 0
+    total_subsite = 0
+    n_subsite_check = 0
+    n_multiple_subsite = 0
     tally_factors = {1: 0}
     for k in factors:
         tally_factors[k] = 0
@@ -300,7 +484,23 @@ def subsample_distance_sitewise(
         else:
             use_spatial = n_coords > samp_per_coord
 
-        if len(df_i) <= min_population:
+        target_population_i = target_population
+        min_population_i = min_population
+        tree = None
+        if target_population and subsite_population_bonus:
+            n_subsite, tree = count_subsites(df_i, subsite_distance, return_tree=True)
+            total_subsite += n_subsite
+            n_subsite_check += 1
+            if n_subsite > 1:
+                n_multiple_subsite += 1
+            target_population_i = target_population + subsite_population_bonus * (
+                n_subsite - 1
+            )
+            min_population_i = min_population + subsite_min_population_bonus * (
+                n_subsite - 1
+            )
+
+        if len(df_i) <= min_population_i:
             n_below_thr += 1
         elif not use_spatial:
             if target_population:
@@ -315,6 +515,7 @@ def subsample_distance_sitewise(
                 threshold=distance,
                 verbose=verbose - 1,
                 exhaustive=exhaustive,
+                tree=tree,
             )
             factor_used = 1
             if target_population:
@@ -330,7 +531,7 @@ def subsample_distance_sitewise(
                         verbose=verbose - 1,
                         exhaustive=exhaustive >= 2,
                     )
-                    if len(df_j) < target_population:
+                    if len(df_j) < target_population_i:
                         df_j = df_prev
                         factor_used = factors[i_factor - 1]
                         break
@@ -349,25 +550,31 @@ def subsample_distance_sitewise(
 
     if verbose >= 1:
         print("Finished downsampling in {:.1f} seconds".format(time.time() - t0))
+        if subsite_population_bonus:
+            print(
+                f"There were {total_subsite} subsites across {n_subsite_check}"
+                f" sites."
+                f" {n_multiple_subsite} sites had more than one subsite."
+            )
 
         n_kept = len(df_redacted)
         out_str = "Kept {:5.2f}% of rows ({:7d}/{:7d}).".format(
             n_kept / len(df) * 100.0, n_kept, len(df)
         )
         out_str += (
-            f"\nThere were {n_below_thr} sites below threshold ({min_population})."
+            f"\nThere were {n_below_thr:5d} sites below threshold ({min_population})."
         )
         out_str += (
-            f"\nThere were {n_unchanged} other sites which also remained unchanged."
+            f"\nThere were {n_unchanged:5d} other sites which also remained unchanged."
         )
         if allow_nonspatial:
-            out_str += (
-                f"\nThere were {n_subindex} sites which were subsampled non-spatially."
-            )
-        out_str += f"\nThere were {n_subspatial} sites which were subsampled spatially."
+            out_str += f"\nThere were {n_subindex:5d} sites which were subsampled non-spatially."
+        out_str += (
+            f"\nThere were {n_subspatial:5d} sites which were subsampled spatially."
+        )
         if target_population is not None and target_population > 0:
             for k, v in tally_factors.items():
-                out_str += f"\n{v:8d} sites subsampled at factor={k} (distance={k * distance}m)"
+                out_str += f"\n{v:8d} sites subsampled at factor={k:>2d} (distance={k * distance}m)"
         print(out_str, flush=True)
 
     return df_redacted
@@ -440,6 +647,9 @@ def subsample_distance_sitewise_from_csv(
     if verbose >= 1:
         print(f"Saving CSV file {output_csv}", flush=True)
 
+    dirname = os.path.dirname(output_csv)
+    if dirname:
+        os.makedirs(dirname, exist_ok=True)
     df.to_csv(output_csv, index=False)
 
     if verbose >= 1:
@@ -582,6 +792,47 @@ def get_parser():
             Perform an exhaustive search of the previous
             samples to ensure none are within DISTANCE/2 before including the
             next sample.
+        """
+        ),
+    )
+    parser.add_argument(
+        "--subsite-distance",
+        type=float,
+        default=500.0,
+        help=textwrap.dedent(
+            """
+            Distance in meters between consecutive samples to detect a subsite.
+            Each subsite grants an increase in the target population equal to
+            SUBSITE_POPULATION_BONUS.
+            Default is %(default)s.
+        """
+        ),
+    )
+    parser.add_argument(
+        "--subsite-population-bonus",
+        type=int,
+        default=None,
+        help=textwrap.dedent(
+            """
+            Amount of increase in target population for every additional subsite
+            within the site.
+            Subsites are detected when there is a gap of at least
+            SUBSITE_DISTANCE between samples.
+            Default is half of TARGET_POPULATION.
+            Set to ``0`` or ``-1`` to disable.
+        """
+        ),
+    )
+    parser.add_argument(
+        "--subsite-min-population-bonus",
+        type=int,
+        default=None,
+        help=textwrap.dedent(
+            """
+            Amount of increase in minimum population threshold for every
+            additional subsite within the site.
+            Default is half of MIN_POPULATION.
+            Set to ``0`` or ``-1`` to disable.
         """
         ),
     )
