@@ -142,7 +142,7 @@ def download_images(
 
     is_valid = np.zeros(len(df), dtype=bool)
     for i_row, (index, row) in enumerate(
-        tqdm.tqdm(df.iterrows(), len(df), disable=not use_tqdm)
+        tqdm.tqdm(df.iterrows(), total=len(df), disable=not use_tqdm)
     ):
         if pd.isna(row["url"]) or row["url"] == "":
             n_error += 1
