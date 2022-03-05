@@ -4,9 +4,43 @@ CSV file handling functions.
 
 import os
 import re
+import time
 
 import numpy as np
 import pandas as pd
+
+
+def delayed_delete(fname, t_wait=5, verbose=1, padding=""):
+    """
+    Delete a file, after a delay in which the user can interrupt the process.
+
+    Parameters
+    ----------
+    fname : str
+        Path to file to delete.
+    t_wait : int or float, default=5
+        Number of seconds to wait before deletion.
+    verbose : int, default=1
+        Level of verbosity.
+    padding : str, default=""
+        String to prepend to each line of printed text.
+    """
+    if not os.path.isfile(fname):
+        return
+    if verbose >= 1:
+        print(f"{padding}File {fname} will be deleted in {t_wait} seconds...")
+        print(f"{padding}Deleting in", end="", flush=True)
+        for i in range(t_wait // 1):
+            print(" {}...".format(t_wait - i), end="", flush=True)
+            time.sleep(1)
+        print(" Deleting!")
+        if t_wait % 1 > 0:
+            time.sleep(t_wait % 1)
+    else:
+        time.sleep(t_wait)
+    os.remove(fname)
+    if verbose >= 1:
+        print(f"{padding}Existing file {fname} deleted", flush=True)
 
 
 def read_csv(fname, expect_datetime=True, **kwargs):

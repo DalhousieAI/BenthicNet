@@ -117,26 +117,8 @@ def download_images(
             with tarfile.open(tar_fname, mode="r") as tar:
                 contents = tar.getnames()
         except tarfile.ReadError:
-            t_wait = 5
-            if verbose >= 1:
-                print(
-                    "{}Unable to open {}.\n{}File {} will be deleted in {} seconds..."
-                    "".format(padding, tar_fname, padding, tar_fname, t_wait),
-                )
-                print("{}Deleting in".format(padding), end="", flush=True)
-                for i in range(t_wait // 1):
-                    print(" {}...".format(t_wait - i), end="", flush=True)
-                    time.sleep(1)
-                print(" Deleting!")
-                if t_wait % 1 > 0:
-                    time.sleep(t_wait % 1)
-            else:
-                time.sleep(t_wait)
-            os.remove(tar_fname)
-            if verbose >= 1:
-                print(
-                    "{}Existing file {} deleted".format(padding, tar_fname), flush=True
-                )
+            print(f"{padding}Unable to open {tar_fname}.")
+            benthicnet.io.delayed_delete(tar_fname)
 
     t1 = time.time()
 
