@@ -379,10 +379,6 @@ def download_images_by_dataset(
         Default is ``0``.
     **kwargs
         Additional keword arguments as per :func:`download_images`.
-
-    Returns
-    -------
-    None
     """
     padding = " " * print_indent
 
@@ -526,10 +522,6 @@ def download_images_by_dataset_from_csv(
         Verbosity level. Default is ``1``.
     **kwargs
         Additional arguments as per :func:`download_images_by_dataset`.
-
-    Returns
-    -------
-    None
     """
     t0 = time.time()
 
