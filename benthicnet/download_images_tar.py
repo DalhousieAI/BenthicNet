@@ -430,9 +430,6 @@ def download_images_by_dataset(
     for i_dataset, dataset in enumerate(
         tqdm.tqdm(datasets_to_process, disable=not using_tqdm)
     ):
-        if not n_proc:
-            pass
-
         if verbose >= 1 and not using_tqdm and i_dataset > 0:
             t_elapsed = time.time() - t0
             t_remain = t_elapsed / i_dataset * (n_to_process - i_dataset)
