@@ -453,7 +453,7 @@ def download_images_by_dataset(
                 flush=True,
             )
 
-        subdf = df.loc[dataset2idx[dataset]]
+        subdf = df.iloc[dataset2idx[dataset]]
         tar_fname = os.path.join(output_dir, "tar", dataset + ".tar")
 
         error_fname = os.path.join(output_dir, "errors", dataset + ".log")
