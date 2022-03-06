@@ -5,6 +5,7 @@ CSV file handling functions.
 import os
 import re
 import time
+from functools import partial
 
 import numpy as np
 import pandas as pd
@@ -254,7 +255,7 @@ def sanitize_filename_series(series, allow_dotfiles=False):
     return series
 
 
-def row2basename(row):
+def row2basename(row, use_url_extension=True):
     """
     Map row to image basename, with extension as per the URL.
 
@@ -266,6 +267,9 @@ def row2basename(row):
     row : dict
         Pandas row or otherwise dictionary-like object with field ``"url"``
         and, optionally, ``"image"``.
+    use_url_extension : bool, default=True
+        Whether to override the file extension in the image column with the
+        extension in the URL.
 
     Returns
     -------
@@ -281,6 +285,8 @@ def row2basename(row):
             return ""
         basename = row["url"].rstrip("/").split("/")[-1]
     basename = sanitize_filename(basename)
+    if not use_url_extension or "url" not in row or pd.isna(row["url"]):
+        return basename
     ext = os.path.splitext(basename)[1]
     expected_ext = os.path.splitext(row["url"].rstrip("/"))[1]
     if expected_ext and ext.lower() != expected_ext.lower():
@@ -291,7 +297,7 @@ def row2basename(row):
     return basename
 
 
-def determine_outpath(df):
+def determine_outpath(df, use_url_extension=True):
     """
     Determine output path (assuming non-tar file output) to each image.
 
@@ -313,7 +319,7 @@ def determine_outpath(df):
         + "/"
         + sanitize_filename_series(df["site"])
         + "/"
-        + df.apply(row2basename, axis=1)
+        + df.apply(partial(row2basename, use_url_extension=use_url_extension), axis=1)
     )
 
 
