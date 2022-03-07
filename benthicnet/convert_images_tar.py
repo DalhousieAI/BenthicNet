@@ -72,7 +72,7 @@ def handle_input_dfs(
     df_source,
     df_dest=None,
     inplace=True,
-    unique_inputs=True,
+    unique_inputs=False,
     unique_outputs=False,
     verbose=1,
 ):
@@ -89,8 +89,8 @@ def handle_input_dfs(
     inplace : bool, default=True
         Whether the input dataframes can be changes in place, otherwise a copy
         will be used.
-    unique_inputs : bool, default=True
-        Whether to only  use input images which have unique paths.
+    unique_inputs : bool, default=False
+        Whether to only use input images which have unique paths.
     unique_outputs : bool, default=False
         Whether to drop repeated output paths in the destination dataframe.
     verbose : int, default=1
