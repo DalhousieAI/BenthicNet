@@ -455,6 +455,7 @@ def download_images_by_dataset(
                 tar_fname,
                 skip_existing=skip_existing,
                 error_stream=file,
+                inplace=False,
                 verbose=verbose - 1,
                 use_tqdm=use_tqdm,
                 print_indent=print_indent + 4,
