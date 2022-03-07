@@ -355,10 +355,17 @@ def convert_images(
                     if error_stream:
                         error_stream.write(fname_in + "\n")
                     continue
-                # Extract to a temporary file
-                # tar_in.extract(fname_in, path=dir_tmp)
                 # Extract file contents
-                im = PIL.Image.open(tar_in.extractfile(fname_in))
+                try:
+                    im = PIL.Image.open(tar_in.extractfile(fname_in))
+                except BaseException as err:
+                    if verbose >= 0:
+                        print("Error while handling: {}".format(row["url"]))
+                        print(err)
+                    n_error += 1
+                    if error_stream:
+                        error_stream.write(row["url"] + "\n")
+                    continue
                 # Do the conversion
                 im, is_shrunk = shrink_image_by_length(
                     im, target_len=target_len, return_is_shrunk=True
