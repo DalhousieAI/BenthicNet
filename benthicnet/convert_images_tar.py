@@ -358,6 +358,18 @@ def convert_images(
                 # Extract file contents
                 try:
                     im = PIL.Image.open(tar_in.extractfile(fname_in))
+                    # Do the conversion
+                    im, is_shrunk = shrink_image_by_length(
+                        im, target_len=target_len, return_is_shrunk=True
+                    )
+                    if im.mode != "RGB":
+                        im = im.convert("RGB")
+                    quality = (
+                        "keep"
+                        if not is_shrunk and im.format == "JPEG"
+                        else jpeg_quality
+                    )
+                    im.save(fname_tmp_new, quality=quality)
                 except BaseException as err:
                     if verbose >= 0:
                         print("Error while handling: {}".format(row["url"]))
@@ -366,16 +378,6 @@ def convert_images(
                     if error_stream:
                         error_stream.write(row["url"] + "\n")
                     continue
-                # Do the conversion
-                im, is_shrunk = shrink_image_by_length(
-                    im, target_len=target_len, return_is_shrunk=True
-                )
-                if im.mode != "RGB":
-                    im = im.convert("RGB")
-                quality = (
-                    "keep" if not is_shrunk and im.format == "JPEG" else jpeg_quality
-                )
-                im.save(fname_tmp_new, quality=quality)
                 # Add to tarball
                 if verbose >= 4:
                     print(
