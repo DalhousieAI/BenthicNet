@@ -82,7 +82,10 @@ def download_images_from_dataframe(
         )
     df["dataset"] = benthicnet.io.sanitize_filename_series(df["dataset"])
     df["site"] = benthicnet.io.sanitize_filename_series(df["site"])
-    df["image"] = benthicnet.io.sanitize_filename_series(df["image"])
+    if "image" not in df.columns:
+        df["image"] = ""
+    else:
+        df["image"] = benthicnet.io.sanitize_filename_series(df["image"])
     df["url"] = df["url"].str.strip()
 
     if verbose != 1:
