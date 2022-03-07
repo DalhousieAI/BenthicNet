@@ -376,7 +376,7 @@ def convert_images(
                         print(err)
                     n_error += 1
                     if error_stream:
-                        error_stream.write(row["url"] + "\n")
+                        error_stream.write(fname_in + "\n")
                     continue
                 # Add to tarball
                 if verbose >= 4:
