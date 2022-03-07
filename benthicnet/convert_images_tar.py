@@ -7,6 +7,7 @@ Convert images in a tarball into smaller JPEGs, in a new tarball.
 import copy
 import datetime
 import os
+import pathlib
 import tarfile
 import tempfile
 import time
@@ -102,6 +103,10 @@ def handle_input_dfs(
         Columns ``member_source`` and ``member_dest`` added to indicate the
         paths to use in each tarball.
     """
+    if df_source is None:
+        df_source = df_dest
+    if df_source is None:
+        raise ValueError("At least one of df_source and df_dest must be given.")
     # Remember whether we started with an outpath column in the input, and
     # should preserve it in the output, or added it ourselves and should strip
     # it away before saving the CSV file
@@ -497,6 +502,9 @@ def convert_images_by_dataset(
 
     t0 = time.time()
 
+    if df_source is None and df_dest is None:
+        raise ValueError("At least one of df_source and df_dest must be given.")
+
     if (i_proc is not None and n_proc is None) or (
         i_proc is None and n_proc is not None
     ):
@@ -647,6 +655,7 @@ def convert_images_by_dataset_from_csv(
     input_dir,
     output_dir,
     csv_fname=None,
+    align_input_csv=False,
     skip_existing=True,
     verbose=1,
     use_tqdm=True,
@@ -664,6 +673,11 @@ def convert_images_by_dataset_from_csv(
     csv_fname : str, optional
         Path to CSV file containing the todo list. If this is not given, every
         file in the input CSV files will be processed.
+    align_input_csv : str or bool, optional
+        Input CSV to align the todo list CSV against. Alignment is done by URL
+        where possible, and otherwise by output path.
+        If this argument is given without a file, the CSV files will be taken
+        from the ``"csv"`` subdirectory of ``input_dir``.
     skip_existing : bool, optional
         Whether to skip downloading files for which the destination already
         exist. Default is ``True``.
@@ -677,6 +691,9 @@ def convert_images_by_dataset_from_csv(
     """
     t0 = time.time()
 
+    if not csv_fname and not align_input_csv:
+        raise ValueError("At least one of csv_fname and align_input_csv must be given.")
+
     if verbose >= 1:
         print(
             f"Will convert images from {input_dir} into smaller JPEGs"
@@ -687,34 +704,59 @@ def convert_images_by_dataset_from_csv(
         else:
             print("Existing outputs will generate an error.")
 
-    input_csvs = sorted(os.listdir(os.path.join(input_dir, "csv")))
-    input_dfs = []
-
-    using_tqdm = verbose == 1 and use_tqdm
-
-    for csv_file_input_i in tqdm(
-        input_csvs, desc="Input CSV files", disable=not using_tqdm
-    ):
-
-        if os.path.splitext(csv_file_input_i)[1].lower() != ".csv":
-            continue
-        fname = os.path.join(input_dir, "csv", csv_file_input_i)
+    # Load input CSV to align against
+    if isinstance(align_input_csv, (str, pathlib.PurePath)):
         if verbose >= 3:
             print(
                 "Reading CSV file {} ({})...".format(
-                    fname, benthicnet.io.file_size(fname)
+                    align_input_csv, benthicnet.io.file_size(align_input_csv)
                 ),
                 flush=True,
             )
-        input_dfs.append(pd.read_csv(fname, low_memory=False))
+        df_source = pd.read_csv(align_input_csv, low_memory=False)
         if verbose >= 2:
             print(
-                "Loaded CSV file {} in {:.1f} seconds".format(fname, time.time() - t0),
+                "Loaded CSV file {} in {:.1f} seconds".format(
+                    align_input_csv, time.time() - t0
+                ),
                 flush=True,
             )
 
-    df_source = pd.concat(input_dfs)
+    elif align_input_csv:
+        input_csvs = sorted(os.listdir(os.path.join(input_dir, "csv")))
+        input_dfs = []
 
+        using_tqdm = verbose == 1 and use_tqdm
+
+        for csv_file_input_i in tqdm(
+            input_csvs, desc="Input CSV files", disable=not using_tqdm
+        ):
+
+            if os.path.splitext(csv_file_input_i)[1].lower() != ".csv":
+                continue
+            fname = os.path.join(input_dir, "csv", csv_file_input_i)
+            if verbose >= 3:
+                print(
+                    "Reading CSV file {} ({})...".format(
+                        fname, benthicnet.io.file_size(fname)
+                    ),
+                    flush=True,
+                )
+            input_dfs.append(pd.read_csv(fname, low_memory=False))
+            if verbose >= 2:
+                print(
+                    "Loaded CSV file {} in {:.1f} seconds".format(
+                        fname, time.time() - t0
+                    ),
+                    flush=True,
+                )
+
+        df_source = pd.concat(input_dfs)
+
+    else:
+        df_source = None
+
+    # Destination/TODO CSV file
     if csv_fname is None:
         df_todo = None
     else:
@@ -729,8 +771,11 @@ def convert_images_by_dataset_from_csv(
                 "Loaded CSV file in {:.1f} seconds".format(time.time() - t0), flush=True
             )
 
+    if os.path.isdir(os.path.join(input_dir, "tar")):
+        input_dir = os.path.join(input_dir, "tar")
+
     ret = convert_images_by_dataset(
-        os.path.join(input_dir, "tar"),
+        input_dir,
         output_dir,
         df_source,
         df_todo,
@@ -798,6 +843,21 @@ def get_parser():
         dest="csv_fname",
         type=str,
         help="Path to CSV file specifying images to process, in the BenthicNet format.",
+    )
+    parser.add_argument(
+        "--align-input-csv",
+        type=str,
+        nargs="?",
+        default=False,
+        const=True,
+        help=textwrap.dedent(
+            """
+            Input CSV to align todo list CSV against. Alignment is done by URL
+            where possible, and otherwise by output path.
+            If this argument is given without a file, the collection of CSV
+            files from INPUT_DIR will be used.
+        """
+        ),
     )
     parser.add_argument(
         "--jpeg-quality",
