@@ -82,10 +82,7 @@ def download_images_from_dataframe(
         )
     df["dataset"] = benthicnet.io.sanitize_filename_series(df["dataset"])
     df["site"] = benthicnet.io.sanitize_filename_series(df["site"])
-    if "image" not in df.columns:
-        df["image"] = ""
-    else:
-        df["image"] = benthicnet.io.sanitize_filename_series(df["image"])
+    df["image"] = df.apply(benthicnet.io.row2basename, axis=1)
     df["url"] = df["url"].str.strip()
 
     if verbose != 1:
@@ -111,12 +108,6 @@ def download_images_from_dataframe(
             continue
 
         destination = row["image"]
-        if not destination:
-            destination = row["url"].rstrip("/").split("/")[-1]
-        ext = os.path.splitext(destination)[1]
-        expected_ext = os.path.splitext(row["url"].rstrip("/"))[1]
-        if expected_ext and ext.lower() != expected_ext.lower():
-            destination += expected_ext
         destination = os.path.join(
             output_dir,
             row["dataset"],
