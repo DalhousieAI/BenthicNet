@@ -704,7 +704,7 @@ def convert_images_by_dataset_from_csv(
                 ),
                 flush=True,
             )
-        input_dfs.append(benthicnet.io.read_csv(fname))
+        input_dfs.append(pd.read_csv(fname, low_memory=False))
         if verbose >= 2:
             print(
                 "Loaded CSV file {} in {:.1f} seconds".format(fname, time.time() - t0),
