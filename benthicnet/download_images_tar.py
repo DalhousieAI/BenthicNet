@@ -243,7 +243,7 @@ def download_images(
                 if check_image or needs_conversion:
                     try:
                         im = PIL.Image.open(fname_tmp)
-                    except BaseException as err:
+                    except Exception as err:
                         if isinstance(err, KeyboardInterrupt):
                             raise
                         print("Error while handling: {}".format(row["url"]))

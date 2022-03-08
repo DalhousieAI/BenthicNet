@@ -158,7 +158,7 @@ def download_images_from_dataframe(
                     row["url"].strip().replace(" ", "%20"), filename=destination
                 )
                 n_download += 1
-            except BaseException as err:
+            except Exception as err:
                 n_error += 1
                 print(
                     "{}An error occured while processing {}".format(

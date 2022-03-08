@@ -158,7 +158,7 @@ def tar2tar(tar_dir_source, tar_dir_dest, csv_source, csv_dest, verbose=1):
                             tar_dest.addfile(
                                 member, tar_source.extractfile(row["_outinner_source"])
                             )
-                        except BaseException:
+                        except Exception:
                             if verbose >= 1:
                                 print(
                                     f"{row['_outinner_source']} could not be copied"

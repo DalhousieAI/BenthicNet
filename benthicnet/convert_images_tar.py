@@ -391,7 +391,7 @@ def convert_images(
                         else jpeg_quality
                     )
                     im.save(fname_tmp_new, quality=quality)
-                except BaseException as err:
+                except Exception as err:
                     if verbose >= 0:
                         print("Error while handling: {}".format(row["url"]))
                         print(err)
