@@ -275,8 +275,8 @@ def download_images(
                         + "  Adding {} to archive as {}".format(fname_tmp, destination)
                     )
                 with tarfile.open(tar_fname, mode="a") as tar:
-                    contents = tar.getnames()
                     tar.add(fname_tmp, arcname=destination)
+                    contents = tar.getnames()
                 n_download += 1
 
         # Record that this row was successfully downloaded

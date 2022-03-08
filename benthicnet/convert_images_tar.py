@@ -394,8 +394,8 @@ def convert_images(
                         f"{innerpad}  Adding {fname_tmp_new} to archive as {destination}"
                     )
                 with tarfile.open(fname_dest, mode="a") as tar_out:
-                    output_contents = tar_out.getnames()
                     tar_out.add(fname_tmp_new, arcname=destination)
+                    output_contents = tar_out.getnames()
                 n_converted += 1
 
             # Record that this row was successfully converted
