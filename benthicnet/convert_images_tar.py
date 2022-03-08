@@ -211,8 +211,9 @@ def convert_images(
         DataFrame containing paths of files to convert.
     jpeg_quality : int or float, optional
         Quality to use when converting to JPEG. Default is ``95``.
-    target_len : int, default=512
+    target_len : int or None, default=512
         Maximum length of shortest side of the image.
+        Set to ``0`` or ``-1`` to disable.
     skip_existing : bool, optional
         Whether to skip existing images within output file ``fname_dest``.
         If ``False``, an error is raised when the destination already exists.
@@ -252,11 +253,18 @@ def convert_images(
     padding = " " * print_indent
     innerpad = padding + " " * 4
 
+    if target_len is None or target_len == 0 or target_len == -1:
+        target_len = None
+
     if verbose >= 1:
+        if target_len:
+            len_str = f", length={target_len}px"
+        else:
+            len_str = ", original size"
         print(
             f"{padding}Converting {len(df_todo):5d} images from tarball {fname_source}"
             f"\n{padding}                                  to {fname_dest}"
-            f"\n{padding}into JPEG format (quality={jpeg_quality}%, length={target_len}px)",
+            f"\n{padding}into JPEG format (quality={jpeg_quality}%{len_str})",
             flush=True,
         )
 
@@ -369,9 +377,12 @@ def convert_images(
                 try:
                     im = PIL.Image.open(tar_in.extractfile(fname_in))
                     # Do the conversion
-                    im, is_shrunk = shrink_image_by_length(
-                        im, target_len=target_len, return_is_shrunk=True
-                    )
+                    if target_len:
+                        im, is_shrunk = shrink_image_by_length(
+                            im, target_len=target_len, return_is_shrunk=True
+                        )
+                    else:
+                        is_shrunk = False
                     if im.mode != "RGB":
                         im = im.convert("RGB")
                     quality = (
@@ -895,7 +906,12 @@ def get_parser():
         "--target-len",
         type=int,
         default=512,
-        help="Minimum image side length. Default is %(default)s.",
+        help=textwrap.dedent(
+            """
+            Minimum image side length. Default is %(default)s.
+            Set to 0 or -1 to disable.
+        """
+        ),
     )
     parser.add_argument(
         "--no-progress-bar",
