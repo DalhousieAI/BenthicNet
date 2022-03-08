@@ -191,6 +191,7 @@ def convert_images(
     target_len=512,
     skip_existing=True,
     error_stream=None,
+    missing_stream=None,
     flexible_source_path=True,
     inplace_df=False,
     verbose=1,
@@ -217,9 +218,13 @@ def convert_images(
         If ``False``, an error is raised when the destination already exists.
         Default is ``True``.
     error_stream : text_stream or None, optional
-        A text stream where errors should be recorded. If provided, all URLs
-        which could not be downloaded due to an error will be written to this
-        stream, separated by ``"\n"`` characters.
+        A text stream where errors should be recorded.
+        If provided, all images which could not be converted due to an error
+        will be written to this stream, separated by ``"\n"`` characters.
+    missing_stream : text_stream or None, optional
+        A text stream where missing images should be recorded.
+        If provided, all images which could not be converted due to an error
+        will be written to this stream, separated by ``"\n"`` characters.
     flexible_source_path : bool, default=True
         Whether to also check output paths with/without dataset as a prefix
         directory.
@@ -357,8 +362,8 @@ def convert_images(
                     if verbose >= 2:
                         print(f"{innerpad}  Missing input {fname_in} in {fname_source}")
                     n_missing += 1
-                    if error_stream:
-                        error_stream.write(fname_in + "\n")
+                    if missing_stream:
+                        missing_stream.write(fname_in + "\n")
                     continue
                 # Extract file contents
                 try:
@@ -589,6 +594,8 @@ def convert_images_by_dataset(
 
         error_fname = os.path.join(output_dir, "errors", dataset + ".log")
         os.makedirs(os.path.dirname(error_fname), exist_ok=True)
+        missing_fname = os.path.join(output_dir, "missing", dataset + ".log")
+        os.makedirs(os.path.dirname(missing_fname), exist_ok=True)
 
         # Check if any source tarball exists for this dataset. If not, we won't
         # clobber the error log file.
@@ -605,7 +612,9 @@ def convert_images_by_dataset(
             continue
 
         outdfs = []
-        with open(error_fname, "w") as file:
+        with open(error_fname, "w") as error_stream, open(
+            missing_fname, "w"
+        ) as missing_stream:
             for fname_source in sourcedataset2subidx:
                 fname_source_full = os.path.join(tar_dir_source, fname_source)
                 if not os.path.isfile(fname_source_full):
@@ -621,18 +630,23 @@ def convert_images_by_dataset(
                         fname_dest,
                         subdf.iloc[sourcedataset2subidx[fname_source]],
                         skip_existing=skip_existing,
-                        error_stream=file,
+                        error_stream=error_stream,
+                        missing_stream=missing_stream,
                         verbose=verbose - 1,
                         use_tqdm=use_tqdm,
                         print_indent=print_indent + 4,
                         **kwargs,
                     )
                 )
-            empty_error_log = file.tell() == 0
+            empty_error_log = error_stream.tell() == 0
+            missing_error_log = missing_stream.tell() == 0
 
         if empty_error_log:
             # Delete empty file
             os.remove(error_fname)
+        if missing_error_log:
+            # Delete empty file
+            os.remove(missing_fname)
 
         if len(outdfs) > 0:
             # Merge output dataframe
