@@ -590,12 +590,25 @@ def convert_images_by_dataset(
         error_fname = os.path.join(output_dir, "errors", dataset + ".log")
         os.makedirs(os.path.dirname(error_fname), exist_ok=True)
 
+        # Check if any source tarball exists for this dataset. If not, we won't
+        # clobber the error log file.
+        for fname_source in sourcedataset2subidx:
+            fname_source_full = os.path.join(tar_dir_source, fname_source)
+            if os.path.isfile(fname_source_full):
+                break
+        else:
+            if verbose >= 2:
+                print(
+                    f"{padding}No source tarballs available for {dataset}",
+                    flush=True,
+                )
+            continue
+
         outdfs = []
         with open(error_fname, "w") as file:
             for fname_source in sourcedataset2subidx:
                 fname_source_full = os.path.join(tar_dir_source, fname_source)
                 if not os.path.isfile(fname_source_full):
-                    file.write(f"Missing source tarball file: {fname_source_full}\n")
                     if verbose >= 2:
                         print(
                             f"{padding}Missing tarball: {fname_source_full}\n",
