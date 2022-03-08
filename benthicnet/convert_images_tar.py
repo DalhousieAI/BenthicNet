@@ -656,7 +656,6 @@ def convert_images_by_dataset(
                 columns=["member_source", "_tarball_source", "member_dest"],
                 inplace=True,
             )
-
             # Save CSV output
             csv_fname = os.path.join(output_dir, "csv", dataset + ".csv")
             os.makedirs(os.path.dirname(csv_fname), exist_ok=True)
