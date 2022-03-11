@@ -664,9 +664,10 @@ def convert_images_by_dataset(
             outdf = pd.concat(outdfs)
             # Drop or rename working columns
             outdf.drop(
-                columns=["member_source", "_tarball_source", "member_dest"],
+                columns=["member_source", "_tarball_source"],
                 inplace=True,
             )
+            outdf.rename(columns={"member_dest": "path"}, inplace=True)
             # Save CSV output
             csv_fname = os.path.join(output_dir, "csv", dataset + ".csv")
             os.makedirs(os.path.dirname(csv_fname), exist_ok=True)
