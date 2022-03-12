@@ -668,6 +668,10 @@ def convert_images_by_dataset(
                 inplace=True,
             )
             outdf.rename(columns={"member_dest": "path"}, inplace=True)
+            # Ensure dataset, site, and image are filename-safe versions
+            outdf["dataset"] = benthicnet.io.sanitize_filename_series(outdf["dataset"])
+            outdf["site"] = benthicnet.io.sanitize_filename_series(outdf["site"])
+            outdf["image"] = benthicnet.io.sanitize_filename_series(outdf["image"])
             # Save CSV output
             csv_fname = os.path.join(output_dir, "csv", dataset + ".csv")
             os.makedirs(os.path.dirname(csv_fname), exist_ok=True)
