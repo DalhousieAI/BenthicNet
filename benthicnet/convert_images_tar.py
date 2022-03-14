@@ -375,7 +375,13 @@ def convert_images(
                     continue
                 # Extract file contents
                 try:
-                    im = PIL.Image.open(tar_in.extractfile(fname_in))
+                    # Extract to file. Can't read TIFF files from the tarball
+                    # directly. If we try, we get an error:
+                    # '_FileInFile' object has no attribute 'fileno'
+                    # https://github.com/numpy/numpy/issues/7989
+                    # The simplest solution is to extract the file to /tmp.
+                    tar_in.extract(fname_in, path=dir_tmp)
+                    im = PIL.Image.open(os.path.join(dir_tmp, fname_in))
                     # Do the conversion
                     if target_len:
                         im, is_shrunk = shrink_image_by_length(
@@ -393,7 +399,7 @@ def convert_images(
                     im.save(fname_tmp_new, quality=quality)
                 except Exception as err:
                     if verbose >= 0:
-                        print("Error while handling: {}".format(row["url"]))
+                        print(f"Error while handling: {fname_in}")
                         print(err)
                     n_error += 1
                     if error_stream:
