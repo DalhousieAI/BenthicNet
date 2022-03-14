@@ -399,7 +399,7 @@ def convert_images(
                     im.save(fname_tmp_new, quality=quality)
                 except Exception as err:
                     if verbose >= 0:
-                        print("Error while handling: {}".format(row["url"]))
+                        print(f"Error while handling: {fname_in}")
                         print(err)
                     n_error += 1
                     if error_stream:
