@@ -123,6 +123,10 @@ def subsample_distance(
         else:
             raise ValueError("Unsupported method: {}".format(method))
         if exhaustive:
+            if method == "threshold":
+                exhaustive_thr = threshold
+            elif method == "closest":
+                exhaustive_thr = threshold / 2
             set_to_keep = set(indices_to_keep)
             while True:
                 if idx + offset >= len(df):
@@ -133,7 +137,7 @@ def subsample_distance(
                 ]
                 neighbours = tree.query_radius(
                     [np.radians(this_coord)],
-                    threshold / 2 / EARTH_RADIUS,
+                    exhaustive_thr / EARTH_RADIUS,
                 )[0]
                 if len(set_to_keep.intersection(neighbours)) == 0:
                     break
