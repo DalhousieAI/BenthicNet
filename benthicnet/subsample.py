@@ -573,7 +573,7 @@ def subsample_distance_sitewise(
                 )
         elif not use_spatial:
             if target_population:
-                df_i = subsample_index(df_i, target_population)
+                df_i = subsample_index(df_i, target_population_i)
             if len(df_i) == pre_population:
                 n_unchanged += 1
             else:
