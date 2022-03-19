@@ -518,7 +518,7 @@ def subsample_distance_sitewise(
                 tree=tree,
             )
             factor_used = 1
-            if target_population:
+            if target_population and len(df_i) > target_population_i:
                 # Try further subsampling at increased distances to reduce pop
                 df_j = df_i
                 for i_factor, factor in enumerate(factors):
