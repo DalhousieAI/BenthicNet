@@ -27,9 +27,12 @@ def subsample_distance(
     threshold=2.5,
     method="closest",
     exhaustive=False,
+    exclude=None,
+    exclude_dist=None,
     verbose=0,
     include_last=None,
     tree=None,
+    tree_exclude=None,
     return_tree=False,
 ):
     """
@@ -57,6 +60,11 @@ def subsample_distance(
     exhaustive : bool, default=True
         Whether to check the distance to all previous points before marking a
         new point point to be included in the subsampled series.
+    exclude : array-like, optional
+        A set of latitude/longitude coordinates to avoid.
+    exclude_dist : float, optional
+        Distance by which to exclude coordinates specified in ``exclude``.
+        Default is ``threshold / 2``.
     verbose : int, optional
         Verbosity level. Default is ``0``.
     include_last : bool or None, optional
@@ -71,6 +79,9 @@ def subsample_distance(
     tree : sklearn.neighbors.BallTree or None, optional
         Pre-built BallTree object, made from this set of latitude and longitude
         coordinates.
+    tree_exclude : sklearn.neighbors.BallTree or None, optional
+        Pre-built BallTree object, made from the set of latitude and longitude
+        coordinates given in ``exclude``.
     return_tree : bool, default=False
         Whether to return the compiled BallTree object.
 
@@ -103,6 +114,17 @@ def subsample_distance(
     # Create ball tree for fast search
     if exhaustive and not tree:
         tree = sklearn.neighbors.BallTree(np.radians(xy), metric="haversine")
+    if exclude is not None:
+        tree_exclude = sklearn.neighbors.BallTree(
+            np.radians(exclude), metric="haversine"
+        )
+    if tree_exclude is not None and not exhaustive:
+        raise ValueError(
+            "Can't perform global exclusion with exhaustive mode disabled."
+        )
+    if exclude_dist is None:
+        exclude_dist = threshold / 2
+
     # Create list of indices of entries to include
     # Always include the first image
     idx = 0
@@ -150,7 +172,15 @@ def subsample_distance(
                     exhaustive_thr / EARTH_RADIUS,
                 )[0]
                 if len(set_to_keep.intersection(neighbours)) == 0:
-                    break
+                    if tree_exclude is None:
+                        break
+                    # Check there are no neighbours in the exclusion list
+                    global_neighbours = tree_exclude.query_radius(
+                        [np.radians(this_coord)],
+                        exclude_dist / EARTH_RADIUS,
+                    )[0]
+                    if len(global_neighbours) == 0:
+                        break
                 offset += 1
                 if offset >= len(cumulative_distances):
                     break
@@ -362,6 +392,7 @@ def subsample_distance_sitewise(
     max_factor=None,
     factors=None,
     exhaustive=False,
+    global_exclusion=False,
     subsite_distance=500.0,
     subsite_population_bonus=None,
     subsite_min_population_bonus=None,
@@ -405,6 +436,9 @@ def subsample_distance_sitewise(
         subsampling step.
         If this is ``2``, an exhaustive search is performed for subsequent
         subsampling steps to satisfy the target population limit as well.
+    global_exclusion : bool, default=False
+        Whether to ensure samples from all sites are sufficiently distant from
+        each other.
     subsite_distance : float, default=500.0
         Distance in meters between consecutive samples to detect a subsite.
     subsite_population_bonus : int or None, optional
@@ -487,7 +521,17 @@ def subsample_distance_sitewise(
     if verbose != 1:
         use_tqdm = False
 
-    for deployment in tqdm.tqdm(site2indices, disable=not use_tqdm):
+    sites_to_do_spatially = {}
+    if global_exclusion:
+        global_coords_list = []
+    else:
+        global_coords_list = None
+        global_tree = None
+
+    # Parse sites to find spatial datasets, and do non-spatial subsampling
+    for deployment in tqdm.tqdm(
+        site2indices, desc="Preprocessing", disable=not use_tqdm
+    ):
         df_i = df.iloc[site2indices[deployment]]
         pre_population = len(df_i)
 
@@ -519,6 +563,14 @@ def subsample_distance_sitewise(
 
         if len(df_i) <= min_population_i:
             n_below_thr += 1
+            dfs_redacted.append(df_i)
+            if use_spatial and global_exclusion:
+                global_coords_list.append(
+                    df_i.loc[
+                        ~pd.isna(df_i["latitude"]) & ~pd.isna(df_i["longitude"]),
+                        ["latitude", "longitude"],
+                    ]
+                )
         elif not use_spatial:
             if target_population:
                 df_i = subsample_index(df_i, target_population)
@@ -526,45 +578,75 @@ def subsample_distance_sitewise(
                 n_unchanged += 1
             else:
                 n_subindex += 1
+            dfs_redacted.append(df_i)
         else:
-            df_i = subsample_distance(
-                df_i,
-                threshold=distance,
-                verbose=verbose - 1,
-                exhaustive=exhaustive,
-                tree=tree,
-            )
-            factor_used = 1
-            if target_population and len(df_i) > target_population_i:
-                # Try further subsampling at increased distances to reduce pop
-                df_j = df_i
-                tree2 = None
-                for i_factor, factor in enumerate(factors):
-                    if factor == 1:
-                        continue
-                    df_prev = df_j
-                    df_j, tree2 = subsample_distance(
-                        df_i,
-                        threshold=distance * factor,
-                        verbose=verbose - 1,
-                        exhaustive=exhaustive >= 2,
-                        tree=tree2,
-                        return_tree=True,
-                    )
-                    if len(df_j) < target_population_i:
-                        df_j = df_prev
-                        factor_used = factors[i_factor - 1]
-                        break
-                else:
-                    factor_used = factor
-                df_i = df_j
+            # Add to the todo list, noting the target population
+            sites_to_do_spatially[deployment] = target_population_i
 
-            if len(df_i) == pre_population:
-                n_unchanged += 1
+    # Do spatial subsampling.
+    # If global exclusion is enabled, we will avoid points added from sites
+    # below the threshold.
+    for deployment, target_population_i in tqdm.tqdm(
+        sites_to_do_spatially.items(), desc="Spatial subsampling", disable=not use_tqdm
+    ):
+        if global_exclusion:
+            global_exclusion_coords = np.concatenate(global_coords_list)
+            global_tree = sklearn.neighbors.BallTree(
+                np.radians(global_exclusion_coords), metric="haversine"
+            )
+        else:
+            global_exclusion_coords = None
+            global_tree = None
+
+        df_i = df.iloc[site2indices[deployment]]
+        pre_population = len(df_i)
+
+        df_i = subsample_distance(
+            df_i,
+            threshold=distance,
+            verbose=verbose - 1,
+            exhaustive=exhaustive,
+            exclude=global_exclusion_coords,
+            exclude_dist=distance,
+            tree=tree,
+            tree_exclude=global_tree,
+        )
+        factor_used = 1
+        if target_population and len(df_i) > target_population_i:
+            # Try further subsampling at increased distances to reduce pop
+            df_j = df_i
+            tree2 = None
+            for i_factor, factor in enumerate(factors):
+                if factor == 1:
+                    continue
+                df_prev = df_j
+                df_j, tree2 = subsample_distance(
+                    df_i,
+                    threshold=distance * factor,
+                    verbose=verbose - 1,
+                    exhaustive=exhaustive >= 2,
+                    exclude=global_exclusion_coords,
+                    exclude_dist=distance,
+                    tree=tree2,
+                    tree_exclude=global_tree,
+                    return_tree=True,
+                )
+                if len(df_j) < target_population_i:
+                    df_j = df_prev
+                    factor_used = factors[i_factor - 1]
+                    break
             else:
-                n_subspatial += 1
-                tally_factors[factor_used] += 1
+                factor_used = factor
+            df_i = df_j
+
+        if len(df_i) == pre_population:
+            n_unchanged += 1
+        else:
+            n_subspatial += 1
+            tally_factors[factor_used] += 1
         dfs_redacted.append(df_i)
+        if global_exclusion:
+            global_coords_list.append(df_i[["latitude", "longitude"]])
 
     df_redacted = pd.concat(dfs_redacted)
 
@@ -812,6 +894,17 @@ def get_parser():
             Perform an exhaustive search of the previous
             samples to ensure none are within DISTANCE/2 before including the
             next sample.
+        """
+        ),
+    )
+    parser.add_argument(
+        "--global",
+        dest="global_exclusion",
+        action="store_true",
+        help=textwrap.dedent(
+            """
+            Ensure no samples are within DISTANCE/2 of each other, even across
+            multiple sites.
         """
         ),
     )
