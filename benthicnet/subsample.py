@@ -30,6 +30,7 @@ def subsample_distance(
     verbose=0,
     include_last=None,
     tree=None,
+    return_tree=False,
 ):
     """
     Subsample data based on distance between records.
@@ -70,16 +71,23 @@ def subsample_distance(
     tree : sklearn.neighbors.BallTree or None, optional
         Pre-built BallTree object, made from this set of latitude and longitude
         coordinates.
+    return_tree : bool, default=False
+        Whether to return the compiled BallTree object.
 
     Returns
     -------
-    pandas.DataFrame
+    df_subsampled : pandas.DataFrame
         Dataframe like `df`, but with only a subset of the rows included.
+    tree : sklearn.neighbors.BallTree, optional
+        Pre-built BallTree object, made from this set of latitude and longitude
+        coordinates.
     """
     # Remove entries without latitude/longitude
     df = df[df["latitude"].notna() & df["longitude"].notna()]
     # Only two entries, so return both
     if len(df) < 3:
+        if return_tree:
+            return df, None
         return df
     # Measure distance between entries using Haversine method
     xy = np.stack([df["latitude"], df["longitude"]], axis=-1)
@@ -89,6 +97,8 @@ def subsample_distance(
     if (method == "closest" and np.all(distances > threshold / 2)) or np.all(
         distances >= threshold
     ):
+        if return_tree:
+            return df, None
         return df
     # Create ball tree for fast search
     if exhaustive and not tree:
@@ -163,6 +173,9 @@ def subsample_distance(
         indices_to_keep.append(-1)
         if verbose:
             print("Added row {} (last row).".format(indices_to_keep[-1]))
+
+    if return_tree:
+        return df.iloc[indices_to_keep], tree
     return df.iloc[indices_to_keep]
 
 
@@ -525,15 +538,18 @@ def subsample_distance_sitewise(
             if target_population:
                 # Try further subsampling at increased distances to reduce pop
                 df_j = df_i
+                tree2 = None
                 for i_factor, factor in enumerate(factors):
                     if factor == 1:
                         continue
                     df_prev = df_j
-                    df_j = subsample_distance(
+                    df_j, tree2 = subsample_distance(
                         df_i,
                         threshold=distance * factor,
                         verbose=verbose - 1,
                         exhaustive=exhaustive >= 2,
+                        tree=tree2,
+                        return_tree=True,
                     )
                     if len(df_j) < target_population_i:
                         df_j = df_prev
