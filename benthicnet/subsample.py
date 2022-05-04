@@ -83,22 +83,24 @@ def subsample_distance(
         Pre-built BallTree object, made from the set of latitude and longitude
         coordinates given in ``exclude``.
     return_tree : bool, default=False
-        Whether to return the compiled BallTree object.
+        Whether to return the compiled BallTree object(s).
 
     Returns
     -------
     df_subsampled : pandas.DataFrame
         Dataframe like `df`, but with only a subset of the rows included.
-    tree : sklearn.neighbors.BallTree, optional
-        Pre-built BallTree object, made from this set of latitude and longitude
-        coordinates.
+    trees : list of sklearn.neighbors.BallTree, optional
+        Pre-built BallTree objects. The first is made from this set of latitude
+        and longitude coordinates (the ``tree`` object, if given.)
+        The second is build from the exclusion locations (the ``tree_exclude``
+        object, if given).
     """
     # Remove entries without latitude/longitude
     df = df[df["latitude"].notna() & df["longitude"].notna()]
     # Only two entries, so return both
     if len(df) < 3:
         if return_tree:
-            return df, None
+            return df, (tree, tree_exclude)
         return df
     # Measure distance between entries using Haversine method
     xy = np.stack([df["latitude"], df["longitude"]], axis=-1)
@@ -109,7 +111,7 @@ def subsample_distance(
         distances >= threshold
     ):
         if return_tree:
-            return df, None
+            return df, (tree, tree_exclude)
         return df
     # Create ball tree for fast search
     if exhaustive and not tree:
@@ -205,7 +207,7 @@ def subsample_distance(
             print("Added row {} (last row).".format(indices_to_keep[-1]))
 
     if return_tree:
-        return df.iloc[indices_to_keep], tree
+        return df.iloc[indices_to_keep], (tree, tree_exclude)
     return df.iloc[indices_to_keep]
 
 
@@ -636,7 +638,7 @@ def subsample_distance_sitewise(
         df_i = df.iloc[site2indices[deployment]]
         pre_population = len(df_i)
 
-        df_i = subsample_distance(
+        df_i, (tree, global_tree) = subsample_distance(
             df_i,
             threshold=distance,
             verbose=verbose - 1,
@@ -645,6 +647,7 @@ def subsample_distance_sitewise(
             exclude_dist=distance,
             tree=tree,
             tree_exclude=global_tree,
+            return_tree=True,
         )
         factor_used = 1
         if target_population and len(df_i) > target_population_i:
@@ -655,7 +658,7 @@ def subsample_distance_sitewise(
                 if factor == 1:
                     continue
                 df_prev = df_j
-                df_j, tree2 = subsample_distance(
+                df_j, (tree2, global_tree) = subsample_distance(
                     df_i,
                     threshold=distance * factor,
                     verbose=verbose - 1,
