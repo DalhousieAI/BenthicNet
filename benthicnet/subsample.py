@@ -393,6 +393,7 @@ def subsample_distance_sitewise(
     factors=None,
     exhaustive=False,
     global_exclusion=False,
+    inter_site_distance=1000.0,
     subsite_distance=500.0,
     subsite_population_bonus=None,
     subsite_min_population_bonus=None,
@@ -439,6 +440,10 @@ def subsample_distance_sitewise(
     global_exclusion : bool, default=False
         Whether to ensure samples from all sites are sufficiently distant from
         each other.
+    inter_site_distance : float, default=1000.0
+        Distance in meters between consecutive samples to detect a distinct
+        site.
+        Set to ``0`` or ``-1`` to disable.
     subsite_distance : float, default=500.0
         Distance in meters between consecutive samples to detect a subsite.
     subsite_population_bonus : int or None, optional
@@ -483,6 +488,8 @@ def subsample_distance_sitewise(
 
     if target_population is None or target_population <= 0:
         target_population = None
+    if inter_site_distance < 0:
+        inter_site_distance = 0
     if subsite_population_bonus is None:
         subsite_population_bonus = target_population / 2
     if subsite_min_population_bonus is None:
@@ -500,6 +507,7 @@ def subsample_distance_sitewise(
         f"\n  distance factors = {factors}"
         f"\n  allow_nonspatial = {allow_nonspatial}"
         f"\n  exhaustive = {exhaustive}"
+        f"\n  inter_site_distance = {inter_site_distance}m"
         f"\n  subsite_distance = {subsite_distance}m"
         f"\n  subsite_population_bonus = {subsite_population_bonus}"
         f"\n  subsite_min_population_bonus = {subsite_min_population_bonus}"
@@ -509,10 +517,17 @@ def subsample_distance_sitewise(
     n_unchanged = 0
     n_subspatial = 0
     n_subindex = 0
+
+    total_fullsite = 0
+    n_fullsite_check = 0
+    n_multiple_fullsite = 0
+
     total_subsite = 0
     n_subsite_check = 0
     n_multiple_subsite = 0
+
     tally_factors = {1: 0}
+
     for k in factors:
         tally_factors[k] = 0
 
@@ -548,17 +563,37 @@ def subsample_distance_sitewise(
         target_population_i = target_population
         min_population_i = min_population
         tree = None
-        if target_population and subsite_population_bonus:
-            n_subsite, tree = count_subsites(df_i, subsite_distance, return_tree=True)
-            total_subsite += n_subsite
-            n_subsite_check += 1
-            if n_subsite > 1:
-                n_multiple_subsite += 1
-            target_population_i = target_population + subsite_population_bonus * (
-                n_subsite - 1
+
+        if target_population:
+            if inter_site_distance:
+                n_fullsite, tree = count_subsites(
+                    df_i, inter_site_distance, return_tree=True
+                )
+                total_fullsite += n_fullsite
+                n_fullsite_check += 1
+                if n_fullsite > 1:
+                    n_multiple_fullsite += 1
+            else:
+                n_fullsite = 1
+            if subsite_population_bonus:
+                n_subsite, tree = count_subsites(
+                    df_i, subsite_distance, return_tree=True
+                )
+                total_subsite += n_subsite
+                n_subsite_check += 1
+                if n_subsite > 1:
+                    n_multiple_subsite += 1
+            else:
+                n_subsite = n_fullsite
+
+            target_population_i = target_population * n_fullsite
+            target_population_i += subsite_population_bonus * max(
+                0, n_subsite - n_fullsite
             )
-            min_population_i = min_population + subsite_min_population_bonus * (
-                n_subsite - 1
+
+            min_population_i = min_population * n_fullsite
+            min_population_i += subsite_min_population_bonus * max(
+                0, n_subsite - n_fullsite
             )
 
         if len(df_i) <= min_population_i:
@@ -573,7 +608,7 @@ def subsample_distance_sitewise(
                 )
         elif not use_spatial:
             if target_population:
-                df_i = subsample_index(df_i, target_population)
+                df_i = subsample_index(df_i, target_population_i)
             if len(df_i) == pre_population:
                 n_unchanged += 1
             else:
@@ -652,10 +687,17 @@ def subsample_distance_sitewise(
 
     if verbose >= 1:
         print("Finished downsampling in {:.1f} seconds".format(time.time() - t0))
+        if inter_site_distance:
+            print(
+                f"There were {total_fullsite:5d} auto-detected sites across"
+                f" {n_fullsite_check} annotated sites."
+                f" {n_multiple_fullsite} annotated sites contained more than"
+                " one auto-detected site."
+            )
         if subsite_population_bonus:
             print(
-                f"There were {total_subsite} subsites across {n_subsite_check}"
-                f" sites."
+                f"There were {total_subsite:5d} subsites across {n_subsite_check}"
+                " sites."
                 f" {n_multiple_subsite} sites had more than one subsite."
             )
 
@@ -905,6 +947,21 @@ def get_parser():
             """
             Ensure no samples are within DISTANCE/2 of each other, even across
             multiple sites.
+        """
+        ),
+    )
+    parser.add_argument(
+        "--site-distance",
+        "--inter-site-distance",
+        dest="inter_site_distance",
+        type=float,
+        default=1000.0,
+        help=textwrap.dedent(
+            """
+            Distance in meters between consecutive samples to detect a site.
+            Each site grants an increase in the target population equal to
+            TARGET_POPULATION.
+            Default is %(default)s.
         """
         ),
     )
