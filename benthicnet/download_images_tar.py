@@ -201,7 +201,7 @@ def download_images(
                     else:
                         # Other errors indicate a server side error. Wait a
                         # short period and then retries to see if it alleviates.
-                        t_wait = 2 ** i_attempt
+                        t_wait = 2**i_attempt
                     if verbose >= 1:
                         print(
                             "{}Retrying in {} seconds (HTTP Status {}): {}".format(
