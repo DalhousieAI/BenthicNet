@@ -522,7 +522,7 @@ def plot_kde(
     return ax
 
 
-def row2organization(row):
+def row2organization(row, merge_squidle_imos=True):
     """
     Map from row to organization name.
 
@@ -555,10 +555,18 @@ def row2organization(row):
 
     if "url" not in row or pd.isna(row["url"]):
         if "repository" in row and not pd.isna(row["repository"]):
+            if merge_squidle_imos and row["repository"].lower() == "squidle":
+                return "SQUIDLE/IMOS"
             return row["repository"]
+        if "source" in row and not pd.isna(row["source"]):
+            if merge_squidle_imos and row["repository"].lower() == "squidle":
+                return "SQUIDLE/IMOS"
+            return row["source"]
         return "other"
 
     if row["url"].startswith("https://s3-ap-southeast-2.amazonaws.com/imos-data"):
+        if merge_squidle_imos:
+            return "SQUIDLE/IMOS"
         return "IMOS"
     if row["url"].startswith("https://www.nodc.noaa.gov") or row["url"].startswith(
         "https://accession.nodc.noaa.gov"
@@ -574,9 +582,16 @@ def row2organization(row):
         return "SOI"
 
     if "repository" in row and not pd.isna(row["repository"]):
-        return row["repository"]
+        org = row["repository"]
+    elif "source" in row and not pd.isna(row["source"]):
+        org = row["source"]
+    else:
+        org = "other"
 
-    return "other"
+    if merge_squidle_imos and org == "squidle":
+        return "SQUIDLE/IMOS"
+
+    return org
 
 
 def plot_samples_by_organization(
