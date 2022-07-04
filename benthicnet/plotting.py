@@ -405,10 +405,10 @@ def plot_samples(
     elif show_map == "two-tone-alt":
         water = np.array([168, 192, 224]) / 255
         show_land_sea_features(ax, water=water)
-    elif show_map:
-        ax.stock_img()
-    else:
+    elif show_map == "coastlines" or not show_map:
         ax.coastlines()
+    else:
+        ax.stock_img()
 
     # Plot the datapoints
     ax.scatter(
@@ -504,10 +504,10 @@ def plot_kde(
     elif show_map == "two-tone-alt":
         water = np.array([168, 192, 224]) / 255
         show_land_sea_features(ax, water=water)
-    elif show_map:
-        ax.stock_img()
-    else:
+    elif show_map == "coastlines" or not show_map:
         ax.coastlines()
+    else:
+        ax.stock_img()
 
     # Plot the datapoints
     contours = ax.contourf(
@@ -665,10 +665,10 @@ def plot_samples_by_organization(
     elif show_map == "two-tone-alt":
         water = np.array([168, 192, 224]) / 255
         show_land_sea_features(ax, water=water)
-    elif show_map:
-        ax.stock_img()
-    else:
+    elif show_map == "coastlines" or not show_map:
         ax.coastlines()
+    else:
+        ax.stock_img()
 
     # Make legend entries
     df_singles = df.drop_duplicates(subset=["organization"]).sort_values("organization")
