@@ -20,11 +20,11 @@ DATASET2ORG = {
     "Sabrina_2017": "AADC",
     "vms": "AADC",
     "VMS_2011": "AADC",
-    "ngu": "Alex Schimel",
-    "NGU_2010": "Alex Schimel",
-    "NGU_2014": "Alex Schimel",
-    "NGU_2015": "Alex Schimel",
-    "NGU_2017": "Alex Schimel",
+    "ngu": "NGU",
+    "NGU_2010": "NGU",
+    "NGU_2014": "NGU",
+    "NGU_2015": "NGU",
+    "NGU_2017": "NGU",
     "bastos": "Bastos Lab",
     "dfo_eelgrass": "DFO",
     "george2000": "DFO",
@@ -402,6 +402,9 @@ def plot_samples(
         pass
     elif show_map == "two-tone":
         show_land_sea_features(ax)
+    elif show_map == "two-tone-alt":
+        water = np.array([168, 192, 224]) / 255
+        show_land_sea_features(ax, water=water)
     elif show_map:
         ax.stock_img()
     else:
@@ -498,6 +501,9 @@ def plot_kde(
         pass
     elif show_map == "two-tone":
         show_land_sea_features(ax)
+    elif show_map == "two-tone-alt":
+        water = np.array([168, 192, 224]) / 255
+        show_land_sea_features(ax, water=water)
     elif show_map:
         ax.stock_img()
     else:
@@ -656,6 +662,9 @@ def plot_samples_by_organization(
         pass
     elif show_map == "two-tone":
         show_land_sea_features(ax)
+    elif show_map == "two-tone-alt":
+        water = np.array([168, 192, 224]) / 255
+        show_land_sea_features(ax, water=water)
     elif show_map:
         ax.stock_img()
     else:
