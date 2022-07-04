@@ -304,7 +304,7 @@ def cmap_white2alpha(
     return cmap_alpha
 
 
-def show_land_sea_features(ax=None):
+def show_land_sea_features(ax=None, land=None, water=None):
     """
     Show global land, sea, and lakes in one flat colour each.
 
@@ -316,27 +316,32 @@ def show_land_sea_features(ax=None):
     if ax is None:
         ax = plt.gca()
 
+    if land is None:
+        land = cartopy.feature.COLORS["land"]
+    if water is None:
+        water = cartopy.feature.COLORS["water"]
+
     scale = "10m"  # use data at this scale
     land = cartopy.feature.NaturalEarthFeature(
         "physical",
         "land",
         scale=scale,
         edgecolor="none",
-        facecolor=cartopy.feature.COLORS["land"],
+        facecolor=land,
     )
     ocean = cartopy.feature.NaturalEarthFeature(
         "physical",
         "ocean",
         scale=scale,
         edgecolor="none",
-        facecolor=cartopy.feature.COLORS["water"],
+        facecolor=water,
     )
     lakes = cartopy.feature.NaturalEarthFeature(
         "physical",
         "lakes",
         scale=scale,
         edgecolor="none",
-        facecolor=cartopy.feature.COLORS["water"],
+        facecolor=water,
     )
     ax.add_feature(land)
     ax.add_feature(ocean)
