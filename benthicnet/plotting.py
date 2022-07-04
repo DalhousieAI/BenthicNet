@@ -600,6 +600,7 @@ def plot_samples_by_organization(
     figsize=(25, 8),
     show_map=True,
     s=10,
+    legend=True,
     **kwargs,
 ):
     """
@@ -617,6 +618,8 @@ def plot_samples_by_organization(
         Whether to show the map, otherwise coastlines are drawn instead.
     s : float, default=1
         The marker size in points**2.
+    legend : bool, default=True
+        Whether to show the legend.
     **kwargs
         Additional arguments as per :func:`matplotlib.pyplot.scatter`.
 
@@ -661,36 +664,44 @@ def plot_samples_by_organization(
     # Make legend entries
     df_singles = df.drop_duplicates(subset=["organization"]).sort_values("organization")
 
-    # Plot a marker for each organization value with a size of 0
-    leg_handles = []
-    leg_labels = []
-    for _, row in df_singles.iterrows():
-        if row["org_color"] == org2color["Other"] and row["organization"] != "Other":
-            continue
-        hsc = ax.scatter(
-            row["longitude"],
-            row["latitude"],
-            c=row["org_color"],
-            s=0,
-            transform=cartopy.crs.PlateCarree(),
-        )
-        leg_handles.append(hsc)
-        leg_labels.append(row["organization"])
+    if legend:
+        # Plot a marker for each organization value with a size of 0
+        leg_handles = []
+        leg_labels = []
+        for _, row in df_singles.iterrows():
+            if (
+                row["org_color"] == org2color["Other"]
+                and row["organization"] != "Other"
+            ):
+                continue
+            hsc = ax.scatter(
+                row["longitude"],
+                row["latitude"],
+                c=row["org_color"],
+                s=0,
+                transform=cartopy.crs.PlateCarree(),
+            )
+            leg_handles.append(hsc)
+            leg_labels.append(row["organization"])
 
-    # Move the "Other" label to the end of the list
-    for key in ["Misc", "Other", "other"]:
-        if key in leg_labels:
-            i = leg_labels.index(key)
-            leg_handles.append(leg_handles.pop(i))
-            leg_labels.append(leg_labels.pop(i))
-    # Show legend
-    hlegend = ax.legend(
-        leg_handles, leg_labels, fontsize=16, loc="center left", bbox_to_anchor=(1, 0.5)
-    )
-    # Set the size of the markers in the legend to be large
-    for h_entry in hlegend.legendHandles:
-        h_entry._sizes = [50]
-    hlegend.get_frame().set_edgecolor("k")
+        # Move the "Other" label to the end of the list
+        for key in ["Misc", "Other", "other"]:
+            if key in leg_labels:
+                i = leg_labels.index(key)
+                leg_handles.append(leg_handles.pop(i))
+                leg_labels.append(leg_labels.pop(i))
+        # Show legend
+        hlegend = ax.legend(
+            leg_handles,
+            leg_labels,
+            fontsize=16,
+            loc="center left",
+            bbox_to_anchor=(1, 0.5),
+        )
+        # Set the size of the markers in the legend to be large
+        for h_entry in hlegend.legendHandles:
+            h_entry._sizes = [50]
+        hlegend.get_frame().set_edgecolor("k")
 
     # Shuffle the order of the samples, so overlapping sites can show through
     df_rand = df.sample(frac=1)
