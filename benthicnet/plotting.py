@@ -97,6 +97,7 @@ ORG2COLOR = {
     "DFO": "#FB9A99",  # l.red / pink
     "FathomNet": "#a65628",  # brown
     "IMOS": "#4daf4a",  # green
+    "SQUIDLE/IMOS": "#4daf4a",
     "MBARI": "#7A7064",  # MBARI logo teal-blue: #004360, #7A7064
     "NOAA": "#0078BC",  # NOAA logo db/lb: #243C72, #0078BC
     "NRCan": "#D32823",  # Canadian flag red: #D32823
@@ -122,6 +123,7 @@ ORG2COLOR_BW = {
     "DFO": "#FB9A99",
     "FathomNet": "#a65628",
     "IMOS": "#52BDEC",  # IMOS logo lb/b: #52BDEC #3A6F8F
+    "SQUIDLE/IMOS": "#52BDEC",
     "MBARI": "#7A7064",
     "NOAA": "#0078BC",
     "NRCan": "#D32823",
