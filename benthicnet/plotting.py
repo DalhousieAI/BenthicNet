@@ -103,20 +103,22 @@ ORG2COLOR = {
     "NRCan": "#D32823",  # Canadian flag red: #D32823
     "PANGAEA": "#009C84",  # PANGAEA Website d.teal/l.teal: #004D60 009C84
     "RLS": "#984ea3",  # purple
-    "SQUIDLE": "#606060",  # grey "#ff7f00",  # orange
+    "SQUIDLE": "#ff7f00",  # orange
     "SOI": "#FECA2D",  # SOI logo y/b/lg: #FECA2D #0B61BE #C4C52A
-    "USAP-DC": "#00264C",  # Banner/logo l.blue: #92B9C5
     "USGS": "#00264C",  # USGS d.blue: #00264C
     "Other": "#606060",  # grey
     "4D Oceans": "#606060",  # grey
-    "AADC": "#606060",  # grey
-    "Alex Schimel": "#606060",  # grey
+    "AADC": "#057002",  # banner blue #01426A; banner blue #09588C
+    "Alex Schimel": "#232321",  # dark grey NGU #232321; Norway blue #00205A
+    "NGU": "#232321",  # dark grey NGU #232321; Norway blue #00205A
     "Bastos Lab": "#606060",  # grey
+    "Ben Misiuk": "#606060",  # grey
     "EAC": "#606060",  # grey
-    "Hakai": "#606060",  # grey
+    "Hakai": "#cf5108",  # Logo: #B52025
     "Merlin Best": "#606060",  # grey
-    "MGDS": "#606060",  # grey
+    "MGDS": "#114891",  # logo blue #114891; secondary grey #3F465C
     "SEAM": "#606060",  # grey
+    "USAP-DC": "#024A61",  # logo light teal #92B9C5; secondary teal #024A61
     "WHOI": "#606060",  # grey
 }
 ORG2COLOR_BW = {
@@ -129,20 +131,22 @@ ORG2COLOR_BW = {
     "NRCan": "#D32823",
     "PANGAEA": "#009C84",
     "RLS": "#984ea3",
-    "SQUIDLE": "#909090",  # grey "#ff7f00",
+    "SQUIDLE": "#ff7f00",
     "SOI": "#FECA2D",
-    "USAP-DC": "#92B9C5",  # Banner/logo l.blue: #92B9C5
     "USGS": "#4daf4a",  # green
     "Other": "#909090",  # grey
     "4D Oceans": "#909090",  # grey
-    "AADC": "#909090",  # grey
-    "Alex Schimel": "#909090",  # grey
+    "AADC": "#057002",  # banner blue #01426A; banner blue #09588C
+    "Alex Schimel": "#232321",  # dark grey NGU #232321; Norway blue #00205A
+    "NGU": "#232321",  # dark grey NGU #232321; Norway blue #00205A
     "Bastos Lab": "#909090",  # grey
+    "Ben Misiuk": "#909090",  # grey
     "EAC": "#909090",  # grey
-    "Hakai": "#909090",  # grey
+    "Hakai": "#cf5108",  # Logo: #B52025
     "Merlin Best": "#909090",  # grey
-    "MGDS": "#909090",  # grey
+    "MGDS": "#114891",  # logo blue #114891; secondary grey #3F465C
     "SEAM": "#909090",  # grey
+    "USAP-DC": "#92B9C5",  # logo light teal #92B9C5; secondary teal #024A61
     "WHOI": "#909090",  # grey
 }
 
