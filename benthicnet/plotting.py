@@ -98,7 +98,7 @@ ORG2COLOR = {
     "FathomNet": "#a65628",  # brown
     "IMOS": "#4daf4a",  # green
     "SQUIDLE/IMOS": "#4daf4a",
-    "MBARI": "#7A7064",  # MBARI logo teal-blue: #004360, #7A7064
+    "MBARI": "#805B2F",  # MBARI logo teal-blue: #004360, #7A7064
     "NOAA": "#0078BC",  # NOAA logo db/lb: #243C72, #0078BC
     "NRCan": "#D32823",  # Canadian flag red: #D32823
     "PANGAEA": "#009C84",  # PANGAEA Website d.teal/l.teal: #004D60 009C84
@@ -124,7 +124,7 @@ ORG2COLOR_BW = {
     "FathomNet": "#a65628",
     "IMOS": "#52BDEC",  # IMOS logo lb/b: #52BDEC #3A6F8F
     "SQUIDLE/IMOS": "#52BDEC",
-    "MBARI": "#7A7064",
+    "MBARI": "#805B2F",  # Secondary colour brown: "#7A7064", but needed to increase saturation
     "NOAA": "#0078BC",
     "NRCan": "#D32823",
     "PANGAEA": "#009C84",
