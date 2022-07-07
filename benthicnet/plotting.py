@@ -120,7 +120,7 @@ ORG2COLOR = {
     "MGDS": "#114891",  # logo blue #114891; secondary grey #3F465C
     "SEAM": "#6a6a6a",  # Research groups
     "USAP-DC": "#024A61",  # logo light teal #92B9C5; secondary teal #024A61
-    "WHOI": "#606060",  # grey
+    "WHOI": "#114891",  # MGDS
 }
 ORG2COLOR_BW = {
     "DFO": "#FB9A99",
@@ -149,7 +149,7 @@ ORG2COLOR_BW = {
     "MGDS": "#114891",  # logo blue #114891; secondary grey #3F465C
     "SEAM": "#8E8E8E",  # Research groups
     "USAP-DC": "#92B9C5",  # logo light teal #92B9C5; secondary teal #024A61
-    "WHOI": "#909090",  # grey
+    "WHOI": "#114891",  # MGDS
 }
 
 
@@ -656,6 +656,7 @@ def plot_samples_by_organization(
     df = df[~pd.isna(df["latitude"]) & ~pd.isna(df["longitude"])]
     # Determine organization and colour
     df["organization"] = df.apply(row2organization, axis=1)
+    df.loc[df["organization"] == "WHOI", "organization"] = "MGDS"  # Soft override
     df["org_color"] = df["organization"].apply(lambda x: org2color.get(x, "#888"))
 
     for k in ["Other", "Research groups"]:
