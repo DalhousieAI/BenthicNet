@@ -403,7 +403,10 @@ def plot_samples(
     ax = fig.add_subplot(projection=projection)
 
     # Display gridlines and either the world map, or outline of coastlines
-    ax.gridlines()
+    if show_map in ["none", "coastlines"] or not show_map:
+        ax.gridlines()
+    else:
+        ax.gridlines(color="w")
     if show_map == "none":
         pass
     elif show_map == "two-tone":
@@ -502,7 +505,10 @@ def plot_kde(
     ax = fig.add_subplot(projection=projection)
 
     # Display gridlines and either the world map, or outline of coastlines
-    ax.gridlines()
+    if show_map in ["none", "coastlines"] or not show_map:
+        ax.gridlines()
+    else:
+        ax.gridlines(color="w")
     if show_map == "none":
         pass
     elif show_map == "two-tone":
@@ -667,7 +673,10 @@ def plot_samples_by_organization(
     ax = fig.add_subplot(projection=projection)
 
     # Display gridlines and either the world map, or outline of coastlines
-    ax.gridlines()
+    if show_map in ["none", "coastlines"] or not show_map:
+        ax.gridlines()
+    else:
+        ax.gridlines(color="w")
     if show_map == "none":
         pass
     elif show_map == "two-tone":
