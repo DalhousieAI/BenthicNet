@@ -107,17 +107,18 @@ ORG2COLOR = {
     "SOI": "#FECA2D",  # SOI logo y/b/lg: #FECA2D #0B61BE #C4C52A
     "USGS": "#00264C",  # USGS d.blue: #00264C
     "Other": "#606060",  # grey
-    "4D Oceans": "#606060",  # grey
+    "Research groups": "#6a6a6a",  # "#670575",  # purple
+    "4D Oceans": "#6a6a6a",  # Research groups
     "AADC": "#057002",  # banner blue #01426A; banner blue #09588C
     "Alex Schimel": "#232321",  # dark grey NGU #232321; Norway blue #00205A
     "NGU": "#232321",  # dark grey NGU #232321; Norway blue #00205A
-    "Bastos Lab": "#606060",  # grey
-    "Ben Misiuk": "#606060",  # grey
-    "EAC": "#606060",  # grey
+    "Bastos Lab": "#6a6a6a",  # Research groups
+    "Ben Misiuk": "#6a6a6a",  # Research groups
+    "EAC": "#6a6a6a",  # Research groups
     "Hakai": "#cf5108",  # Logo: #B52025
-    "Merlin Best": "#606060",  # grey
+    "Merlin Best": "#6a6a6a",  # Research groups
     "MGDS": "#114891",  # logo blue #114891; secondary grey #3F465C
-    "SEAM": "#606060",  # grey
+    "SEAM": "#6a6a6a",  # Research groups
     "USAP-DC": "#024A61",  # logo light teal #92B9C5; secondary teal #024A61
     "WHOI": "#606060",  # grey
 }
@@ -135,17 +136,18 @@ ORG2COLOR_BW = {
     "SOI": "#FECA2D",
     "USGS": "#4daf4a",  # green
     "Other": "#909090",  # grey
-    "4D Oceans": "#909090",  # grey
+    "Research groups": "#8E8E8E",  # "#670575",  # purple
+    "4D Oceans": "#8E8E8E",  # Research groups
     "AADC": "#057002",  # banner blue #01426A; banner blue #09588C
     "Alex Schimel": "#232321",  # dark grey NGU #232321; Norway blue #00205A
     "NGU": "#232321",  # dark grey NGU #232321; Norway blue #00205A
-    "Bastos Lab": "#909090",  # grey
-    "Ben Misiuk": "#909090",  # grey
-    "EAC": "#909090",  # grey
+    "Bastos Lab": "#8E8E8E",  # Research groups
+    "Ben Misiuk": "#8E8E8E",  # Research groups
+    "EAC": "#8E8E8E",  # Research groups
     "Hakai": "#cf5108",  # Logo: #B52025
-    "Merlin Best": "#909090",  # grey
+    "Merlin Best": "#8E8E8E",  # Research groups
     "MGDS": "#114891",  # logo blue #114891; secondary grey #3F465C
-    "SEAM": "#909090",  # grey
+    "SEAM": "#8E8E8E",  # Research groups
     "USAP-DC": "#92B9C5",  # logo light teal #92B9C5; secondary teal #024A61
     "WHOI": "#909090",  # grey
 }
@@ -656,6 +658,9 @@ def plot_samples_by_organization(
     df["organization"] = df.apply(row2organization, axis=1)
     df["org_color"] = df["organization"].apply(lambda x: org2color.get(x, "#888"))
 
+    for k in ["Other", "Research groups"]:
+        df.loc[df["org_color"] == org2color[k], "organization"] = k
+
     # Create a plot using the projection
     fig = plt.figure(figsize=figsize)
     ax = fig.add_subplot(projection=projection)
@@ -698,7 +703,7 @@ def plot_samples_by_organization(
             leg_labels.append(row["organization"])
 
         # Move the "Other" label to the end of the list
-        for key in ["Misc", "Other", "other"]:
+        for key in ["Misc", "Other", "other", "Other research labs"]:
             if key in leg_labels:
                 i = leg_labels.index(key)
                 leg_handles.append(leg_handles.pop(i))
