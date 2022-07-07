@@ -8,24 +8,40 @@ import matplotlib.colors
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import scipy.stats
 
 from . import kde_tools
 
 DATASET2ORG = {
     "julia": "4D Oceans",
+    "Julia_2020": "4D Oceans",
     "shreya": "4D Oceans",
+    "Shreya_2020": "4D Oceans",
     "sabrina": "AADC",
+    "Sabrina_2017": "AADC",
     "vms": "AADC",
-    "ngu": "Alex Schimel",
+    "VMS_2011": "AADC",
+    "ngu": "NGU",
+    "NGU_2010": "NGU",
+    "NGU_2014": "NGU",
+    "NGU_2015": "NGU",
+    "NGU_2017": "NGU",
     "bastos": "Bastos Lab",
     "dfo_eelgrass": "DFO",
     "george2000": "DFO",
     "george2002": "DFO",
+    "Georges_Bank_2000": "DFO",
+    "Georges_Bank_2002": "DFO",
     "german2003": "DFO",
+    "German_Bank_2003": "DFO",
     "german2006": "DFO",
+    "German_Bank_2006": "DFO",
     "german2010": "DFO",
+    "German_Bank_2010": "DFO",
     "noaa_habcam": "DFO",
+    "NOAA_HabCam_2015": "DFO",
     "eac": "EAC",
+    "EAC_2021": "EAC",
     "Doc Ricketts": "MBARI",
     "i2MAP": "MBARI",
     "Mini ROV": "MBARI",
@@ -34,43 +50,56 @@ DATASET2ORG = {
     "Ventana": "MBARI",
     "prnpr2018": "Hakai",
     "hakai_rov": "Hakai",
+    "Hakai_ROV_2019": "Hakai",
     "hakai_video": "Hakai",
-    "hogkins_H1685": "Merlin Best",
-    "dellwood_H1682": "Merlin Best",
-    "dellwood_H1683": "Merlin Best",
-    "dellwood_south_H1690": "Merlin Best",
-    "explorer_H1691": "Merlin Best",
-    "sgaan_H1684": "Merlin Best",
-    "sgaan_H1686": "Merlin Best",
+    "Hakai_Video_2020": "Hakai",
+    "hogkins_h1685": "Merlin Best",
+    "dellwood_h1682": "Merlin Best",
+    "dellwood_h1683": "Merlin Best",
+    "dellwood_south_h1690": "Merlin Best",
+    "explorer_h1691": "Merlin Best",
+    "sgaan_h1684": "Merlin Best",
+    "sgaan_h1686": "Merlin Best",
     "LISMARC12_SEABOSS": "MGDS",
     "LISMARC12_ISIS": "MGDS",
     "LISMARC13_SEABOSS": "MGDS",
     "LISMARC13_ROV": "MGDS",
     "mgds": "MGDS",
     "bedford": "SEAM",
+    "Bedford_2017": "SEAM",
     "bay_of_fundy": "SEAM",
+    "Bay_of_Fundy_2019": "SEAM",
     "st_anns_bank": "SEAM",
+    "King_George_Bransfield_2018": "USAP-DC",
     "lmg1311": "USAP-DC",
     "lmg1703": "USAP-DC",
     "nbp1402": "USAP-DC",
+    "nbp1502": "USAP-DC",
     "crocker2014": "USGS",
+    "Crocker_2014": "USGS",
     "frrp2011": "USGS",
+    "frrp_2011": "USGS",
     "nantuckett": "USGS",
     "pulley-ridge": "USGS",
     "pulley_ridge": "USGS",
+    "Pulley_Ridge_2003": "USGS",
     "tortugas2009": "USGS",
+    "Tortugas_2009": "USGS",
     "tortugas2011": "USGS",
+    "Tortugas_2011": "USGS",
     "AT18-12": "WHOI",
-    "chesterfield": "Other",
-    "frobisher": "Other",
-    "qik": "Other",
-    "wager": "Other",
+    "chesterfield": "Ben Misiuk",
+    "frobisher": "Ben Misiuk",
+    "qik": "Ben Misiuk",
+    "Qikiqtarjuaq": "Ben Misiuk",
+    "wager": "Ben Misiuk",
 }
 ORG2COLOR = {
     "DFO": "#FB9A99",  # l.red / pink
     "FathomNet": "#a65628",  # brown
     "IMOS": "#4daf4a",  # green
-    "MBARI": "#7A7064",  # MBARI logo teal-blue: #004360, #7A7064
+    "SQUIDLE/IMOS": "#4daf4a",
+    "MBARI": "#805B2F",  # MBARI logo teal-blue: #004360, #7A7064
     "NOAA": "#0078BC",  # NOAA logo db/lb: #243C72, #0078BC
     "NRCan": "#D32823",  # Canadian flag red: #D32823
     "PANGAEA": "#009C84",  # PANGAEA Website d.teal/l.teal: #004D60 009C84
@@ -79,23 +108,27 @@ ORG2COLOR = {
     "SOI": "#FECA2D",  # SOI logo y/b/lg: #FECA2D #0B61BE #C4C52A
     "USGS": "#00264C",  # USGS d.blue: #00264C
     "Other": "#606060",  # grey
-    "4D Oceans": "#606060",  # grey
-    "AADC": "#606060",  # grey
-    "Alex Schimel": "#606060",  # grey
-    "Bastos Lab": "#606060",  # grey
-    "EAC": "#606060",  # grey
-    "Hakai": "#606060",  # grey
-    "Merlin Best": "#606060",  # grey
-    "MGDS": "#606060",  # grey
-    "SEAM": "#606060",  # grey
-    "USAP-DC": "#606060",  # grey
-    "WHOI": "#606060",  # grey
+    "Research groups": "#6a6a6a",  # "#670575",  # purple
+    "4D Oceans": "#6a6a6a",  # Research groups
+    "AADC": "#057002",  # banner blue #01426A; banner blue #09588C
+    "Alex Schimel": "#232321",  # dark grey NGU #232321; Norway blue #00205A
+    "NGU": "#232321",  # dark grey NGU #232321; Norway blue #00205A
+    "Bastos Lab": "#6a6a6a",  # Research groups
+    "Ben Misiuk": "#6a6a6a",  # Research groups
+    "EAC": "#6a6a6a",  # Research groups
+    "Hakai": "#cf5108",  # Logo: #B52025
+    "Merlin Best": "#6a6a6a",  # Research groups
+    "MGDS": "#114891",  # logo blue #114891; secondary grey #3F465C
+    "SEAM": "#6a6a6a",  # Research groups
+    "USAP-DC": "#024A61",  # logo light teal #92B9C5; secondary teal #024A61
+    "WHOI": "#114891",  # MGDS
 }
 ORG2COLOR_BW = {
     "DFO": "#FB9A99",
     "FathomNet": "#a65628",
     "IMOS": "#52BDEC",  # IMOS logo lb/b: #52BDEC #3A6F8F
-    "MBARI": "#7A7064",
+    "SQUIDLE/IMOS": "#52BDEC",
+    "MBARI": "#805B2F",  # Secondary colour brown: "#7A7064", but needed to increase saturation
     "NOAA": "#0078BC",
     "NRCan": "#D32823",
     "PANGAEA": "#009C84",
@@ -104,17 +137,20 @@ ORG2COLOR_BW = {
     "SOI": "#FECA2D",
     "USGS": "#4daf4a",  # green
     "Other": "#909090",  # grey
-    "4D Oceans": "#909090",  # grey
-    "AADC": "#909090",  # grey
-    "Alex Schimel": "#909090",  # grey
-    "Bastos Lab": "#909090",  # grey
-    "EAC": "#909090",  # grey
-    "Hakai": "#909090",  # grey
-    "Merlin Best": "#909090",  # grey
-    "MGDS": "#909090",  # grey
-    "SEAM": "#909090",  # grey
-    "USAP-DC": "#909090",  # grey
-    "WHOI": "#909090",  # grey
+    "Research groups": "#8E8E8E",  # "#670575",  # purple
+    "4D Oceans": "#8E8E8E",  # Research groups
+    "AADC": "#057002",  # banner blue #01426A; banner blue #09588C
+    "Alex Schimel": "#232321",  # dark grey NGU #232321; Norway blue #00205A
+    "NGU": "#232321",  # dark grey NGU #232321; Norway blue #00205A
+    "Bastos Lab": "#8E8E8E",  # Research groups
+    "Ben Misiuk": "#8E8E8E",  # Research groups
+    "EAC": "#8E8E8E",  # Research groups
+    "Hakai": "#cf5108",  # Logo: #B52025
+    "Merlin Best": "#8E8E8E",  # Research groups
+    "MGDS": "#114891",  # logo blue #114891; secondary grey #3F465C
+    "SEAM": "#8E8E8E",  # Research groups
+    "USAP-DC": "#92B9C5",  # logo light teal #92B9C5; secondary teal #024A61
+    "WHOI": "#114891",  # MGDS
 }
 
 
@@ -275,7 +311,7 @@ def cmap_white2alpha(
     return cmap_alpha
 
 
-def show_land_sea_features(ax=None):
+def show_land_sea_features(ax=None, land=None, water=None):
     """
     Show global land, sea, and lakes in one flat colour each.
 
@@ -287,27 +323,32 @@ def show_land_sea_features(ax=None):
     if ax is None:
         ax = plt.gca()
 
+    if land is None:
+        land = cartopy.feature.COLORS["land"]
+    if water is None:
+        water = cartopy.feature.COLORS["water"]
+
     scale = "10m"  # use data at this scale
     land = cartopy.feature.NaturalEarthFeature(
         "physical",
         "land",
         scale=scale,
         edgecolor="none",
-        facecolor=cartopy.feature.COLORS["land"],
+        facecolor=land,
     )
     ocean = cartopy.feature.NaturalEarthFeature(
         "physical",
         "ocean",
         scale=scale,
         edgecolor="none",
-        facecolor=cartopy.feature.COLORS["water"],
+        facecolor=water,
     )
     lakes = cartopy.feature.NaturalEarthFeature(
         "physical",
         "lakes",
         scale=scale,
         edgecolor="none",
-        facecolor=cartopy.feature.COLORS["water"],
+        facecolor=water,
     )
     ax.add_feature(land)
     ax.add_feature(ocean)
@@ -321,7 +362,8 @@ def plot_samples(
     figsize=(25, 8),
     show_map=True,
     s=1,
-    color="r",
+    c="r",
+    global_map=True,
     **kwargs,
 ):
     """
@@ -356,35 +398,62 @@ def plot_samples(
         projection = getattr(cartopy.crs, projection)
     elif not isinstance(projection, callable):
         raise ValueError("projection must be either a string or callable.")
-    projection = projection()
+    if global_map:
+        projection = projection()
+    else:
+        central_longitude = np.degrees(scipy.stats.circmean(np.radians(longitude)))
+        projection = projection(central_longitude=central_longitude)
 
     # Create a plot using the projection
     fig = plt.figure(figsize=figsize)
     ax = fig.add_subplot(projection=projection)
 
     # Display gridlines and either the world map, or outline of coastlines
-    ax.gridlines()
+    if show_map in ["none", "coastlines"] or not show_map:
+        ax.gridlines()
+    else:
+        ax.gridlines(color="w")
     if show_map == "none":
         pass
     elif show_map == "two-tone":
         show_land_sea_features(ax)
-    elif show_map:
-        ax.stock_img()
-    else:
+    elif show_map == "two-tone-alt":
+        water = np.array([168, 192, 224]) / 255
+        show_land_sea_features(ax, water=water)
+    elif show_map == "coastlines" or not show_map:
         ax.coastlines()
+    else:
+        ax.stock_img()
 
     # Plot the datapoints
     ax.scatter(
         longitude,
         latitude,
         s=s,
-        color=color,
+        c=c,
+        marker=".",
+        edgecolors="none",
+        zorder=999,
         transform=cartopy.crs.PlateCarree(),
         **kwargs,
     )
 
-    # Ensure the full map is shown
-    ax.set_global()
+    if global_map:
+        # Ensure the full map is shown
+        ax.set_global()
+    else:
+        # TODO: Use circular min/max to handle cross-dateline longitude correctly
+        x0 = np.min(longitude)
+        x1 = np.max(longitude)
+        y0 = np.min(latitude)
+        y1 = np.max(latitude)
+        x_offset = (x1 - x0) / 20
+        y_offset = (y1 - y0) / 20
+        x0 = np.maximum(-180, x0 - x_offset)
+        x1 = np.minimum(180, x1 + x_offset)
+        y0 = np.maximum(-90, y0 - y_offset)
+        y1 = np.minimum(90, y1 + y_offset)
+        ax.set_extent([x0, x1, y0, y1])
     return ax
 
 
@@ -396,6 +465,7 @@ def plot_kde(
     show_map=False,
     cmap="Reds",
     extend_cmap=True,
+    n_grid=181,
     **kwargs,
 ):
     """
@@ -417,6 +487,9 @@ def plot_kde(
         The colormap to use.
     extend_cmap : bool, default=True
         Whether to extend the colormap to go to fully transparent.
+    n_grid : int, default=181
+        Number of grid points to use in the longitude dimension. Twice as many
+        samples will be used for the latitude.
     **kwargs
         Additional arguments as per :func:`fit_kde_spherical`.
 
@@ -447,7 +520,7 @@ def plot_kde(
 
     # Fit kernel density estimator and use it to measure samples on a grid
     X, Y, Z = kde_tools.fit_meshgrid_kde_spherical(
-        latitude, longitude, n_grid=101, **kwargs
+        latitude, longitude, n_grid=n_grid, **kwargs
     )
 
     # Create a plot using the projection
@@ -455,15 +528,21 @@ def plot_kde(
     ax = fig.add_subplot(projection=projection)
 
     # Display gridlines and either the world map, or outline of coastlines
-    ax.gridlines()
+    if show_map in ["none", "coastlines"] or not show_map:
+        ax.gridlines()
+    else:
+        ax.gridlines(color="w")
     if show_map == "none":
         pass
     elif show_map == "two-tone":
         show_land_sea_features(ax)
-    elif show_map:
-        ax.stock_img()
-    else:
+    elif show_map == "two-tone-alt":
+        water = np.array([168, 192, 224]) / 255
+        show_land_sea_features(ax, water=water)
+    elif show_map == "coastlines" or not show_map:
         ax.coastlines()
+    else:
+        ax.stock_img()
 
     # Plot the datapoints
     contours = ax.contourf(
@@ -484,7 +563,7 @@ def plot_kde(
     return ax
 
 
-def row2organization(row):
+def row2organization(row, merge_squidle_imos=True):
     """
     Map from row to organization name.
 
@@ -517,10 +596,18 @@ def row2organization(row):
 
     if "url" not in row or pd.isna(row["url"]):
         if "repository" in row and not pd.isna(row["repository"]):
+            if merge_squidle_imos and row["repository"].lower() == "squidle":
+                return "SQUIDLE/IMOS"
             return row["repository"]
+        if "source" in row and not pd.isna(row["source"]):
+            if merge_squidle_imos and row["repository"].lower() == "squidle":
+                return "SQUIDLE/IMOS"
+            return row["source"]
         return "other"
 
     if row["url"].startswith("https://s3-ap-southeast-2.amazonaws.com/imos-data"):
+        if merge_squidle_imos:
+            return "SQUIDLE/IMOS"
         return "IMOS"
     if row["url"].startswith("https://www.nodc.noaa.gov") or row["url"].startswith(
         "https://accession.nodc.noaa.gov"
@@ -536,9 +623,16 @@ def row2organization(row):
         return "SOI"
 
     if "repository" in row and not pd.isna(row["repository"]):
-        return row["repository"]
+        org = row["repository"]
+    elif "source" in row and not pd.isna(row["source"]):
+        org = row["source"]
+    else:
+        org = "other"
 
-    return "other"
+    if merge_squidle_imos and org == "squidle":
+        return "SQUIDLE/IMOS"
+
+    return org
 
 
 def plot_samples_by_organization(
@@ -547,6 +641,7 @@ def plot_samples_by_organization(
     figsize=(25, 8),
     show_map=True,
     s=10,
+    legend=True,
     **kwargs,
 ):
     """
@@ -564,6 +659,8 @@ def plot_samples_by_organization(
         Whether to show the map, otherwise coastlines are drawn instead.
     s : float, default=1
         The marker size in points**2.
+    legend : bool, default=True
+        Whether to show the legend.
     **kwargs
         Additional arguments as per :func:`matplotlib.pyplot.scatter`.
 
@@ -588,56 +685,74 @@ def plot_samples_by_organization(
     df = df[~pd.isna(df["latitude"]) & ~pd.isna(df["longitude"])]
     # Determine organization and colour
     df["organization"] = df.apply(row2organization, axis=1)
+    df.loc[df["organization"] == "WHOI", "organization"] = "MGDS"  # Soft override
     df["org_color"] = df["organization"].apply(lambda x: org2color.get(x, "#888"))
+
+    for k in ["Other", "Research groups"]:
+        df.loc[df["org_color"] == org2color[k], "organization"] = k
 
     # Create a plot using the projection
     fig = plt.figure(figsize=figsize)
     ax = fig.add_subplot(projection=projection)
 
     # Display gridlines and either the world map, or outline of coastlines
-    ax.gridlines()
+    if show_map in ["none", "coastlines"] or not show_map:
+        ax.gridlines()
+    else:
+        ax.gridlines(color="w")
     if show_map == "none":
         pass
     elif show_map == "two-tone":
         show_land_sea_features(ax)
-    elif show_map:
-        ax.stock_img()
-    else:
+    elif show_map == "two-tone-alt":
+        water = np.array([168, 192, 224]) / 255
+        show_land_sea_features(ax, water=water)
+    elif show_map == "coastlines" or not show_map:
         ax.coastlines()
+    else:
+        ax.stock_img()
 
     # Make legend entries
     df_singles = df.drop_duplicates(subset=["organization"]).sort_values("organization")
 
-    # Plot a marker for each organization value with a size of 0
-    leg_handles = []
-    leg_labels = []
-    for _, row in df_singles.iterrows():
-        if row["org_color"] == org2color["Other"] and row["organization"] != "Other":
-            continue
-        hsc = ax.scatter(
-            row["longitude"],
-            row["latitude"],
-            c=row["org_color"],
-            s=0,
-            transform=cartopy.crs.PlateCarree(),
-        )
-        leg_handles.append(hsc)
-        leg_labels.append(row["organization"])
+    if legend:
+        # Plot a marker for each organization value with a size of 0
+        leg_handles = []
+        leg_labels = []
+        for _, row in df_singles.iterrows():
+            if (
+                row["org_color"] == org2color["Other"]
+                and row["organization"] != "Other"
+            ):
+                continue
+            hsc = ax.scatter(
+                row["longitude"],
+                row["latitude"],
+                c=row["org_color"],
+                s=0,
+                transform=cartopy.crs.PlateCarree(),
+            )
+            leg_handles.append(hsc)
+            leg_labels.append(row["organization"])
 
-    # Move the "Other" label to the end of the list
-    for key in ["Misc", "Other", "other"]:
-        if key in leg_labels:
-            i = leg_labels.index(key)
-            leg_handles.append(leg_handles.pop(i))
-            leg_labels.append(leg_labels.pop(i))
-    # Show legend
-    hlegend = ax.legend(
-        leg_handles, leg_labels, fontsize=16, loc="center left", bbox_to_anchor=(1, 0.5)
-    )
-    # Set the size of the markers in the legend to be large
-    for h_entry in hlegend.legendHandles:
-        h_entry._sizes = [50]
-    hlegend.get_frame().set_edgecolor("k")
+        # Move the "Other" label to the end of the list
+        for key in ["Misc", "Other", "other", "Other research labs"]:
+            if key in leg_labels:
+                i = leg_labels.index(key)
+                leg_handles.append(leg_handles.pop(i))
+                leg_labels.append(leg_labels.pop(i))
+        # Show legend
+        hlegend = ax.legend(
+            leg_handles,
+            leg_labels,
+            fontsize=16,
+            loc="center left",
+            bbox_to_anchor=(1, 0.5),
+        )
+        # Set the size of the markers in the legend to be large
+        for h_entry in hlegend.legendHandles:
+            h_entry._sizes = [50]
+        hlegend.get_frame().set_edgecolor("k")
 
     # Shuffle the order of the samples, so overlapping sites can show through
     df_rand = df.sample(frac=1)
