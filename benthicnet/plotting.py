@@ -8,6 +8,7 @@ import matplotlib.colors
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import scipy.stats
 
 from . import kde_tools
 
@@ -362,6 +363,7 @@ def plot_samples(
     show_map=True,
     s=1,
     c="r",
+    global_map=True,
     **kwargs,
 ):
     """
@@ -396,7 +398,11 @@ def plot_samples(
         projection = getattr(cartopy.crs, projection)
     elif not isinstance(projection, callable):
         raise ValueError("projection must be either a string or callable.")
-    projection = projection()
+    if global_map:
+        projection = projection()
+    else:
+        central_longitude = np.degrees(scipy.stats.circmean(np.radians(longitude)))
+        projection = projection(central_longitude=central_longitude)
 
     # Create a plot using the projection
     fig = plt.figure(figsize=figsize)
@@ -432,8 +438,22 @@ def plot_samples(
         **kwargs,
     )
 
-    # Ensure the full map is shown
-    ax.set_global()
+    if global_map:
+        # Ensure the full map is shown
+        ax.set_global()
+    else:
+        # TODO: Use circular min/max to handle cross-dateline longitude correctly
+        x0 = np.min(longitude)
+        x1 = np.max(longitude)
+        y0 = np.min(latitude)
+        y1 = np.max(latitude)
+        x_offset = (x1 - x0) / 20
+        y_offset = (y1 - y0) / 20
+        x0 = np.maximum(-180, x0 - x_offset)
+        x1 = np.minimum(180, x1 + x_offset)
+        y0 = np.maximum(-90, y0 - y_offset)
+        y1 = np.minimum(90, y1 + y_offset)
+        ax.set_extent([x0, x1, y0, y1])
     return ax
 
 
