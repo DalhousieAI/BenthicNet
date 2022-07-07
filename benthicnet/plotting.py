@@ -425,6 +425,9 @@ def plot_samples(
         latitude,
         s=s,
         c=c,
+        marker=".",
+        edgecolors="none",
+        zorder=999,
         transform=cartopy.crs.PlateCarree(),
         **kwargs,
     )
