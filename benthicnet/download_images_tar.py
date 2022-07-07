@@ -100,7 +100,7 @@ def download_images(
         )
     df["dataset"] = benthicnet.io.sanitize_filename_series(df["dataset"])
     df["site"] = benthicnet.io.sanitize_filename_series(df["site"])
-    df["image"] = benthicnet.io.sanitize_filename_series(df["image"])
+    df["image"] = df.apply(benthicnet.io.row2basename, axis=1)
     df["url"] = df["url"].str.strip()
 
     if verbose != 1:
@@ -117,32 +117,14 @@ def download_images(
             with tarfile.open(tar_fname, mode="r") as tar:
                 contents = tar.getnames()
         except tarfile.ReadError:
-            t_wait = 5
-            if verbose >= 1:
-                print(
-                    "{}Unable to open {}.\n{}File {} will be deleted in {} seconds..."
-                    "".format(padding, tar_fname, padding, tar_fname, t_wait),
-                )
-                print("{}Deleting in".format(padding), end="", flush=True)
-                for i in range(t_wait // 1):
-                    print(" {}...".format(t_wait - i), end="", flush=True)
-                    time.sleep(1)
-                print(" Deleting!")
-                if t_wait % 1 > 0:
-                    time.sleep(t_wait % 1)
-            else:
-                time.sleep(t_wait)
-            os.remove(tar_fname)
-            if verbose >= 1:
-                print(
-                    "{}Existing file {} deleted".format(padding, tar_fname), flush=True
-                )
+            print(f"{padding}Unable to open {tar_fname}.")
+            benthicnet.io.delayed_delete(tar_fname)
 
     t1 = time.time()
 
     is_valid = np.zeros(len(df), dtype=bool)
     for i_row, (index, row) in enumerate(
-        tqdm.tqdm(df.iterrows(), len(df), disable=not use_tqdm)
+        tqdm.tqdm(df.iterrows(), total=len(df), disable=not use_tqdm)
     ):
         if pd.isna(row["url"]) or row["url"] == "":
             n_error += 1
@@ -178,16 +160,6 @@ def download_images(
             )
 
         destination = row["image"]
-        if not destination:
-            destination = row["url"].rstrip("/").split("/")[-1]
-            destination = benthicnet.io.sanitize_filename(destination)
-        ext = os.path.splitext(destination)[1]
-        expected_ext = os.path.splitext(row["url"].rstrip("/"))[1]
-        if expected_ext and ext.lower() != expected_ext.lower():
-            if ext.lower() in {".jpg", ".jpeg"}:
-                destination = os.path.splitext(destination)[0] + expected_ext
-            else:
-                destination = destination + expected_ext
         destination = os.path.join(row["site"], destination)
         ext = os.path.splitext(destination)[1]
         if convert_to_jpeg and ext.lower() not in {".jpg", ".jpeg"}:
@@ -229,7 +201,7 @@ def download_images(
                     else:
                         # Other errors indicate a server side error. Wait a
                         # short period and then retries to see if it alleviates.
-                        t_wait = 2 ** i_attempt
+                        t_wait = 2**i_attempt
                     if verbose >= 1:
                         print(
                             "{}Retrying in {} seconds (HTTP Status {}): {}".format(
@@ -271,7 +243,7 @@ def download_images(
                 if check_image or needs_conversion:
                     try:
                         im = PIL.Image.open(fname_tmp)
-                    except BaseException as err:
+                    except Exception as err:
                         if isinstance(err, KeyboardInterrupt):
                             raise
                         print("Error while handling: {}".format(row["url"]))
@@ -303,8 +275,8 @@ def download_images(
                         + "  Adding {} to archive as {}".format(fname_tmp, destination)
                     )
                 with tarfile.open(tar_fname, mode="a") as tar:
-                    contents = tar.getnames()
                     tar.add(fname_tmp, arcname=destination)
+                    contents = tar.getnames()
                 n_download += 1
 
         # Record that this row was successfully downloaded
@@ -397,10 +369,6 @@ def download_images_by_dataset(
         Default is ``0``.
     **kwargs
         Additional keword arguments as per :func:`download_images`.
-
-    Returns
-    -------
-    None
     """
     padding = " " * print_indent
 
@@ -452,9 +420,6 @@ def download_images_by_dataset(
     for i_dataset, dataset in enumerate(
         tqdm.tqdm(datasets_to_process, disable=not using_tqdm)
     ):
-        if not n_proc:
-            pass
-
         if verbose >= 1 and not using_tqdm and i_dataset > 0:
             t_elapsed = time.time() - t0
             t_remain = t_elapsed / i_dataset * (n_to_process - i_dataset)
@@ -478,7 +443,7 @@ def download_images_by_dataset(
                 flush=True,
             )
 
-        subdf = df.loc[dataset2idx[dataset]]
+        subdf = df.iloc[dataset2idx[dataset]]
         tar_fname = os.path.join(output_dir, "tar", dataset + ".tar")
 
         error_fname = os.path.join(output_dir, "errors", dataset + ".log")
@@ -490,6 +455,7 @@ def download_images_by_dataset(
                 tar_fname,
                 skip_existing=skip_existing,
                 error_stream=file,
+                inplace=False,
                 verbose=verbose - 1,
                 use_tqdm=use_tqdm,
                 print_indent=print_indent + 4,
@@ -544,10 +510,6 @@ def download_images_by_dataset_from_csv(
         Verbosity level. Default is ``1``.
     **kwargs
         Additional arguments as per :func:`download_images_by_dataset`.
-
-    Returns
-    -------
-    None
     """
     t0 = time.time()
 
