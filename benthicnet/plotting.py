@@ -361,7 +361,7 @@ def plot_samples(
     figsize=(25, 8),
     show_map=True,
     s=1,
-    color="r",
+    c="r",
     **kwargs,
 ):
     """
@@ -421,7 +421,7 @@ def plot_samples(
         longitude,
         latitude,
         s=s,
-        color=color,
+        c=c,
         transform=cartopy.crs.PlateCarree(),
         **kwargs,
     )
