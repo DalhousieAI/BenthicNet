@@ -87,11 +87,11 @@ DATASET2ORG = {
     "tortugas2011": "USGS",
     "Tortugas_2011": "USGS",
     "AT18-12": "WHOI",
-    "chesterfield": "Other",
-    "frobisher": "Other",
-    "qik": "Other",
-    "Qikiqtarjuaq": "Other",
-    "wager": "Other",
+    "chesterfield": "Ben Misiuk",
+    "frobisher": "Ben Misiuk",
+    "qik": "Ben Misiuk",
+    "Qikiqtarjuaq": "Ben Misiuk",
+    "wager": "Ben Misiuk",
 }
 ORG2COLOR = {
     "DFO": "#FB9A99",  # l.red / pink
