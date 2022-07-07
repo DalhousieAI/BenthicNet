@@ -372,7 +372,9 @@ def fixup_repeated_output_paths(df, inplace=True, verbose=1):
         resolved = False
         for k in range(1, 5):
             new_basenames = subdf["url"].apply(
-                lambda x: sanitize_filename("-".join(x.rstrip("/").split("/")[-k:]))
+                lambda x: sanitize_filename(
+                    "-".join(x.rstrip("/").split("/")[-k:])  # noqa: B023
+                )
             )
             # All URL basenames are unique, so we are done
             if len(new_basenames.unique()) != len(new_basenames):
