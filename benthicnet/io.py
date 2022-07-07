@@ -287,13 +287,15 @@ def row2basename(row, use_url_extension=True):
     basename = sanitize_filename(basename)
     if not use_url_extension or "url" not in row or pd.isna(row["url"]):
         return basename
-    ext = os.path.splitext(basename)[1]
-    expected_ext = os.path.splitext(row["url"].rstrip("/"))[1]
-    if expected_ext and ext.lower() != expected_ext.lower():
-        if ext.lower() in {".jpg", ".jpeg"}:
-            basename = os.path.splitext(basename)[0] + expected_ext
-        else:
-            basename = basename + expected_ext
+    if "url" in row and not pd.isna(row["url"]):
+        # Ensure we enclude the extension from the URL
+        ext = os.path.splitext(basename)[1]
+        expected_ext = os.path.splitext(row["url"].rstrip("/"))[1]
+        if expected_ext and ext.lower() != expected_ext.lower():
+            if ext.lower() in {".jpg", ".jpeg"}:
+                basename = os.path.splitext(basename)[0] + expected_ext
+            else:
+                basename = basename + expected_ext
     return basename
 
 
