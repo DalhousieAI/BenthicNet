@@ -96,7 +96,7 @@ def partition_dataset(
     # Remove samples missing lat/lon values
     df = df[(~pd.isna(df["latitude"])) & (~pd.isna(df["longitude"]))]
     # Add outpath, so we can determine which rows are the same image
-    df["outpath"] = benthicnet.io.determine_outpath(df)
+    df["_outpath"] = benthicnet.io.determine_outpath(df)
     # Initialize columns to use for partition output and working values,
     # minimum distances from samples in train/test partition.
     df["partition"] = ""
@@ -129,7 +129,7 @@ def partition_dataset(
             print(f"{x_} {label_counts[x]:>4d}")
 
     # Reduce to only unique combinations of label and image, to check counts
-    dfu = df.drop_duplicates(subset=["outpath", label_col])
+    dfu = df.drop_duplicates(subset=["_outpath", label_col])
 
     total_ulabel_counts = dfu[label_col].value_counts(ascending=True, dropna=False)
 
@@ -169,7 +169,7 @@ def partition_dataset(
     # because the interaction effects mean we would need to do a
     # reverse lookup on each candidate sample we want to add.
     if only_exclude_same_label is None:
-        only_exclude_same_label = len(df) == len(df["outpath"].unique())
+        only_exclude_same_label = len(df) == len(df["_outpath"].unique())
         if verbosity < 1:
             pass
         elif only_exclude_same_label:
@@ -193,7 +193,7 @@ def partition_dataset(
         pc : bool, default=False
             Whether to print values as a percentage.
         """
-        dfu = df.drop_duplicates(subset=["outpath", label_col])
+        dfu = df.drop_duplicates(subset=["_outpath", label_col])
         partitions = sorted(df["partition"].unique())
         max_label_len = max(len(label) for label in total_ulabel_counts.index)
         fmt_label = "{:<" + str(max_label_len) + "s}"
@@ -217,7 +217,7 @@ def partition_dataset(
                     s += f" {n:>8d}"
             print(s)
         print("-" * len(s))
-        sdfu = dfu.drop_duplicates(subset=["outpath"])
+        sdfu = dfu.drop_duplicates(subset=["_outpath"])
         s = fmt_label.format("Total")
         n = n_total = len(sdfu)
         s += f" {n:>8d} |"
@@ -381,7 +381,7 @@ def partition_dataset(
         if not partition_name:
             raise ValueError("Partition name must be provided")
 
-        dfu = df.drop_duplicates(subset=["outpath", label_col])
+        dfu = df.drop_duplicates(subset=["_outpath", label_col])
 
         sdf = dfu[dfu["partition"] == partition_name]
         existing_label_counts = sdf[label_col].value_counts(
@@ -587,7 +587,7 @@ def partition_dataset(
             # Put the sample in the test partition
             df.loc[df.index.values[idx], "partition"] = partition_name
             # Set other annotations on the same image to have the same partition
-            select = df["outpath"] == df.loc[df.index.values[idx], "outpath"]
+            select = df["_outpath"] == df.loc[df.index.values[idx], "_outpath"]
             df.loc[select, "partition"] = partition_name
 
             allocated_indices = [idx]
@@ -628,9 +628,9 @@ def partition_dataset(
             if only_exclude_same_label and not partition_radius:
                 # Only select samples which have the same label
                 sdf = df.loc[select]
-                outpaths = sdf.loc[sdf[label_col] == label, "outpath"]
+                outpaths = sdf.loc[sdf[label_col] == label, "_outpath"]
                 # But extend this to be samples on the same image bearing that label
-                select = df["outpath"].isin(outpaths)
+                select = df["_outpath"].isin(outpaths)
             df.loc[select, "partition"] = df.loc[select, "partition"].apply(
                 functools.partial(
                     update_neighbourhood_partition_name, neighbour=partition_name
@@ -715,7 +715,7 @@ def partition_dataset(
             if i_label == 0:
                 continue
 
-            dfu = df.drop_duplicates(subset=["outpath", label_col])
+            dfu = df.drop_duplicates(subset=["_outpath", label_col])
 
             partition_counts = dfu.loc[
                 df["partition"] == partition_name, label_col
@@ -839,7 +839,7 @@ def partition_dataset(
         for i_label, label in enumerate(total_ulabel_counts.index):
             if i_label == 0:
                 continue
-            dfu = df.drop_duplicates(subset=["outpath", label_col])
+            dfu = df.drop_duplicates(subset=["_outpath", label_col])
             partition_counts = dfu.loc[
                 df["partition"] == partition_name, label_col
             ].value_counts(ascending=True, dropna=False)
@@ -943,7 +943,7 @@ def partition_dataset(
                 print(f"Moving index {idx} to {partition_name}")
 
             # Set other annotations on the same image to have the same partition
-            select = df["outpath"] == df.loc[idx, "outpath"]
+            select = df["_outpath"] == df.loc[idx, "_outpath"]
             df.loc[select, "partition"] = partition_name
 
             neighbours_pre = sum(select)
@@ -1013,5 +1013,16 @@ def partition_dataset(
         if show_plots:
             show_label_locations()
             report(plot=True)
+
+    # Remove columns we added for our own workspace
+    df.drop(
+        columns=[
+            "_dist_from_any",
+            "_dist_from_test",
+            "_dist_from_train",
+            "_outpath",
+        ],
+        inplace=True,
+    )
 
     return df
