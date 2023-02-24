@@ -98,7 +98,8 @@ ORG2COLOR = {
     "DFO": "#FB9A99",  # l.red / pink
     "DFO (IOS)": "#FB9A99",  # l.red / pink
     "DFO (BIO)": "#FB9A99",  # l.red / pink
-    "FathomNet": "#a65628",  # brown
+    # "FathomNet": "#a65628",  # brown
+    "FathomNet": "#805B2F",  # MBARI logo teal-blue: #004360, #7A7064
     "IMOS": "#4daf4a",  # green
     "SQUIDLE/IMOS": "#4daf4a",
     "NOAA": "#0078BC",  # NOAA logo db/lb: #243C72, #0078BC
@@ -127,10 +128,10 @@ ORG2COLOR_BW = {
     "DFO": "#FB9A99",
     "DFO (IOS)": "#FB9A99",
     "DFO (BIO)": "#FB9A99",
-    "FathomNet": "#a65628",
+    # "FathomNet": "#a65628",
+    "FathomNet": "#805B2F",  # Secondary MBARI colour brown "#7A7064" with increased saturation
     "IMOS": "#52BDEC",  # IMOS logo lb/b: #52BDEC #3A6F8F
     "SQUIDLE/IMOS": "#52BDEC",
-    "FathomNet": "#805B2F",  # Secondary colour brown: "#7A7064", but needed to increase saturation
     "NOAA": "#0078BC",
     "NOAA (NFSC)": "#0078BC",
     "NRCan": "#D32823",
