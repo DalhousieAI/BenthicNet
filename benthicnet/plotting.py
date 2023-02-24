@@ -26,40 +26,40 @@ DATASET2ORG = {
     "NGU_2014": "NGU",
     "NGU_2015": "NGU",
     "NGU_2017": "NGU",
-    "bastos": "Bastos Lab",
-    "dfo_eelgrass": "DFO",
-    "george2000": "DFO",
-    "george2002": "DFO",
-    "Georges_Bank_2000": "DFO",
-    "Georges_Bank_2002": "DFO",
-    "german2003": "DFO",
-    "German_Bank_2003": "DFO",
-    "german2006": "DFO",
-    "German_Bank_2006": "DFO",
-    "german2010": "DFO",
-    "German_Bank_2010": "DFO",
-    "noaa_habcam": "DFO",
-    "NOAA_HabCam_2015": "DFO",
+    "bastos": "LaboGeo (Marine Geosciences Lab/UFES)",
+    "dfo_eelgrass": "DFO (BIO)",
+    "george2000": "DFO (BIO)",
+    "george2002": "DFO (BIO)",
+    "Georges_Bank_2000": "DFO (BIO)",
+    "Georges_Bank_2002": "DFO (BIO)",
+    "german2003": "DFO (BIO)",
+    "German_Bank_2003": "DFO (BIO)",
+    "german2006": "DFO (BIO)",
+    "German_Bank_2006": "DFO (BIO)",
+    "german2010": "DFO (BIO)",
+    "German_Bank_2010": "DFO (BIO)",
+    "noaa_habcam": "NOAA (NFSC)",
+    "NOAA_HabCam_2015": "NOAA (NFSC)",
     "eac": "EAC",
     "EAC_2021": "EAC",
-    "Doc Ricketts": "MBARI",
-    "i2MAP": "MBARI",
-    "Mini ROV": "MBARI",
-    "MiniROV": "MBARI",
-    "Tiburon": "MBARI",
-    "Ventana": "MBARI",
-    "prnpr2018": "Hakai",
-    "hakai_rov": "Hakai",
-    "Hakai_ROV_2019": "Hakai",
-    "hakai_video": "Hakai",
-    "Hakai_Video_2020": "Hakai",
-    "hogkins_h1685": "Merlin Best",
-    "dellwood_h1682": "Merlin Best",
-    "dellwood_h1683": "Merlin Best",
-    "dellwood_south_h1690": "Merlin Best",
-    "explorer_h1691": "Merlin Best",
-    "sgaan_h1684": "Merlin Best",
-    "sgaan_h1686": "Merlin Best",
+    "Doc Ricketts": "FathomNet",
+    "i2MAP": "FathomNet",
+    "Mini ROV": "FathomNet",
+    "MiniROV": "FathomNet",
+    "Tiburon": "FathomNet",
+    "Ventana": "FathomNet",
+    "prnpr2018": "Hakai Institute",
+    "hakai_rov": "Hakai Institute",
+    "Hakai_ROV_2019": "Hakai Institute",
+    "hakai_video": "Hakai Institute",
+    "Hakai_Video_2020": "Hakai Institute",
+    "hogkins_h1685": "DFO (IOS)",
+    "dellwood_h1682": "DFO (IOS)",
+    "dellwood_h1683": "DFO (IOS)",
+    "dellwood_south_h1690": "DFO (IOS)",
+    "explorer_h1691": "DFO (IOS)",
+    "sgaan_h1684": "DFO (IOS)",
+    "sgaan_h1686": "DFO (IOS)",
     "LISMARC12_SEABOSS": "MGDS",
     "LISMARC12_ISIS": "MGDS",
     "LISMARC13_SEABOSS": "MGDS",
@@ -87,20 +87,23 @@ DATASET2ORG = {
     "Tortugas_2009": "USGS",
     "tortugas2011": "USGS",
     "Tortugas_2011": "USGS",
-    "AT18-12": "WHOI",
-    "chesterfield": "Ben Misiuk",
-    "frobisher": "Ben Misiuk",
-    "qik": "Ben Misiuk",
-    "Qikiqtarjuaq": "Ben Misiuk",
-    "wager": "Ben Misiuk",
+    "AT18-12": "MGDS",
+    "chesterfield": "MUN",
+    "frobisher": "MUN",
+    "qik": "MUN",
+    "Qikiqtarjuaq": "MUN",
+    "wager": "MUN",
 }
 ORG2COLOR = {
     "DFO": "#FB9A99",  # l.red / pink
-    "FathomNet": "#a65628",  # brown
+    "DFO (IOS)": "#FB9A99",  # l.red / pink
+    "DFO (BIO)": "#FB9A99",  # l.red / pink
+    # "FathomNet": "#a65628",  # brown
+    "FathomNet": "#805B2F",  # MBARI logo teal-blue: #004360, #7A7064
     "IMOS": "#4daf4a",  # green
     "SQUIDLE/IMOS": "#4daf4a",
-    "MBARI": "#805B2F",  # MBARI logo teal-blue: #004360, #7A7064
     "NOAA": "#0078BC",  # NOAA logo db/lb: #243C72, #0078BC
+    "NOAA (NFSC)": "#0078BC",  # NOAA logo db/lb: #243C72, #0078BC
     "NRCan": "#D32823",  # Canadian flag red: #D32823
     "PANGAEA": "#009C84",  # PANGAEA Website d.teal/l.teal: #004D60 009C84
     "RLS": "#984ea3",  # purple
@@ -113,23 +116,24 @@ ORG2COLOR = {
     "AADC": "#057002",  # banner blue #01426A; banner blue #09588C
     "Alex Schimel": "#232321",  # dark grey NGU #232321; Norway blue #00205A
     "NGU": "#232321",  # dark grey NGU #232321; Norway blue #00205A
-    "Bastos Lab": "#6a6a6a",  # Research groups
-    "Ben Misiuk": "#6a6a6a",  # Research groups
+    "LaboGeo (Marine Geosciences Lab/UFES)": "#6a6a6a",  # Research groups
+    "MUN": "#6a6a6a",  # Research groups
     "EAC": "#6a6a6a",  # Research groups
     "Hakai": "#cf5108",  # Logo: #B52025
-    "Merlin Best": "#6a6a6a",  # Research groups
     "MGDS": "#114891",  # logo blue #114891; secondary grey #3F465C
     "SEAM": "#6a6a6a",  # Research groups
     "USAP-DC": "#024A61",  # logo light teal #92B9C5; secondary teal #024A61
-    "WHOI": "#114891",  # MGDS
 }
 ORG2COLOR_BW = {
     "DFO": "#FB9A99",
-    "FathomNet": "#a65628",
+    "DFO (IOS)": "#FB9A99",
+    "DFO (BIO)": "#FB9A99",
+    # "FathomNet": "#a65628",
+    "FathomNet": "#805B2F",  # Secondary MBARI colour brown "#7A7064" with increased saturation
     "IMOS": "#52BDEC",  # IMOS logo lb/b: #52BDEC #3A6F8F
     "SQUIDLE/IMOS": "#52BDEC",
-    "MBARI": "#805B2F",  # Secondary colour brown: "#7A7064", but needed to increase saturation
     "NOAA": "#0078BC",
+    "NOAA (NFSC)": "#0078BC",
     "NRCan": "#D32823",
     "PANGAEA": "#009C84",
     "RLS": "#984ea3",
@@ -142,15 +146,13 @@ ORG2COLOR_BW = {
     "AADC": "#057002",  # banner blue #01426A; banner blue #09588C
     "Alex Schimel": "#232321",  # dark grey NGU #232321; Norway blue #00205A
     "NGU": "#232321",  # dark grey NGU #232321; Norway blue #00205A
-    "Bastos Lab": "#8E8E8E",  # Research groups
-    "Ben Misiuk": "#8E8E8E",  # Research groups
+    "LaboGeo (Marine Geosciences Lab/UFES)": "#8E8E8E",  # Research groups
+    "MUN": "#8E8E8E",  # Research groups
     "EAC": "#8E8E8E",  # Research groups
     "Hakai": "#cf5108",  # Logo: #B52025
-    "Merlin Best": "#8E8E8E",  # Research groups
     "MGDS": "#114891",  # logo blue #114891; secondary grey #3F465C
     "SEAM": "#8E8E8E",  # Research groups
     "USAP-DC": "#92B9C5",  # logo light teal #92B9C5; secondary teal #024A61
-    "WHOI": "#114891",  # MGDS
 }
 
 
@@ -588,11 +590,11 @@ def row2organization(row, merge_squidle_imos=True):
     if row["dataset"].lower().startswith("rls_") or row["dataset"].lower().startswith(
         "rls "
     ):
-        return "RLS"
+        return "SQUIDLE"
     if row["dataset"].lower().startswith("fathomnet"):
         return "FathomNet"
     if row["dataset"].startswith("FK200429"):
-        return "SOI"
+        return "MGDS"
 
     if "url" not in row or pd.isna(row["url"]):
         if "repository" in row and not pd.isna(row["repository"]):
@@ -685,7 +687,6 @@ def plot_samples_by_organization(
     df = df[~pd.isna(df["latitude"]) & ~pd.isna(df["longitude"])]
     # Determine organization and colour
     df["organization"] = df.apply(row2organization, axis=1)
-    df.loc[df["organization"] == "WHOI", "organization"] = "MGDS"  # Soft override
     df["org_color"] = df["organization"].apply(lambda x: org2color.get(x, "#888"))
 
     for k in ["Other", "Research groups"]:
