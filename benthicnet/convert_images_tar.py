@@ -779,7 +779,6 @@ def convert_images_by_dataset_from_csv(
         for csv_file_input_i in tqdm(
             input_csvs, desc="Input CSV files", disable=not using_tqdm
         ):
-
             if os.path.splitext(csv_file_input_i)[1].lower() != ".csv":
                 continue
             fname = os.path.join(input_dir, "csv", csv_file_input_i)
