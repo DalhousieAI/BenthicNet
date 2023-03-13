@@ -529,7 +529,7 @@ def download_images_by_dataset_from_csv(
             "Reading CSV file ({})...".format(benthicnet.io.file_size(input_csv)),
             flush=True,
         )
-    df = pd.read_csv(input_csv)
+    df = benthicnet.io.read_csv(input_csv)
     if verbose >= 1:
         print("Loaded CSV file in {:.1f} seconds".format(time.time() - t0), flush=True)
 
