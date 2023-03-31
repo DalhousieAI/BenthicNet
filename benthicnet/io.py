@@ -310,6 +310,9 @@ def determine_outpath(df, use_url_extension=True):
     df : pandas.DataFrame
         Dataset with columns ``"dataset"``,  ``"site"``, ``"url"`` and
         (optionally) ``"image"``.
+    use_url_extension : bool, default=True
+        Whether to override the file extension in the image column with the
+        extension in the URL.
 
     Returns
     -------
