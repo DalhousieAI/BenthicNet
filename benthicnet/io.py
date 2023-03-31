@@ -74,6 +74,7 @@ def read_csv(fname, expect_datetime=True, **kwargs):
             "image": str,
             "latitude": float,
             "longitude": float,
+            "platform": str,
             "site": str,
             "url": str,
             **extra_columns,
