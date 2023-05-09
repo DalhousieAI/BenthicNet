@@ -1,7 +1,4 @@
-import json
 from collections import defaultdict
-
-import pandas as pd
 import requests
 
 
@@ -48,9 +45,8 @@ def aphiaID2taxonomy(identity):
 
     # If the API request was successful, extract the URL data from the response
     if response.status_code == 200:
-        # Collect json data from response obtained through the api and convert it to defaultdict
-        data = json.loads(response.content)
-        d = defaultdict(dict, data)
+        # Collect json data from response obtained through the api
+        d = dict(response.json())
 
         # res will contain the resultant string
         res = ""
@@ -103,9 +99,8 @@ def taxon_status(identity):
 
     # If the API request was successful, extract the URL data from the response
     if response.status_code == 200:
-        # Collect json data from response obtained through the api and convert it to defaultdict
-        data = json.loads(response.content)
-        d = defaultdict(dict, data)
+        # Collect json data from response obtained through the api
+        d = dict(response.json())
 
         if d["status"] == "accepted":
             return True
@@ -126,7 +121,7 @@ def aphiaID2mapping(identity):
 
     Returns
     -------
-    res : defaultdict
+    res : dict
         Consists of different classifications as keys and corresponding levels as values.
 
     Raises
@@ -160,11 +155,10 @@ def aphiaID2mapping(identity):
 
     # If the API request was successful, extract the URL data from the response
     if response.status_code == 200:
-        # Collect json data from response obtained through the api and convert it to defaultdict
-        data = json.loads(response.content)
-        d = defaultdict(dict, data)
+        # Collect json data from response obtained through the api
+        d = dict(response.json())
 
-        res = defaultdict(str)
+        res = {}
 
         # Iterating till there are no children in the classifications
         while True:
@@ -242,7 +236,7 @@ def aphiaID2counts(ids):
              'Bathyarctus formosanus': 1}
     """
     resdict = defaultdict(int)
-    for item in ids.iteritems():
+    for _, item in enumerate(ids):
         identity = str(item)
         api_url = (
             "https://www.marinespecies.org/rest/AphiaClassificationByAphiaID/"
@@ -252,9 +246,8 @@ def aphiaID2counts(ids):
 
         # If the API request was successful, extract the URL data from the response
         if response.status_code == 200:
-            # Collect json data from response obtained through the api and convert it to defaultdict
-            data = json.loads(response.content)
-            d = defaultdict(dict, data)
+            # Collect json data from response obtained through the api
+            d = dict(response.json())
 
             # Iterating till there are no children in the classifications
             while True:
