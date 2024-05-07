@@ -44,29 +44,28 @@ def aphiaID2taxonomy(identity):
     )
     response = requests.get(api_url)
 
-    # If the API request was successful, extract the URL data from the response
-    if response.status_code == 200:
-        # Collect json data from response obtained through the api
-        d = dict(response.json())
-
-        # res will contain the resultant string
-        res = ""
-
-        # Iterating till there are no children in the classifications
-        while True:
-            # Extracting scientific name from response
-            res += "{} > ".format(str(d["scientificname"]))
-            if d["child"] is not None:
-                d = d["child"]
-            else:
-                break
-
-        res = res[:-3]
-        return res
-
-    # If the API request failed, raise InvalidAphiaIDException
-    else:
+    if response.status_code != 200:
+        # If the API request failed, raise InvalidAphiaIDException
         raise InvalidAphiaIDException(identity)
+
+    # If the API request was successful, extract the URL data from the response
+    # Collect json data from response obtained through the api
+    d = dict(response.json())
+
+    # res will contain the resultant string
+    res = ""
+
+    # Iterating till there are no children in the classifications
+    while True:
+        # Extracting scientific name from response
+        res += "{} > ".format(str(d["scientificname"]))
+        if d["child"] is not None:
+            d = d["child"]
+        else:
+            break
+
+    res = res[:-3]
+    return res
 
 
 def taxon_status(identity):
@@ -99,17 +98,16 @@ def taxon_status(identity):
     response = requests.get(api_url)
 
     # If the API request was successful, extract the URL data from the response
-    if response.status_code == 200:
-        # Collect json data from response obtained through the api
-        d = dict(response.json())
-
-        if d["status"] == "accepted":
-            return True
-        return False
-
-    # If the API request failed, raise InvalidAphiaIDException
-    else:
+    if response.status_code != 200:
+        # If the API request failed, raise InvalidAphiaIDException
         raise InvalidAphiaIDException(identity)
+
+    # Collect json data from response obtained through the api
+    d = dict(response.json())
+
+    if d["status"] == "accepted":
+        return True
+    return False
 
 
 def aphiaID2mapping(identity):
@@ -154,27 +152,27 @@ def aphiaID2mapping(identity):
     )
     response = requests.get(api_url)
 
-    # If the API request was successful, extract the URL data from the response
-    if response.status_code == 200:
-        # Collect json data from response obtained through the api
-        d = dict(response.json())
-
-        res = {}
-
-        # Iterating till there are no children in the classifications
-        while True:
-            # Assigning levels to corresponding classifications
-            res[d["scientificname"]] = d["rank"]
-
-            if d["child"] is not None:
-                d = d["child"]
-            else:
-                break
-        return res
-
-    # If the API request failed, raise InvalidAphiaIDException
-    else:
+    if response.status_code != 200:
+        # If the API request failed, raise InvalidAphiaIDException
         raise InvalidAphiaIDException(identity)
+
+    # If the API request was successful, extract the URL data from the response
+    # Collect json data from response obtained through the api
+    d = dict(response.json())
+
+    res = {}
+
+    # Iterating till there are no children in the classifications
+    while True:
+        # Assigning levels to corresponding classifications
+        res[d["scientificname"]] = d["rank"]
+
+        if d["child"] is not None:
+            d = d["child"]
+        else:
+            break
+
+    return res
 
 
 def aphiaID2counts(ids):
@@ -245,22 +243,21 @@ def aphiaID2counts(ids):
         )
         response = requests.get(api_url)
 
-        # If the API request was successful, extract the URL data from the response
-        if response.status_code == 200:
-            # Collect json data from response obtained through the api
-            d = dict(response.json())
-
-            # Iterating till there are no children in the classifications
-            while True:
-                # Incrementing count of classification
-                resdict[d["scientificname"]] += 1
-                if d["child"] is not None:
-                    d = d["child"]
-                else:
-                    break
-
-        # If the API request failed, raise InvalidAphiaIDException
-        else:
+        if response.status_code != 200:
+            # If the API request failed, raise InvalidAphiaIDException
             raise InvalidAphiaIDException(identity)
+
+        # If the API request was successful, extract the URL data from the response
+        # Collect json data from response obtained through the api
+        d = dict(response.json())
+
+        # Iterating till there are no children in the classifications
+        while True:
+            # Incrementing count of classification
+            resdict[d["scientificname"]] += 1
+            if d["child"] is not None:
+                d = d["child"]
+            else:
+                break
 
     return resdict
