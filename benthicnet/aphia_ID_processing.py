@@ -26,7 +26,7 @@ def aphiaID2taxonomy(identity):
     Returns
     -------
     res : str
-        Consists of the hierarchical classification going from higher to lower level taxonomies.
+        Taxonomic classification, from higher to lower level taxonomies.
 
     Raises
     ------
@@ -55,7 +55,7 @@ def aphiaID2taxonomy(identity):
     # res will contain the resultant string
     res = ""
 
-    # Iterating till there are no children in the classifications
+    # Iterating until there are no children in the classifications
     while True:
         # Extracting scientific name from response
         res += "{} > ".format(str(d["scientificname"]))
@@ -69,7 +69,7 @@ def aphiaID2taxonomy(identity):
 
 
 def taxon_status(identity):
-    """Show whether a taxon associated with a given Aphia ID is accepted or not.
+    """Show whether a taxon associated with a given Aphia ID is accepted.
 
     Parameters
     ----------
@@ -79,9 +79,7 @@ def taxon_status(identity):
     Returns
     -------
     bool
-        A boolean value
-          False indicates that the taxon is unaccepted.
-          True indicates that the taxon is accepted.
+        Whether the taxon is accepted no WoRMS.
 
     Raises
     ------
