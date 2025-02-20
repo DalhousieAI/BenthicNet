@@ -105,9 +105,7 @@ def taxon_status(identity):
     # Collect json data from response obtained through the api
     d = dict(response.json())
 
-    if d["status"] == "accepted":
-        return True
-    return False
+    return d["status"] == "accepted"
 
 
 def aphiaID2mapping(identity):
