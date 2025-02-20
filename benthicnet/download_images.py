@@ -5,14 +5,16 @@ Downloading BenthicNet images from CSV file.
 """
 
 import datetime
-import functools
 import os
+import shutil
 import sys
+import tempfile
 import time
-import urllib.request
 
 import numpy as np
 import pandas as pd
+import PIL.Image
+import requests
 import tqdm
 
 import benthicnet.io
@@ -23,8 +25,8 @@ def download_images_from_dataframe(
     df,
     output_dir,
     skip_existing=True,
+    check_image=True,
     inplace=True,
-    delete_partial=True,
     verbose=1,
     use_tqdm=True,
     print_indent=0,
@@ -41,13 +43,12 @@ def download_images_from_dataframe(
     skip_existing : bool, optional
         Whether to skip downloading files for which the destination already
         exist. Default is ``True``.
+    check_image : bool, default=True
+        Whether to check the image can be opened with PIL. If ``True``,
+        downloads which can not be opened are discarded.
     inplace : bool, optional
         Whether operations on ``df`` can be performed in place. Default is
         ``True``.
-    delete_partial : bool, optional
-        Whether to delete partially downloaded files in the event of an error,
-        such as running out of disk space or keyboard interrupt.
-        Default is ``True``.
     verbose : int, optional
         Verbosity level. Default is ``1``.
     use_tqdm : bool, optional
@@ -153,33 +154,78 @@ def download_images_from_dataframe(
                     "{}Downloading {} to {}".format(innerpad, row["url"], destination),
                     flush=True,
                 )
-            try:
-                _, headers = urllib.request.urlretrieve(
-                    row["url"].strip().replace(" ", "%20"), filename=destination
-                )
-                n_download += 1
-            except Exception as err:
-                n_error += 1
-                print(
-                    "{}An error occured while processing {}".format(
-                        innerpad, row["url"]
-                    )
-                )
-                if os.path.isfile(destination) and delete_partial:
-                    print("{}Deleting partial file {}".format(innerpad, destination))
-                    os.remove(destination)
-                if isinstance(
-                    err,
-                    (
-                        ValueError,
-                        urllib.error.ContentTooShortError,
-                        urllib.error.HTTPError,
-                        urllib.error.URLError,
-                    ),
-                ):
+            request_completed = False
+            for i_attempt in range(5):
+                try:
+                    r = requests.get(row["url"], stream=True)
+                    request_completed = True
+                except requests.exceptions.RequestException as err:
+                    request_completed = False
+                    print("Error while handling: {}".format(row["url"]))
                     print(err)
-                    continue
-                raise
+                    n_error += 1
+                    break
+                if r.status_code in [429, 500, 503]:
+                    # Could also retry on [408, 502, 504, 599]
+                    if r.status_code == 429:
+                        # PANGAEA has a maximum of 180 requests within a 30s period
+                        # Wait for this to cool off
+                        t_wait = 30
+                    else:
+                        # Other errors indicate a server side error. Wait a
+                        # short period and then retries to see if it alleviates.
+                        t_wait = 2**i_attempt
+                    if verbose >= 1:
+                        print(
+                            "{}Retrying in {} seconds (HTTP Status {}): {}".format(
+                                innerpad, t_wait, r.status_code, row["url"]
+                            )
+                        )
+                    time.sleep(t_wait)
+                else:
+                    break
+            if not request_completed:
+                continue
+            if r.status_code != 200:
+                if verbose >= 1:
+                    print(
+                        innerpad
+                        + "Bad URL (HTTP Status {}): {}".format(
+                            r.status_code, row["url"]
+                        )
+                    )
+                n_error += 1
+                continue
+
+            with tempfile.TemporaryDirectory() as dir_tmp:
+                if verbose >= 3:
+                    print(innerpad + "Downloading {}".format(row["url"]))
+                fname_tmp = os.path.join(
+                    dir_tmp,
+                    os.path.basename(row["url"].rstrip("/")),
+                )
+                with open(fname_tmp, "wb") as f:
+                    for chunk in r.iter_content(chunk_size=1048576):
+                        f.write(chunk)
+                if verbose >= 4:
+                    print(innerpad + "  Wrote to {}".format(fname_tmp))
+
+                # Check the image can be opened with PIL
+                if check_image:
+                    try:
+                        PIL.Image.open(fname_tmp)
+                    except Exception as err:
+                        if isinstance(err, KeyboardInterrupt):
+                            raise
+                        print("Error while handling: {}".format(row["url"]))
+                        print(err)
+                        n_error += 1
+                        continue
+
+                if verbose >= 4:
+                    print(innerpad + "  Moving {} to {}".format(fname_tmp, destination))
+                shutil.move(fname_tmp, destination)
+                n_download += 1
 
         # Record that this row was successfully downloaded
         is_valid[i_row] = True
@@ -413,12 +459,6 @@ def get_parser():
         dest="skip_existing",
         action="store_false",
         help="Overwrite existing outputs instead of skipping their download.",
-    )
-    parser.add_argument(
-        "--keep-on-error",
-        dest="delete_partial",
-        action="store_false",
-        help="Keep partially downloaded files in the event of an error.",
     )
     parser.add_argument(
         "--verbose",
