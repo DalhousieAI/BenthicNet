@@ -132,15 +132,15 @@ def aphiaID2mapping(identity):
     Example
     -------
     Input : 140892
-    Output : {'Biota': 'Superdomain',
-             'Animalia': 'Kingdom',
-             'Mollusca': 'Phylum',
-             'Scaphopoda': 'Class',
-             'Gadilida': 'Order',
-             'Gadilimorpha': 'Suborder',
-             'Pulsellidae': 'Family',
-             'Pulsellum': 'Genus',
-             'Pulsellum affine': 'Species'}
+    Output : {'Superdomain': 'Biota',
+             'Kingdom': 'Animalia',
+             'Phylum': 'Mollusca',
+             'Class': 'Scaphopoda',
+             'Order': 'Gadilida',
+             'Suborder': 'Gadilimorpha',
+             'Family': 'Pulsellidae',
+             'Genus': 'Pulsellum',
+             'Species': 'Pulsellum affine'}
     """
     identity = str(identity)
     api_url = (
@@ -161,7 +161,7 @@ def aphiaID2mapping(identity):
     # Iterating till there are no children in the classifications
     while True:
         # Assigning levels to corresponding classifications
-        res[d["scientificname"]] = d["rank"]
+        res[d["rank"]] = d["scientificname"]
 
         if d["child"] is not None:
             d = d["child"]
