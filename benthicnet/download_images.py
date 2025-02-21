@@ -94,6 +94,7 @@ def download_images_from_dataframe(
     n_error = 0
 
     t1 = time.time()
+    t_last_request = t1
 
     is_valid = np.zeros(len(df), dtype=bool)
     for i_row, (index, row) in enumerate(
@@ -157,6 +158,10 @@ def download_images_from_dataframe(
             request_completed = False
             for i_attempt in range(5):
                 try:
+                    if "pangaea.de/" in row["url"]:
+                        # PANGAEA has a maximum of 180 requests within a 30s period
+                        # Let's try to make sure we stay under that
+                        time.sleep(max(0, 0.167 - (time.time() - t_last_request)))
                     r = requests.get(row["url"], stream=True)
                     request_completed = True
                 except requests.exceptions.RequestException as err:
@@ -207,6 +212,7 @@ def download_images_from_dataframe(
                 with open(fname_tmp, "wb") as f:
                     for chunk in r.iter_content(chunk_size=1048576):
                         f.write(chunk)
+                t_last_request = time.time()
                 if verbose >= 4:
                     print(innerpad + "  Wrote to {}".format(fname_tmp))
 
