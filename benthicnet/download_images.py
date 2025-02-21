@@ -171,8 +171,24 @@ def download_images_from_dataframe(
                     n_error += 1
                     break
                 if r.status_code in [429, 500, 503]:
-                    # Could also retry on [408, 502, 504, 599]
-                    if r.status_code == 429 or "pangaea.de/" in row["url"]:
+                    if r.headers.get("Retry-After", "") != "":
+                        # Too many requests or server busy and it wants us to wait
+                        # So let's wait for the Retry-After period
+                        if verbose >= 1 and "Retry-After" in r.headers:
+                            print(
+                                "{}Server asks us to retry after: {}".format(
+                                    innerpad, r.headers["Retry-After"]
+                                )
+                            )
+                        try:
+                            t_wait = int(r.headers.get("Retry-After", 30))
+                        except ValueError:
+                            # Retry-After is not an integer, so let's wait 30s
+                            t_wait = 30
+                    elif r.status_code == 429 or (
+                        r.status_code == 503 and "pangaea.de/" in row["url"]
+                    ):
+                        # Too many requests, wait a while
                         # PANGAEA has a maximum of 180 requests within a 30s period
                         # Wait for this to cool off
                         t_wait = 30
