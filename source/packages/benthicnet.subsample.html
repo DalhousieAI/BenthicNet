@@ -1,0 +1,693 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>benthicnet.subsample module &#8212; benthicnet 0.1.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/rtd_sphinx_search.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/js/rtd_search_config.js"></script>
+    <script src="../../_static/js/rtd_sphinx_search.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/packages/benthicnet.subsample';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="benthicnet.tar2tar module" href="benthicnet.tar2tar.html" />
+    <link rel="prev" title="benthicnet.plotting module" href="benthicnet.plotting.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">benthicnet 0.1.dev0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../programs/programs.html">CLI Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../programs/download_images.html">benthicnet-download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../programs/download_images_tar.html">benthicnet-download-tar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../programs/convert_images_tar.html">benthicnet-convert-tar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../programs/subsample.html">benthicnet-subsample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../programs/tar2tar.html">benthicnet-tar2tar</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="modules.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="benthicnet.html">benthicnet package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="benthicnet.aphia_ID_processing.html">benthicnet.aphia_ID_processing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="benthicnet.convert_images_tar.html">benthicnet.convert_images_tar module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="benthicnet.download_images.html">benthicnet.download_images module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="benthicnet.download_images_tar.html">benthicnet.download_images_tar module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="benthicnet.io.html">benthicnet.io module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="benthicnet.kde_tools.html">benthicnet.kde_tools module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="benthicnet.partition.html">benthicnet.partition module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="benthicnet.plotting.html">benthicnet.plotting module</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">benthicnet.subsample module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="benthicnet.tar2tar.html">benthicnet.tar2tar module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="benthicnet.utils.html">benthicnet.utils module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../py-modindex.html">Module Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/source/packages/benthicnet.subsample.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>benthicnet.subsample module</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.coordinate_center_independent"><code class="docutils literal notranslate"><span class="pre">coordinate_center_independent()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.coordinate_centroid"><code class="docutils literal notranslate"><span class="pre">coordinate_centroid()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.count_subsites"><code class="docutils literal notranslate"><span class="pre">count_subsites()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.get_parser"><code class="docutils literal notranslate"><span class="pre">get_parser()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.subsample_distance"><code class="docutils literal notranslate"><span class="pre">subsample_distance()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.subsample_distance_sitewise"><code class="docutils literal notranslate"><span class="pre">subsample_distance_sitewise()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.subsample_distance_sitewise_from_csv"><code class="docutils literal notranslate"><span class="pre">subsample_distance_sitewise_from_csv()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.subsample_index"><code class="docutils literal notranslate"><span class="pre">subsample_index()</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="module-benthicnet.subsample">
+<span id="benthicnet-subsample-module"></span><h1>benthicnet.subsample module<a class="headerlink" href="#module-benthicnet.subsample" title="Permalink to this heading">#</a></h1>
+<p>Tools for subsampling datasets.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="benthicnet.subsample.coordinate_center_independent">
+<span class="sig-prename descclassname"><span class="pre">benthicnet.subsample.</span></span><span class="sig-name descname"><span class="pre">coordinate_center_independent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitudes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitudes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/benthicnet/subsample.html#coordinate_center_independent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#benthicnet.subsample.coordinate_center_independent" title="Permalink to this definition">#</a></dt>
+<dd><p>Take the center of latitude and longitude, independently.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitudes</strong> (<em>array-like</em>) – Latitude of coordinates.</p></li>
+<li><p><strong>longitudes</strong> (<em>array-like</em>) – Longitudes of coordinates.</p></li>
+<li><p><strong>degrees</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=True</em>) – Whether the inputs are in degrees, otherwise they are expected to be
+radians.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>c_latitude</strong> (<em>float</em>) – The central latitude, in degrees if <code class="docutils literal notranslate"><span class="pre">degrees=True</span></code>,
+otherwise in radians.</p></li>
+<li><p><strong>c_longitude</strong> (<em>float</em>) – The central longitude, in degrees if <code class="docutils literal notranslate"><span class="pre">degrees=True</span></code>,
+otherwise in radians.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="benthicnet.subsample.coordinate_centroid">
+<span class="sig-prename descclassname"><span class="pre">benthicnet.subsample.</span></span><span class="sig-name descname"><span class="pre">coordinate_centroid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitudes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitudes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/benthicnet/subsample.html#coordinate_centroid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#benthicnet.subsample.coordinate_centroid" title="Permalink to this definition">#</a></dt>
+<dd><p>Take the center coordinate via normal vectors, $n_E$.</p>
+<p><a class="reference external" href="https://www.ffi.no/en/research/n-vector/n-vector-explained">https://www.ffi.no/en/research/n-vector/n-vector-explained</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitudes</strong> (<em>array-like</em>) – Latitude of coordinates.</p></li>
+<li><p><strong>longitudes</strong> (<em>array-like</em>) – Longitudes of coordinates.</p></li>
+<li><p><strong>degrees</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=True</em>) – Whether the inputs are in degrees, otherwise they are expected to be
+radians.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>c_latitude</strong> (<em>float</em>) – The latitude of the centroid, in degrees if <code class="docutils literal notranslate"><span class="pre">degrees=True</span></code>,
+otherwise in radians.</p></li>
+<li><p><strong>c_longitude</strong> (<em>float</em>) – The longitude of the centroid, in degrees if <code class="docutils literal notranslate"><span class="pre">degrees=True</span></code>,
+otherwise in radians.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="benthicnet.subsample.count_subsites">
+<span class="sig-prename descclassname"><span class="pre">benthicnet.subsample.</span></span><span class="sig-name descname"><span class="pre">count_subsites</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsite_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_tree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/benthicnet/subsample.html#count_subsites"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#benthicnet.subsample.count_subsites" title="Permalink to this definition">#</a></dt>
+<dd><p>Count the number of subsites, detected by distance between consecutive samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><em>pandas.DataFrame</em></a>) – </p></li>
+<li><p><strong>subsite_distance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>default=500.0</em>) – </p></li>
+<li><p><strong>return_tree</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>num_subsites</strong> (<em>int</em>) – The number of subsites in the dataframe.</p></li>
+<li><p><strong>tree</strong> (<em>sklearn.neighbors.BallTree or None, optional</em>) – The fitted BallTree object used to verify subsite, if there were any
+to check.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="benthicnet.subsample.get_parser">
+<span class="sig-prename descclassname"><span class="pre">benthicnet.subsample.</span></span><span class="sig-name descname"><span class="pre">get_parser</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/benthicnet/subsample.html#get_parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#benthicnet.subsample.get_parser" title="Permalink to this definition">#</a></dt>
+<dd><p>Build CLI parser for downloading a dataset into tarfiles by dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>parser</strong> – CLI argument parser.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser" title="(in Python v3.13)">argparse.ArgumentParser</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="benthicnet.subsample.main">
+<span class="sig-prename descclassname"><span class="pre">benthicnet.subsample.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/benthicnet/subsample.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#benthicnet.subsample.main" title="Permalink to this definition">#</a></dt>
+<dd><p>Run command line interface for subsampling dataframe by distance.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="benthicnet.subsample.subsample_distance">
+<span class="sig-prename descclassname"><span class="pre">benthicnet.subsample.</span></span><span class="sig-name descname"><span class="pre">subsample_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'closest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exhaustive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_last</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_tree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/benthicnet/subsample.html#subsample_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#benthicnet.subsample.subsample_distance" title="Permalink to this definition">#</a></dt>
+<dd><p>Subsample data based on distance between records.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><em>pandas.DataFrame</em></a>) – Dataframe to process, with latitude and longitude columns. Data must be
+ordered with sequential samples in sequence.</p></li>
+<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Minimum distance between samples, in metres. Default is <code class="docutils literal notranslate"><span class="pre">2.5</span></code>.</p></li>
+<li><p><strong>method</strong> (<em>{&quot;closest&quot;</em><em>, </em><em>&quot;threshold&quot;}</em><em>, </em><em>optional</em>) – <p>Which method to use when subsampling. Default is <code class="docutils literal notranslate"><span class="pre">&quot;closest&quot;</span></code>.</p>
+<dl class="simple">
+<dt>threshold</dt><dd><p>A row must be at least <code class="docutils literal notranslate"><span class="pre">threshold</span></code> metres from the last included
+row to be included.</p>
+</dd>
+<dt>closest</dt><dd><p>The distance <code class="docutils literal notranslate"><span class="pre">threshold</span></code> is treated as a target distance.
+The closest row to the target distance from the last included row
+is included. This may be closer or further away from the last row
+than <code class="docutils literal notranslate"><span class="pre">threshold</span></code>.</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>exhaustive</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=True</em>) – Whether to check the distance to all previous points before marking a
+new point point to be included in the subsampled series.</p></li>
+<li><p><strong>exclude</strong> (<em>array-like</em><em>, </em><em>optional</em>) – A set of latitude/longitude coordinates to avoid.</p></li>
+<li><p><strong>exclude_dist</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Distance by which to exclude coordinates specified in <code class="docutils literal notranslate"><span class="pre">exclude</span></code>.
+Default is <code class="docutils literal notranslate"><span class="pre">threshold</span> <span class="pre">/</span> <span class="pre">2</span></code>.</p></li>
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Verbosity level. Default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><strong>include_last</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – Whether to include the last row regardless of its distance from the
+preceding included row.
+If <code class="docutils literal notranslate"><span class="pre">False</span></code>, the last row in <cite>df</cite> is included only if it is further than
+<code class="docutils literal notranslate"><span class="pre">threshold</span></code> metres from the preceding included row.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, the last row in <cite>df</cite> is included only if it is further than
+<code class="docutils literal notranslate"><span class="pre">threshold</span> <span class="pre">/</span> <span class="pre">2</span></code> metres from the preceding included row.
+If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the last row in <cite>df</cite> is always included.
+Default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>tree</strong> (<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.BallTree.html#sklearn.neighbors.BallTree" title="(in scikit-learn v1.6)"><em>sklearn.neighbors.BallTree</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – Pre-built BallTree object, made from this set of latitude and longitude
+coordinates.</p></li>
+<li><p><strong>tree_exclude</strong> (<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.BallTree.html#sklearn.neighbors.BallTree" title="(in scikit-learn v1.6)"><em>sklearn.neighbors.BallTree</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – Pre-built BallTree object, made from the set of latitude and longitude
+coordinates given in <code class="docutils literal notranslate"><span class="pre">exclude</span></code>.</p></li>
+<li><p><strong>return_tree</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to return the compiled BallTree object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>df_subsampled</strong> (<em>pandas.DataFrame</em>) – Dataframe like <cite>df</cite>, but with only a subset of the rows included.</p></li>
+<li><p><strong>tree</strong> (<em>sklearn.neighbors.BallTree, optional</em>) – Pre-built BallTree object, made from this set of latitude and longitude
+coordinates.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="benthicnet.subsample.subsample_distance_sitewise">
+<span class="sig-prename descclassname"><span class="pre">benthicnet.subsample.</span></span><span class="sig-name descname"><span class="pre">subsample_distance_sitewise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_population</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_nonspatial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_population</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exhaustive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_exclusion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inter_site_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsite_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsite_population_bonus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsite_min_population_bonus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_tqdm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/benthicnet/subsample.html#subsample_distance_sitewise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#benthicnet.subsample.subsample_distance_sitewise" title="Permalink to this definition">#</a></dt>
+<dd><p>Subsample a dataframe by distance between entries, for each site separately.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><em>pandas.DataFrame</em></a>) – Must contain columns named <code class="docutils literal notranslate"><span class="pre">latitude</span></code>, <code class="docutils literal notranslate"><span class="pre">longitude</span></code>, and <code class="docutils literal notranslate"><span class="pre">site</span></code>.</p></li>
+<li><p><strong>distance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>default=2.5</em>) – Target distance between consecutive entries in the dataframe.</p></li>
+<li><p><strong>min_population</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=500</em>) – Sites with fewer than this many entries will not be subsampled.</p></li>
+<li><p><strong>allow_nonspatial</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=True</em>) – Handle sites with heavily duplicated coordinates with non-spatial
+downsampling instead. The threshold is when the number of unique lat/lon
+coordinates is higher than the number of samples per coordinate.</p></li>
+<li><p><strong>target_population</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em> or </em><em>None</em><em>, </em><em>default=1000</em>) – Desired number of samples per site. The specified distance will
+by multiplied by a factor 1, 2, 3, …, <cite>max_factor</cite> until the population
+falls below <cite>target_population</cite>; the largest factor before falling
+below the <cite>target_population</cite> will be used.
+Set to <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">-1</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code> to disable additional subsampling.</p></li>
+<li><p><strong>max_factor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=4</em>) – Maximum distance factor to use when performing additional subsampling
+for over populated sites.
+The maximum distance at which to subsample is <code class="docutils literal notranslate"><span class="pre">distance</span> <span class="pre">*</span> <span class="pre">max_factor</span></code>.</p></li>
+<li><p><strong>factors</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>, </em><em>default=None</em>) – Distance factors to use when performing additional subsampling
+for over populated sites.
+The distance will be multiplied by these factors to increase subsampling
+for sites bearing more than the <code class="docutils literal notranslate"><span class="pre">target_population</span></code>.</p></li>
+<li><p><strong>exhaustive</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=0</em>) – Whether to check the distance to all previous points before marking a
+new point point to be included in the subsampled series.
+If this is <code class="docutils literal notranslate"><span class="pre">1</span></code>, an exhaustive search is performed for the initial
+subsampling step.
+If this is <code class="docutils literal notranslate"><span class="pre">2</span></code>, an exhaustive search is performed for subsequent
+subsampling steps to satisfy the target population limit as well.</p></li>
+<li><p><strong>global_exclusion</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to ensure samples from all sites are sufficiently distant from
+each other.</p></li>
+<li><p><strong>inter_site_distance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>default=1000.0</em>) – Distance in meters between consecutive samples to detect a distinct
+site.
+Set to <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">-1</span></code> to disable.</p></li>
+<li><p><strong>subsite_distance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>default=500.0</em>) – Distance in meters between consecutive samples to detect a subsite.</p></li>
+<li><p><strong>subsite_population_bonus</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – Amount of increase in target population for every additional subsite
+within the site.
+Subsites are detected when there is a gap of at least
+<code class="docutils literal notranslate"><span class="pre">subsite_distance</span></code> between samples.
+Default is half of <code class="docutils literal notranslate"><span class="pre">target_population</span></code>.
+Set to <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">-1</span></code> to disable.</p></li>
+<li><p><strong>subsite_min_population_bonus</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – Amount of increase in minimum population for every additional subsite
+within the site.
+Subsites are detected when there is a gap of at least
+<code class="docutils literal notranslate"><span class="pre">subsite_distance</span></code> between samples.
+Default is half of <code class="docutils literal notranslate"><span class="pre">min_population</span></code>.
+Set to <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">-1</span></code> to disable.</p></li>
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=1</em>) – Verbosity level.</p></li>
+<li><p><strong>use_tqdm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to use tqdm to print progress. Disable if stdout is sent to a
+file. Default is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="benthicnet.subsample.subsample_distance_sitewise_from_csv">
+<span class="sig-prename descclassname"><span class="pre">benthicnet.subsample.</span></span><span class="sig-name descname"><span class="pre">subsample_distance_sitewise_from_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_csv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_csv</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/benthicnet/subsample.html#subsample_distance_sitewise_from_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#benthicnet.subsample.subsample_distance_sitewise_from_csv" title="Permalink to this definition">#</a></dt>
+<dd><p>Subsample a CSV file by distance between records.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_csv</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Path to input CSV file.</p></li>
+<li><p><strong>output_csv</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Path to output CSV file.</p></li>
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=1</em>) – Verbosity level</p></li>
+<li><p><strong>**kwargs</strong> – Additional arguments as per subsample_distance_sitewise.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="benthicnet.subsample.subsample_index">
+<span class="sig-prename descclassname"><span class="pre">benthicnet.subsample.</span></span><span class="sig-name descname"><span class="pre">subsample_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_population</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/benthicnet/subsample.html#subsample_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#benthicnet.subsample.subsample_index" title="Permalink to this definition">#</a></dt>
+<dd><p>Subsample data based on distance between records.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><em>pandas.DataFrame</em></a>) – Dataframe to process. Data is assumed to be ordered by sample datetime.</p></li>
+<li><p><strong>target_population</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Desired number of samples.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataframe like <cite>df</cite>, but with only a subset of the rows included.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="benthicnet.plotting.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">benthicnet.plotting module</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="benthicnet.tar2tar.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">benthicnet.tar2tar module</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.coordinate_center_independent"><code class="docutils literal notranslate"><span class="pre">coordinate_center_independent()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.coordinate_centroid"><code class="docutils literal notranslate"><span class="pre">coordinate_centroid()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.count_subsites"><code class="docutils literal notranslate"><span class="pre">count_subsites()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.get_parser"><code class="docutils literal notranslate"><span class="pre">get_parser()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.subsample_distance"><code class="docutils literal notranslate"><span class="pre">subsample_distance()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.subsample_distance_sitewise"><code class="docutils literal notranslate"><span class="pre">subsample_distance_sitewise()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.subsample_distance_sitewise_from_csv"><code class="docutils literal notranslate"><span class="pre">subsample_distance_sitewise_from_csv()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benthicnet.subsample.subsample_index"><code class="docutils literal notranslate"><span class="pre">subsample_index()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Scott C. Lowe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Scott C. Lowe.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

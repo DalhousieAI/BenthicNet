@@ -1,0 +1,1340 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>benthicnet.convert_images_tar &#8212; benthicnet 0.1.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/rtd_sphinx_search.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/js/rtd_search_config.js"></script>
+    <script src="../../_static/js/rtd_sphinx_search.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/benthicnet/convert_images_tar';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">benthicnet 0.1.dev0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../source/programs/programs.html">CLI Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/download_images.html">benthicnet-download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/download_images_tar.html">benthicnet-download-tar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/convert_images_tar.html">benthicnet-convert-tar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/subsample.html">benthicnet-subsample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/tar2tar.html">benthicnet-tar2tar</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../source/packages/modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../source/packages/benthicnet.html">benthicnet package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.aphia_ID_processing.html">benthicnet.aphia_ID_processing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.convert_images_tar.html">benthicnet.convert_images_tar module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.download_images.html">benthicnet.download_images module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.download_images_tar.html">benthicnet.download_images_tar module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.io.html">benthicnet.io module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.kde_tools.html">benthicnet.kde_tools module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.partition.html">benthicnet.partition module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.plotting.html">benthicnet.plotting module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.subsample.html">benthicnet.subsample module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.tar2tar.html">benthicnet.tar2tar module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.utils.html">benthicnet.utils module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../py-modindex.html">Module Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for benthicnet.convert_images_tar</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Convert images in a tarball into smaller JPEGs, in a new tarball.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tarfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">PIL.Image</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm.auto</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">benthicnet.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">benthicnet.utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benthicnet</span><span class="w"> </span><span class="kn">import</span> <span class="n">__meta__</span>
+
+<span class="n">VALID_IMG_EXTENSIONS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;.bmp&quot;</span><span class="p">,</span> <span class="s2">&quot;.cr2&quot;</span><span class="p">,</span> <span class="s2">&quot;.jpeg&quot;</span><span class="p">,</span> <span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;.png&quot;</span><span class="p">,</span> <span class="s2">&quot;.tif&quot;</span><span class="p">,</span> <span class="s2">&quot;.tiff&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="shrink_image_by_length"><a class="viewcode-back" href="../../source/packages/benthicnet.convert_images_tar.html#benthicnet.convert_images_tar.shrink_image_by_length">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">shrink_image_by_length</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">target_len</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">return_is_shrunk</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Shrink an image by reducing the shortest side, preserving aspect ratio.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    im : PIL.Image</span>
+<span class="sd">        Input image</span>
+<span class="sd">    target_len : int, default=512</span>
+<span class="sd">        Target image side length.</span>
+<span class="sd">    tolerance : float, default=0.1</span>
+<span class="sd">        Fraction of ``target_len`` that the</span>
+<span class="sd">    return_is_shrunk : bool, optional</span>
+<span class="sd">        Return ``is_shrunk``, indicating whether the image was shruk.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    im : PIL.Image</span>
+<span class="sd">        Shrunk image, or pointer to original image if the image did not need to</span>
+<span class="sd">        be shrunk.</span>
+<span class="sd">    is_shrunk : bool, optional</span>
+<span class="sd">        Whether the image was shrunk.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">target_len</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">tolerance</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">return_is_shrunk</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">im</span><span class="p">,</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">im</span>
+    <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">width</span> <span class="o">&lt;</span> <span class="n">im</span><span class="o">.</span><span class="n">height</span><span class="p">:</span>
+        <span class="n">new_width</span> <span class="o">=</span> <span class="n">target_len</span>
+        <span class="n">new_height</span> <span class="o">=</span> <span class="n">new_width</span> <span class="o">*</span> <span class="n">im</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="n">im</span><span class="o">.</span><span class="n">width</span>
+        <span class="n">new_height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">new_height</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">new_height</span> <span class="o">=</span> <span class="n">target_len</span>
+        <span class="n">new_width</span> <span class="o">=</span> <span class="n">new_height</span> <span class="o">*</span> <span class="n">im</span><span class="o">.</span><span class="n">width</span> <span class="o">/</span> <span class="n">im</span><span class="o">.</span><span class="n">height</span>
+        <span class="n">new_width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">new_width</span><span class="p">))</span>
+
+    <span class="n">im_new</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="n">new_width</span><span class="p">,</span> <span class="n">new_height</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">return_is_shrunk</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">im_new</span><span class="p">,</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">im_new</span></div>
+
+
+<div class="viewcode-block" id="handle_input_dfs"><a class="viewcode-back" href="../../source/packages/benthicnet.convert_images_tar.html#benthicnet.convert_images_tar.handle_input_dfs">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">handle_input_dfs</span><span class="p">(</span>
+    <span class="n">df_source</span><span class="p">,</span>
+    <span class="n">df_dest</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">unique_inputs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">unique_outputs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Join source and destination dataframes to make a todo list.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df_source : pandas.DataFrame</span>
+<span class="sd">        Dataframe, in BenthicNet format, containing details about source images</span>
+<span class="sd">    df_dest : pandas.DataFrame, optional</span>
+<span class="sd">        Dataframe, in BenthicNet format, containing metadata about destination</span>
+<span class="sd">        images. If this is not given, ``df_source`` is used.</span>
+<span class="sd">    inplace : bool, default=True</span>
+<span class="sd">        Whether the input dataframes can be changes in place, otherwise a copy</span>
+<span class="sd">        will be used.</span>
+<span class="sd">    unique_inputs : bool, default=False</span>
+<span class="sd">        Whether to only use input images which have unique paths.</span>
+<span class="sd">    unique_outputs : bool, default=False</span>
+<span class="sd">        Whether to drop repeated output paths in the destination dataframe.</span>
+<span class="sd">    verbose : int, default=1</span>
+<span class="sd">        Verbosity level.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    df_todo : pandas.DataFrame</span>
+<span class="sd">        The rows in ``df_dest`` which have paths appearing in ``df_source``.</span>
+<span class="sd">        Columns ``member_source`` and ``member_dest`` added to indicate the</span>
+<span class="sd">        paths to use in each tarball.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">df_source</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df_source</span> <span class="o">=</span> <span class="n">df_dest</span>
+    <span class="k">if</span> <span class="n">df_source</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;At least one of df_source and df_dest must be given.&quot;</span><span class="p">)</span>
+    <span class="c1"># Remember whether we started with an outpath column in the input, and</span>
+    <span class="c1"># should preserve it in the output, or added it ourselves and should strip</span>
+    <span class="c1"># it away before saving the CSV file</span>
+    <span class="k">if</span> <span class="n">df_dest</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">given_outpath</span> <span class="o">=</span> <span class="s2">&quot;outpath&quot;</span> <span class="ow">in</span> <span class="n">df_source</span><span class="o">.</span><span class="n">columns</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">given_outpath</span> <span class="o">=</span> <span class="s2">&quot;outpath&quot;</span> <span class="ow">in</span> <span class="n">df_dest</span><span class="o">.</span><span class="n">columns</span>
+    <span class="k">if</span> <span class="s2">&quot;outpath&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_source</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">df_source</span><span class="p">[</span><span class="s2">&quot;outpath&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">determine_outpath</span><span class="p">(</span><span class="n">df_source</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">df_dest</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df_dest</span> <span class="o">=</span> <span class="n">df_source</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
+        <span class="n">df_dest</span> <span class="o">=</span> <span class="n">df_dest</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="s2">&quot;outpath&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_dest</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">df_dest</span><span class="p">[</span><span class="s2">&quot;outpath&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">determine_outpath</span><span class="p">(</span><span class="n">df_dest</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">unique_inputs</span><span class="p">:</span>
+        <span class="c1"># Don&#39;t try to copy duplicated image paths in the source, since we can&#39;t be</span>
+        <span class="c1"># sure which one is present in the source.</span>
+        <span class="n">df_source</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;outpath&quot;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="n">inplace</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">unique_outputs</span><span class="p">:</span>
+        <span class="c1"># Ensure all the new output paths are unique</span>
+        <span class="n">dup_outpaths</span> <span class="o">=</span> <span class="n">df_dest</span><span class="p">[</span><span class="n">df_dest</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;outpath&quot;</span><span class="p">)][</span><span class="s2">&quot;outpath&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dup_outpaths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">EnvironmentError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dup_outpaths</span><span class="p">)</span><span class="si">}</span><span class="s2"> duplicated output paths.&quot;</span>
+            <span class="p">)</span>
+
+    <span class="c1"># Align source and destination dataframes</span>
+    <span class="n">df_todo_parts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="s2">&quot;url&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_dest</span><span class="o">.</span><span class="n">columns</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">df_dest</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aligning records by outpath&quot;</span><span class="p">)</span>
+        <span class="n">df_todo1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+            <span class="n">df_source</span><span class="p">[[</span><span class="s2">&quot;outpath&quot;</span><span class="p">]],</span>
+            <span class="n">df_dest</span>
+            <span class="k">if</span> <span class="s2">&quot;url&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_dest</span><span class="o">.</span><span class="n">columns</span>
+            <span class="k">else</span> <span class="n">df_dest</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">df_dest</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">])],</span>
+            <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span>
+            <span class="n">on</span><span class="o">=</span><span class="s2">&quot;outpath&quot;</span><span class="p">,</span>
+            <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;_source&quot;</span><span class="p">,</span> <span class="s2">&quot;_dest&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">df_todo1</span><span class="p">[</span><span class="s2">&quot;member_source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_todo1</span><span class="p">[</span><span class="s2">&quot;outpath&quot;</span><span class="p">]</span>
+        <span class="n">df_todo1</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;outpath&quot;</span><span class="p">:</span> <span class="s2">&quot;member_dest&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">df_todo_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_todo1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="s2">&quot;url&quot;</span> <span class="ow">in</span> <span class="n">df_source</span><span class="o">.</span><span class="n">columns</span>
+        <span class="ow">and</span> <span class="s2">&quot;url&quot;</span> <span class="ow">in</span> <span class="n">df_dest</span><span class="o">.</span><span class="n">columns</span>
+        <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="o">~</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">df_dest</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]))</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aligning records by URL&quot;</span><span class="p">)</span>
+        <span class="c1"># Merge the two dataframes together to get common URLs</span>
+        <span class="n">df_todo2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+            <span class="n">df_source</span><span class="p">[[</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="s2">&quot;outpath&quot;</span><span class="p">]],</span>
+            <span class="n">df_dest</span><span class="p">[</span><span class="o">~</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">df_dest</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">])],</span>
+            <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span>
+            <span class="n">on</span><span class="o">=</span><span class="s2">&quot;url&quot;</span><span class="p">,</span>
+            <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;_source&quot;</span><span class="p">,</span> <span class="s2">&quot;_dest&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">df_todo2</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+            <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;outpath_source&quot;</span><span class="p">:</span> <span class="s2">&quot;member_source&quot;</span><span class="p">,</span> <span class="s2">&quot;outpath_dest&quot;</span><span class="p">:</span> <span class="s2">&quot;member_dest&quot;</span><span class="p">},</span>
+            <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">df_todo_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_todo2</span><span class="p">)</span>
+
+    <span class="n">df_todo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">df_todo_parts</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">given_outpath</span><span class="p">:</span>
+        <span class="n">df_todo</span><span class="p">[</span><span class="s2">&quot;outpath&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_todo</span><span class="p">[</span><span class="s2">&quot;member_dest&quot;</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">df_todo</span></div>
+
+
+<div class="viewcode-block" id="convert_images"><a class="viewcode-back" href="../../source/packages/benthicnet.convert_images_tar.html#benthicnet.convert_images_tar.convert_images">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">convert_images</span><span class="p">(</span>
+    <span class="n">fname_source</span><span class="p">,</span>
+    <span class="n">fname_dest</span><span class="p">,</span>
+    <span class="n">df_todo</span><span class="p">,</span>
+    <span class="n">output_csv</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">jpeg_quality</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span>
+    <span class="n">target_len</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+    <span class="n">skip_existing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">error_stream</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">missing_stream</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">flexible_source_path</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">inplace_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">use_tqdm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">print_indent</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert images in one tarball into JPEG format in another.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fname_source : str</span>
+<span class="sd">        Path to input tarball file.</span>
+<span class="sd">    fname_dest : str</span>
+<span class="sd">        Path to output tarball file.</span>
+<span class="sd">    df_todo : pandas.DataFrame</span>
+<span class="sd">        DataFrame containing paths of files to convert.</span>
+<span class="sd">    jpeg_quality : int or float, optional</span>
+<span class="sd">        Quality to use when converting to JPEG. Default is ``95``.</span>
+<span class="sd">    target_len : int or None, default=512</span>
+<span class="sd">        Maximum length of shortest side of the image.</span>
+<span class="sd">        Set to ``0`` or ``-1`` to disable.</span>
+<span class="sd">    skip_existing : bool, optional</span>
+<span class="sd">        Whether to skip existing images within output file ``fname_dest``.</span>
+<span class="sd">        If ``False``, an error is raised when the destination already exists.</span>
+<span class="sd">        Default is ``True``.</span>
+<span class="sd">    error_stream : text_stream or None, optional</span>
+<span class="sd">        A text stream where errors should be recorded.</span>
+<span class="sd">        If provided, all images which could not be converted due to an error</span>
+<span class="sd">        will be written to this stream, separated by ``&quot;\n&quot;`` characters.</span>
+<span class="sd">    missing_stream : text_stream or None, optional</span>
+<span class="sd">        A text stream where missing images should be recorded.</span>
+<span class="sd">        If provided, all images which could not be converted due to an error</span>
+<span class="sd">        will be written to this stream, separated by ``&quot;\n&quot;`` characters.</span>
+<span class="sd">    flexible_source_path : bool, default=True</span>
+<span class="sd">        Whether to also check output paths with/without dataset as a prefix</span>
+<span class="sd">        directory.</span>
+<span class="sd">    inplace_df : bool, optional</span>
+<span class="sd">        Whether operations on `df` can be performed in place. Default is</span>
+<span class="sd">        ``True``.</span>
+<span class="sd">    verbose : int, optional</span>
+<span class="sd">        Verbosity level. Default is ``1``.</span>
+<span class="sd">    use_tqdm : bool, optional</span>
+<span class="sd">        Whether to use tqdm to print progress. Disable if stdout is being</span>
+<span class="sd">        written to a file. Default is ``True``.</span>
+<span class="sd">    print_indent : int, optional</span>
+<span class="sd">        Amount of whitespace padding to precede print statements.</span>
+<span class="sd">        Default is ``0``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        Like ``df_todo``, but filtered to only include converted files and</span>
+<span class="sd">        with the ``image`` field changed to the new basename of the output file</span>
+<span class="sd">        within the tarball, including ``&quot;.jpg&quot;`` extension.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="n">padding</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">print_indent</span>
+    <span class="n">innerpad</span> <span class="o">=</span> <span class="n">padding</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="mi">4</span>
+
+    <span class="k">if</span> <span class="n">target_len</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">target_len</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">target_len</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">target_len</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">target_len</span><span class="p">:</span>
+            <span class="n">len_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;, length=</span><span class="si">{</span><span class="n">target_len</span><span class="si">}</span><span class="s2">px&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">len_str</span> <span class="o">=</span> <span class="s2">&quot;, original size&quot;</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s2">Converting </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_todo</span><span class="p">)</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> images from tarball </span><span class="si">{</span><span class="n">fname_source</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s2">                                  to </span><span class="si">{</span><span class="n">fname_dest</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s2">into JPEG format (quality=</span><span class="si">{</span><span class="n">jpeg_quality</span><span class="si">}</span><span class="s2">%</span><span class="si">{</span><span class="n">len_str</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+            <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace_df</span><span class="p">:</span>
+        <span class="n">df_todo</span> <span class="o">=</span> <span class="n">df_todo</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">use_tqdm</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">n_already_converted</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_converted</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_missing</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_error</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Check what already exists so we know when we can skip a file</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">fname_dest</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">output_contents</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fname_dest</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fname_dest</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tar</span><span class="p">:</span>
+                <span class="n">output_contents</span> <span class="o">=</span> <span class="n">tar</span><span class="o">.</span><span class="n">getnames</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">ReadError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s2">Unable to open </span><span class="si">{</span><span class="n">fname_dest</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="n">benthicnet</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">delayed_delete</span><span class="p">(</span><span class="n">fname_dest</span><span class="p">)</span>
+
+    <span class="n">is_valid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_todo</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fname_source</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tar_in</span><span class="p">:</span>
+        <span class="n">input_contents</span> <span class="o">=</span> <span class="n">tar_in</span><span class="o">.</span><span class="n">getnames</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i_row</span><span class="p">,</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+            <span class="n">tqdm</span><span class="p">(</span>
+                <span class="n">df_todo</span><span class="o">.</span><span class="n">iterrows</span><span class="p">(),</span>
+                <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">df_todo</span><span class="p">),</span>
+                <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">use_tqdm</span><span class="p">,</span>
+                <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Images&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">):</span>
+            <span class="c1"># Progress report</span>
+            <span class="k">if</span> <span class="n">i_row</span> <span class="o">&gt;</span> <span class="n">n_error</span> <span class="ow">and</span> <span class="p">(</span>
+                <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">3</span>
+                <span class="ow">or</span> <span class="p">(</span><span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">use_tqdm</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i_row</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="ow">or</span> <span class="n">i_row</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+            <span class="p">):</span>
+                <span class="n">t_elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span>
+                <span class="k">if</span> <span class="n">n_converted</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">t_remain</span> <span class="o">=</span> <span class="n">t_elapsed</span> <span class="o">/</span> <span class="n">n_converted</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_todo</span><span class="p">)</span> <span class="o">-</span> <span class="n">i_row</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">t_remain</span> <span class="o">=</span> <span class="n">t_elapsed</span> <span class="o">/</span> <span class="n">i_row</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_todo</span><span class="p">)</span> <span class="o">-</span> <span class="n">i_row</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">Processed </span><span class="si">{:4d}</span><span class="s2">/</span><span class="si">{}</span><span class="s2"> urls (</span><span class="si">{:6.2f}</span><span class="s2">%) in </span><span class="si">{}</span><span class="s2"> (approx. </span><span class="si">{}</span><span class="s2"> remaining)&quot;</span>
+                    <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">padding</span><span class="p">,</span>
+                        <span class="n">i_row</span><span class="p">,</span>
+                        <span class="nb">len</span><span class="p">(</span><span class="n">df_todo</span><span class="p">),</span>
+                        <span class="mi">100</span> <span class="o">*</span> <span class="n">i_row</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_todo</span><span class="p">),</span>
+                        <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">t_elapsed</span><span class="p">),</span>
+                        <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">t_remain</span><span class="p">),</span>
+                    <span class="p">),</span>
+                    <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Change the file extension of the output file</span>
+            <span class="n">destination</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;member_dest&quot;</span><span class="p">]</span>
+            <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">destination</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">ext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">VALID_IMG_EXTENSIONS</span><span class="p">:</span>
+                <span class="n">destination</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">destination</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.jpg&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">destination</span> <span class="o">=</span> <span class="n">destination</span> <span class="o">+</span> <span class="s2">&quot;.jpg&quot;</span>
+
+            <span class="c1"># Check if we already did this file</span>
+            <span class="k">if</span> <span class="n">destination</span> <span class="ow">in</span> <span class="n">output_contents</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">skip_existing</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">EnvironmentError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Destination </span><span class="si">{</span><span class="n">destination</span><span class="si">}</span><span class="s2"> already exists within </span><span class="si">{</span><span class="n">fname_dest</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">innerpad</span><span class="si">}</span><span class="s2">Output already exists at </span><span class="si">{</span><span class="n">destination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">n_already_converted</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">is_valid</span><span class="p">[</span><span class="n">i_row</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="c1"># Update this row&#39;s image column to have the correct extension</span>
+                <span class="n">df_todo</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;member_dest&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">destination</span>
+                <span class="n">df_todo</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Process the file</span>
+            <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">dir_tmp</span><span class="p">:</span>
+                <span class="n">fname_in</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;member_source&quot;</span><span class="p">]</span>
+                <span class="n">fname_tmp_new</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_tmp</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">destination</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">innerpad</span><span class="si">}</span><span class="s2">  Converting </span><span class="si">{</span><span class="n">destination</span><span class="si">}</span><span class="s2"> to JPEG </span><span class="si">{</span><span class="n">fname_tmp_new</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+                <span class="c1"># Check if the input file name needs to be tweaked</span>
+                <span class="k">if</span> <span class="n">fname_in</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">input_contents</span> <span class="ow">and</span> <span class="n">flexible_source_path</span><span class="p">:</span>
+                    <span class="c1"># Check to see if the input exists if we drop the dataset name</span>
+                    <span class="c1"># prefix on the path</span>
+                    <span class="n">fname_in2</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fname_in</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
+                    <span class="k">if</span> <span class="n">fname_in2</span> <span class="ow">in</span> <span class="n">input_contents</span><span class="p">:</span>
+                        <span class="n">fname_in</span> <span class="o">=</span> <span class="n">fname_in2</span>
+                <span class="k">if</span> <span class="n">fname_in</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">input_contents</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">innerpad</span><span class="si">}</span><span class="s2">  Missing input </span><span class="si">{</span><span class="n">fname_in</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">fname_source</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">n_missing</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">missing_stream</span><span class="p">:</span>
+                        <span class="n">missing_stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fname_in</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="c1"># Extract file contents</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># Extract to file. Can&#39;t read TIFF files from the tarball</span>
+                    <span class="c1"># directly. If we try, we get an error:</span>
+                    <span class="c1"># &#39;_FileInFile&#39; object has no attribute &#39;fileno&#39;</span>
+                    <span class="c1"># https://github.com/numpy/numpy/issues/7989</span>
+                    <span class="c1"># The simplest solution is to extract the file to /tmp.</span>
+                    <span class="n">tar_in</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">fname_in</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">dir_tmp</span><span class="p">)</span>
+                    <span class="n">im</span> <span class="o">=</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_tmp</span><span class="p">,</span> <span class="n">fname_in</span><span class="p">))</span>
+                    <span class="c1"># Do the conversion</span>
+                    <span class="k">if</span> <span class="n">target_len</span><span class="p">:</span>
+                        <span class="n">im</span><span class="p">,</span> <span class="n">is_shrunk</span> <span class="o">=</span> <span class="n">shrink_image_by_length</span><span class="p">(</span>
+                            <span class="n">im</span><span class="p">,</span> <span class="n">target_len</span><span class="o">=</span><span class="n">target_len</span><span class="p">,</span> <span class="n">return_is_shrunk</span><span class="o">=</span><span class="kc">True</span>
+                        <span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">is_shrunk</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">mode</span> <span class="o">!=</span> <span class="s2">&quot;RGB&quot;</span><span class="p">:</span>
+                        <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+                    <span class="n">quality</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="s2">&quot;keep&quot;</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_shrunk</span> <span class="ow">and</span> <span class="n">im</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s2">&quot;JPEG&quot;</span>
+                        <span class="k">else</span> <span class="n">jpeg_quality</span>
+                    <span class="p">)</span>
+                    <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fname_tmp_new</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="n">quality</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error while handling: </span><span class="si">{</span><span class="n">fname_in</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+                    <span class="n">n_error</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">error_stream</span><span class="p">:</span>
+                        <span class="n">error_stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fname_in</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="c1"># Add to tarball</span>
+                <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">innerpad</span><span class="si">}</span><span class="s2">  Adding </span><span class="si">{</span><span class="n">fname_tmp_new</span><span class="si">}</span><span class="s2"> to archive as </span><span class="si">{</span><span class="n">destination</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fname_dest</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tar_out</span><span class="p">:</span>
+                    <span class="n">tar_out</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">fname_tmp_new</span><span class="p">,</span> <span class="n">arcname</span><span class="o">=</span><span class="n">destination</span><span class="p">)</span>
+                    <span class="n">output_contents</span> <span class="o">=</span> <span class="n">tar_out</span><span class="o">.</span><span class="n">getnames</span><span class="p">()</span>
+                <span class="n">n_converted</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="c1"># Record that this row was successfully converted</span>
+            <span class="n">is_valid</span><span class="p">[</span><span class="n">i_row</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="c1"># Update this row&#39;s image column to have the correct extension</span>
+            <span class="n">df_todo</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;member_dest&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">destination</span>
+            <span class="n">df_todo</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">Finished processing </span><span class="si">{}</span><span class="s2"> images in </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">padding</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_todo</span><span class="p">),</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">n_already_converted</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">n_already_converted</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_todo</span><span class="p">):</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;All&quot;</span>
+            <span class="k">elif</span> <span class="n">n_already_converted</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;There was&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;There were&quot;</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot; </span><span class="si">{}</span><span class="s2"> image</span><span class="si">{}</span><span class="s2"> already converted.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">n_already_converted</span><span class="p">,</span>
+                <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">n_already_converted</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_error</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="s2">&quot;There </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> conversion error</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="s2">&quot;was&quot;</span> <span class="k">if</span> <span class="n">n_error</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;were&quot;</span><span class="p">,</span>
+                    <span class="n">n_error</span><span class="p">,</span>
+                    <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">n_error</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_missing</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There were </span><span class="si">{</span><span class="n">n_missing</span><span class="si">}</span><span class="s2"> missing input images.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_converted</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">n_converted</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_todo</span><span class="p">):</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;All </span><span class="si">{}</span><span class="s2"> images were converted.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_converted</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;The remaining </span><span class="si">{}</span><span class="s2"> image</span><span class="si">{}</span><span class="s2"> converted.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">n_converted</span><span class="p">,</span>
+                    <span class="s2">&quot; was&quot;</span> <span class="k">if</span> <span class="n">n_converted</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;s were&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">messages</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">padding</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">messages</span><span class="p">),</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Remove invalid rows</span>
+    <span class="n">df_todo</span> <span class="o">=</span> <span class="n">df_todo</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">is_valid</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">df_todo</span></div>
+
+
+<div class="viewcode-block" id="convert_images_by_dataset"><a class="viewcode-back" href="../../source/packages/benthicnet.convert_images_tar.html#benthicnet.convert_images_tar.convert_images_by_dataset">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">convert_images_by_dataset</span><span class="p">(</span>
+    <span class="n">tar_dir_source</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">,</span>
+    <span class="n">df_source</span><span class="p">,</span>
+    <span class="n">df_dest</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">skip_existing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">inplace_df</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">i_proc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_proc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">use_tqdm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">print_indent</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download all images from a DataFrame into tarfiles, one for each dataset.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tar_dir_source : str</span>
+<span class="sd">        Path to directory containing input tarballs.</span>
+<span class="sd">    output_dir : str</span>
+<span class="sd">        Path to output directory.</span>
+<span class="sd">    df_source : pandas.DataFrame</span>
+<span class="sd">        Input DataFrame, containing mappings from URLs to image paths.</span>
+<span class="sd">    df_dest : pandas.DataFrame</span>
+<span class="sd">        Destination DataFrame, listing files to process.</span>
+<span class="sd">    skip_existing : bool, optional</span>
+<span class="sd">        Whether to silently skip converting files for which the destination</span>
+<span class="sd">        already exist. Otherwise an error is raised. Default is ``True``.</span>
+<span class="sd">    inplace_df : bool, optional</span>
+<span class="sd">        Whether operations on dataframes can be performed in place.</span>
+<span class="sd">        Default is ``True``.</span>
+<span class="sd">    i_proc : int or None, optional</span>
+<span class="sd">        Run on only a subset of the datasets in the CSV file. If ``None``</span>
+<span class="sd">        (default), the entire dataset will be converted by this process.</span>
+<span class="sd">        Otherwise, `n_proc` must also be set, and ``1/n_proc``-th of the</span>
+<span class="sd">        datasets will be processed.</span>
+<span class="sd">    n_proc : int or None, optional</span>
+<span class="sd">        Number of processes being run in parallel. Default is ``None``.</span>
+<span class="sd">    verbose : int, optional</span>
+<span class="sd">        Verbosity level. Default is ``1``.</span>
+<span class="sd">    use_tqdm : bool, optional</span>
+<span class="sd">        Whether to use tqdm to print progress. Disable if stdout is being</span>
+<span class="sd">        written to a file. Default is ``True``.</span>
+<span class="sd">    print_indent : int, optional</span>
+<span class="sd">        Amount of whitespace padding to precede print statements.</span>
+<span class="sd">        Default is ``0``.</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Additional keword arguments as per :func:`download_images`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">padding</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">print_indent</span>
+
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">df_source</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">df_dest</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;At least one of df_source and df_dest must be given.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">i_proc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">n_proc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
+        <span class="n">i_proc</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">n_proc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Both i_proc and n_proc must be defined when partitioning the CSV file.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">skip_existing</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Existing outputs will result in an error.&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">df_todo</span> <span class="o">=</span> <span class="n">handle_input_dfs</span><span class="p">(</span><span class="n">df_source</span><span class="p">,</span> <span class="n">df_dest</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="n">inplace_df</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+    <span class="c1"># Sanitise dataset names</span>
+    <span class="n">df_todo</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">sanitize_filename_series</span><span class="p">(</span><span class="n">df_todo</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">])</span>
+    <span class="c1"># Get source tarball file names</span>
+    <span class="n">df_todo</span><span class="p">[</span><span class="s2">&quot;_tarball_source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">df_todo</span><span class="p">[</span><span class="s2">&quot;member_source&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;.tar&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create mapping from unique datasets to rows which bear that dataset</span>
+    <span class="n">dataset2idx</span> <span class="o">=</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">unique_map</span><span class="p">(</span><span class="n">df_todo</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">])</span>
+    <span class="n">datasets_to_process</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dataset2idx</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n_proc</span><span class="p">:</span>
+        <span class="n">partition_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset2idx</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_proc</span>
+        <span class="n">i_proc</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">i_proc</span> <span class="o">==</span> <span class="n">n_proc</span> <span class="k">else</span> <span class="n">i_proc</span>
+        <span class="n">start_idx</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">i_proc</span> <span class="o">*</span> <span class="n">partition_size</span><span class="p">)</span>
+        <span class="n">end_idx</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">i_proc</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">partition_size</span><span class="p">)</span>
+        <span class="n">datasets_to_process</span> <span class="o">=</span> <span class="n">datasets_to_process</span><span class="p">[</span><span class="n">start_idx</span><span class="p">:</span><span class="n">end_idx</span><span class="p">]</span>
+
+    <span class="n">n_to_process</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">datasets_to_process</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">There are </span><span class="si">{}</span><span class="s2"> datasets in the CSV file.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">padding</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset2idx</span><span class="p">)</span>
+            <span class="p">),</span>
+            <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_proc</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">Worker </span><span class="si">{}</span><span class="s2"> of </span><span class="si">{}</span><span class="s2">. Will process </span><span class="si">{}</span><span class="s2"> datasets:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">padding</span><span class="p">,</span> <span class="n">i_proc</span><span class="p">,</span> <span class="n">n_proc</span><span class="p">,</span> <span class="n">n_to_process</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">datasets_to_process</span><span class="p">)</span>
+
+    <span class="n">using_tqdm</span> <span class="o">=</span> <span class="n">verbose</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">use_tqdm</span>
+
+    <span class="n">using_tqdm</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">for</span> <span class="n">i_dataset</span><span class="p">,</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+        <span class="n">tqdm</span><span class="p">(</span><span class="n">datasets_to_process</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Datasets&quot;</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">using_tqdm</span><span class="p">)</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">using_tqdm</span> <span class="ow">and</span> <span class="n">i_dataset</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">t_elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+            <span class="n">t_remain</span> <span class="o">=</span> <span class="n">t_elapsed</span> <span class="o">/</span> <span class="n">i_dataset</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_to_process</span> <span class="o">-</span> <span class="n">i_dataset</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">Processed </span><span class="si">{:3d}</span><span class="s2">/</span><span class="si">{}</span><span class="s2"> dataset</span><span class="si">{}</span><span class="s2"> (</span><span class="si">{:6.2f}</span><span class="s2">%) in </span><span class="si">{}</span><span class="s2"> (approx. </span><span class="si">{}</span><span class="s2">&quot;</span>
+                <span class="s2">&quot; remaining)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">padding</span><span class="p">,</span>
+                    <span class="n">i_dataset</span><span class="p">,</span>
+                    <span class="n">n_to_process</span><span class="p">,</span>
+                    <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">n_to_process</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+                    <span class="mi">100</span> <span class="o">*</span> <span class="n">i_dataset</span> <span class="o">/</span> <span class="n">n_to_process</span><span class="p">,</span>
+                    <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">t_elapsed</span><span class="p">),</span>
+                    <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">t_remain</span><span class="p">),</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">using_tqdm</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s1">&#39;</span><span class="se">\n</span><span class="si">{}</span><span class="s1">Processing dataset &quot;</span><span class="si">{}</span><span class="s1">&quot; (</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">padding</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">i_dataset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_to_process</span>
+                <span class="p">),</span>
+                <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">subdf</span> <span class="o">=</span> <span class="n">df_todo</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">dataset2idx</span><span class="p">[</span><span class="n">dataset</span><span class="p">]]</span>
+        <span class="n">fname_dest</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;tar&quot;</span><span class="p">,</span> <span class="n">dataset</span> <span class="o">+</span> <span class="s2">&quot;.tar&quot;</span><span class="p">)</span>
+
+        <span class="n">sourcedataset2subidx</span> <span class="o">=</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">unique_map</span><span class="p">(</span><span class="n">subdf</span><span class="p">[</span><span class="s2">&quot;_tarball_source&quot;</span><span class="p">])</span>
+
+        <span class="n">error_fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;errors&quot;</span><span class="p">,</span> <span class="n">dataset</span> <span class="o">+</span> <span class="s2">&quot;.log&quot;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">error_fname</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">missing_fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;missing&quot;</span><span class="p">,</span> <span class="n">dataset</span> <span class="o">+</span> <span class="s2">&quot;.log&quot;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">missing_fname</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Check if any source tarball exists for this dataset. If not, we won&#39;t</span>
+        <span class="c1"># clobber the error log file.</span>
+        <span class="k">for</span> <span class="n">fname_source</span> <span class="ow">in</span> <span class="n">sourcedataset2subidx</span><span class="p">:</span>
+            <span class="n">fname_source_full</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tar_dir_source</span><span class="p">,</span> <span class="n">fname_source</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname_source_full</span><span class="p">):</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s2">No source tarballs available for </span><span class="si">{</span><span class="n">dataset</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="n">outdfs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">error_fname</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">error_stream</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span>
+            <span class="n">missing_fname</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">missing_stream</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">fname_source</span> <span class="ow">in</span> <span class="n">sourcedataset2subidx</span><span class="p">:</span>
+                <span class="n">fname_source_full</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tar_dir_source</span><span class="p">,</span> <span class="n">fname_source</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname_source_full</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s2">Missing tarball: </span><span class="si">{</span><span class="n">fname_source_full</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="n">outdfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">convert_images</span><span class="p">(</span>
+                        <span class="n">fname_source_full</span><span class="p">,</span>
+                        <span class="n">fname_dest</span><span class="p">,</span>
+                        <span class="n">subdf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">sourcedataset2subidx</span><span class="p">[</span><span class="n">fname_source</span><span class="p">]],</span>
+                        <span class="n">skip_existing</span><span class="o">=</span><span class="n">skip_existing</span><span class="p">,</span>
+                        <span class="n">error_stream</span><span class="o">=</span><span class="n">error_stream</span><span class="p">,</span>
+                        <span class="n">missing_stream</span><span class="o">=</span><span class="n">missing_stream</span><span class="p">,</span>
+                        <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="n">use_tqdm</span><span class="o">=</span><span class="n">use_tqdm</span><span class="p">,</span>
+                        <span class="n">print_indent</span><span class="o">=</span><span class="n">print_indent</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="n">empty_error_log</span> <span class="o">=</span> <span class="n">error_stream</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span>
+            <span class="n">missing_error_log</span> <span class="o">=</span> <span class="n">missing_stream</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">empty_error_log</span><span class="p">:</span>
+            <span class="c1"># Delete empty file</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">error_fname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">missing_error_log</span><span class="p">:</span>
+            <span class="c1"># Delete empty file</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">missing_fname</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">outdfs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Merge output dataframe</span>
+            <span class="n">outdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">outdfs</span><span class="p">)</span>
+            <span class="c1"># Drop or rename working columns</span>
+            <span class="n">outdf</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+                <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;member_source&quot;</span><span class="p">,</span> <span class="s2">&quot;_tarball_source&quot;</span><span class="p">],</span>
+                <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">outdf</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;member_dest&quot;</span><span class="p">:</span> <span class="s2">&quot;path&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># Ensure dataset, site, and image are filename-safe versions</span>
+            <span class="n">outdf</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">sanitize_filename_series</span><span class="p">(</span><span class="n">outdf</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">])</span>
+            <span class="n">outdf</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">sanitize_filename_series</span><span class="p">(</span><span class="n">outdf</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">])</span>
+            <span class="n">outdf</span><span class="p">[</span><span class="s2">&quot;image&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">sanitize_filename_series</span><span class="p">(</span><span class="n">outdf</span><span class="p">[</span><span class="s2">&quot;image&quot;</span><span class="p">])</span>
+            <span class="c1"># Save CSV output</span>
+            <span class="n">csv_fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;csv&quot;</span><span class="p">,</span> <span class="n">dataset</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">csv_fname</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s2">Saving as </span><span class="si">{</span><span class="n">csv_fname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">outdf</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">csv_fname</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">using_tqdm</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Processed </span><span class="si">{}</span><span class="s2"> dataset</span><span class="si">{}</span><span class="s2"> in </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">n_to_process</span><span class="p">,</span>
+                <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">n_to_process</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+                <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="convert_images_by_dataset_from_csv"><a class="viewcode-back" href="../../source/packages/benthicnet.convert_images_tar.html#benthicnet.convert_images_tar.convert_images_by_dataset_from_csv">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">convert_images_by_dataset_from_csv</span><span class="p">(</span>
+    <span class="n">input_dir</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">,</span>
+    <span class="n">csv_fname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">align_input_csv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">skip_existing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">use_tqdm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download all images from a CSV file into tarfiles, one for each dataset.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    input_dir : str</span>
+<span class="sd">        Path to input directory.</span>
+<span class="sd">    output_dir : str</span>
+<span class="sd">        Path to output directory.</span>
+<span class="sd">    csv_fname : str, optional</span>
+<span class="sd">        Path to CSV file containing the todo list. If this is not given, every</span>
+<span class="sd">        file in the input CSV files will be processed.</span>
+<span class="sd">    align_input_csv : str or bool, optional</span>
+<span class="sd">        Input CSV to align the todo list CSV against. Alignment is done by URL</span>
+<span class="sd">        where possible, and otherwise by output path.</span>
+<span class="sd">        If this argument is given without a file, the CSV files will be taken</span>
+<span class="sd">        from the ``&quot;csv&quot;`` subdirectory of ``input_dir``.</span>
+<span class="sd">    skip_existing : bool, optional</span>
+<span class="sd">        Whether to skip downloading files for which the destination already</span>
+<span class="sd">        exist. Default is ``True``.</span>
+<span class="sd">    verbose : int, optional</span>
+<span class="sd">        Verbosity level. Default is ``1``.</span>
+<span class="sd">    use_tqdm : bool, optional</span>
+<span class="sd">        Whether to use tqdm to print progress. Disable if stdout is being</span>
+<span class="sd">        written to a file. Default is ``True``.</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Additional arguments as per :func:`convert_images_by_dataset`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">csv_fname</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">align_input_csv</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;At least one of csv_fname and align_input_csv must be given.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Will convert images from </span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2"> into smaller JPEGs&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Into directory: </span><span class="si">{</span><span class="n">output_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">skip_existing</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Existing outputs will be skipped.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Existing outputs will generate an error.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Load input CSV to align against</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">align_input_csv</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">PurePath</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;Reading CSV file </span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">)...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">align_input_csv</span><span class="p">,</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file_size</span><span class="p">(</span><span class="n">align_input_csv</span><span class="p">)</span>
+                <span class="p">),</span>
+                <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">df_source</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">align_input_csv</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;Loaded CSV file </span><span class="si">{}</span><span class="s2"> in </span><span class="si">{:.1f}</span><span class="s2"> seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">align_input_csv</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+                <span class="p">),</span>
+                <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">align_input_csv</span><span class="p">:</span>
+        <span class="n">input_csvs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="s2">&quot;csv&quot;</span><span class="p">)))</span>
+        <span class="n">input_dfs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">using_tqdm</span> <span class="o">=</span> <span class="n">verbose</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">use_tqdm</span>
+
+        <span class="k">for</span> <span class="n">csv_file_input_i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+            <span class="n">input_csvs</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Input CSV files&quot;</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">using_tqdm</span>
+        <span class="p">):</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">csv_file_input_i</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;.csv&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="s2">&quot;csv&quot;</span><span class="p">,</span> <span class="n">csv_file_input_i</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;Reading CSV file </span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">)...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">fname</span><span class="p">,</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file_size</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+                    <span class="p">),</span>
+                    <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="n">input_dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;Loaded CSV file </span><span class="si">{}</span><span class="s2"> in </span><span class="si">{:.1f}</span><span class="s2"> seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">fname</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+                    <span class="p">),</span>
+                    <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="p">)</span>
+
+        <span class="n">df_source</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">input_dfs</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">df_source</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Destination/TODO CSV file</span>
+    <span class="k">if</span> <span class="n">csv_fname</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df_todo</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;Reading CSV file (</span><span class="si">{}</span><span class="s2">)...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">benthicnet</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file_size</span><span class="p">(</span><span class="n">csv_fname</span><span class="p">)),</span>
+                <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">df_todo</span> <span class="o">=</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_fname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;Loaded CSV file in </span><span class="si">{:.1f}</span><span class="s2"> seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="s2">&quot;tar&quot;</span><span class="p">)):</span>
+        <span class="n">input_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="s2">&quot;tar&quot;</span><span class="p">)</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">convert_images_by_dataset</span><span class="p">(</span>
+        <span class="n">input_dir</span><span class="p">,</span>
+        <span class="n">output_dir</span><span class="p">,</span>
+        <span class="n">df_source</span><span class="p">,</span>
+        <span class="n">df_todo</span><span class="p">,</span>
+        <span class="n">skip_existing</span><span class="o">=</span><span class="n">skip_existing</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+        <span class="n">use_tqdm</span><span class="o">=</span><span class="n">use_tqdm</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Total runtime: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)),</span>
+            <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="get_parser"><a class="viewcode-back" href="../../source/packages/benthicnet.convert_images_tar.html#benthicnet.convert_images_tar.get_parser">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_parser</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build CLI parser for converting a tarfile of images into smaller JPEGs.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    parser : argparse.ArgumentParser</span>
+<span class="sd">        CLI argument parser.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+
+    <span class="n">prog</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">prog</span> <span class="o">==</span> <span class="s2">&quot;__main__.py&quot;</span> <span class="ow">or</span> <span class="n">prog</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+        <span class="n">prog</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">prog</span><span class="o">=</span><span class="n">prog</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Convert files from tarball of images to another, by matching on URL.&quot;</span><span class="p">,</span>
+        <span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-h&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--help&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;help&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Show this help message and exit.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--version&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-V&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;version&quot;</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(prog)s</span><span class="s2"> </span><span class="si">{version}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="n">__meta__</span><span class="o">.</span><span class="n">version</span><span class="p">),</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Show program&#39;s version number and exit.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;input_dir&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Directory containing tar and csv sources.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;output_dir&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Directory in which output tarballs and csv files with be placed.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--csv-todo&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;csv_fname&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to CSV file specifying images to process, in the BenthicNet format.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--align-input-csv&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">const</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Input CSV to align todo list CSV against. Alignment is done by URL</span>
+<span class="sd">            where possible, and otherwise by output path.</span>
+<span class="sd">            If this argument is given without a file, the collection of CSV</span>
+<span class="sd">            files from INPUT_DIR will be used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--jpeg-quality&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Quality to use when converting to JPEG. Default is </span><span class="si">%(default)s</span><span class="s2">.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--target-len&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Minimum image side length. Default is %(default)s.</span>
+<span class="sd">            Set to 0 or -1 to disable.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--no-progress-bar&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;use_tqdm&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_false&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Disable tqdm progress bar.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--nproc&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;n_proc&quot;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;NPROC&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of processing partitions being run.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--iproc&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--proc&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;i_proc&quot;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;IPROC&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Partition index for this process.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--fail-existing&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;skip_existing&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_false&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Raise an error if any outputs already exist in the target tarfile.</span>
+<span class="sd">            Default behaviour is to quietly skip processing any existing files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--verbose&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-v&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Increase the level of verbosity of the program. This can be</span>
+<span class="sd">            specified multiple times, each will increase the amount of detail</span>
+<span class="sd">            printed to the terminal. The default verbosity level is %(default)s.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--quiet&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-q&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Decrease the level of verbosity of the program. This can be</span>
+<span class="sd">            specified multiple times, each will reduce the amount of detail</span>
+<span class="sd">            printed to the terminal.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">parser</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../source/packages/benthicnet.convert_images_tar.html#benthicnet.convert_images_tar.main">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run command line interface for downloading images to tarfiles by dataset.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">get_parser</span><span class="p">()</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;verbose&quot;</span><span class="p">]</span> <span class="o">-=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;quiet&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">convert_images_by_dataset_from_csv</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Scott C. Lowe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Scott C. Lowe.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,747 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>benthicnet.io &#8212; benthicnet 0.1.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/rtd_sphinx_search.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/js/rtd_search_config.js"></script>
+    <script src="../../_static/js/rtd_sphinx_search.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/benthicnet/io';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">benthicnet 0.1.dev0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../source/programs/programs.html">CLI Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/download_images.html">benthicnet-download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/download_images_tar.html">benthicnet-download-tar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/convert_images_tar.html">benthicnet-convert-tar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/subsample.html">benthicnet-subsample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/tar2tar.html">benthicnet-tar2tar</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../source/packages/modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../source/packages/benthicnet.html">benthicnet package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.aphia_ID_processing.html">benthicnet.aphia_ID_processing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.convert_images_tar.html">benthicnet.convert_images_tar module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.download_images.html">benthicnet.download_images module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.download_images_tar.html">benthicnet.download_images_tar module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.io.html">benthicnet.io module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.kde_tools.html">benthicnet.kde_tools module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.partition.html">benthicnet.partition module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.plotting.html">benthicnet.plotting module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.subsample.html">benthicnet.subsample module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.tar2tar.html">benthicnet.tar2tar module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.utils.html">benthicnet.utils module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../py-modindex.html">Module Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for benthicnet.io</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">CSV file handling functions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+
+<div class="viewcode-block" id="delayed_delete"><a class="viewcode-back" href="../../source/packages/benthicnet.io.html#benthicnet.io.delayed_delete">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">delayed_delete</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">t_wait</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Delete a file, after a delay in which the user can interrupt the process.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fname : str</span>
+<span class="sd">        Path to file to delete.</span>
+<span class="sd">    t_wait : int or float, default=5</span>
+<span class="sd">        Number of seconds to wait before deletion.</span>
+<span class="sd">    verbose : int, default=1</span>
+<span class="sd">        Level of verbosity.</span>
+<span class="sd">    padding : str, default=&quot;&quot;</span>
+<span class="sd">        String to prepend to each line of printed text.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+        <span class="k">return</span>
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s2">File </span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2"> will be deleted in </span><span class="si">{</span><span class="n">t_wait</span><span class="si">}</span><span class="s2"> seconds...&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s2">Deleting in&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t_wait</span> <span class="o">//</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; </span><span class="si">{}</span><span class="s2">...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t_wait</span> <span class="o">-</span> <span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Deleting!&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">t_wait</span> <span class="o">%</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">t_wait</span> <span class="o">%</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">t_wait</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s2">Existing file </span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2"> deleted&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="read_csv"><a class="viewcode-back" href="../../source/packages/benthicnet.io.html#benthicnet.io.read_csv">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">read_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">expect_datetime</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load a BenthicNet CSV file with dtype set correctly for expected fields.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fname : str</span>
+<span class="sd">        Path to CSV file.</span>
+<span class="sd">    expect_datetime : bool, default=True</span>
+<span class="sd">        Whether to expect a datetime column. If ``True``, this will be parsed</span>
+<span class="sd">        as a datetime column. This must be set to ``False`` if the CSV file</span>
+<span class="sd">        does not have a ``datetime`` column.</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Additional arguments as per :func:`pandas.read_csv`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">extra_columns</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">expect_datetime</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;parse_dates&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;parse_dates&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+        <span class="n">fname</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;altitude&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">&quot;dataset&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">&quot;datetime&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">extra_columns</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="clean_df"><a class="viewcode-back" href="../../source/packages/benthicnet.io.html#benthicnet.io.clean_df">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">clean_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clean dataframe by removing trailing spaces from string columns.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pandas.DataFrame</span>
+<span class="sd">        Dataframe in BenthicNet format.</span>
+<span class="sd">    inplace : bool, optional</span>
+<span class="sd">        Whether the cleaning operation should be inplace.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    df : pandas.DataFrame</span>
+<span class="sd">        Cleaned dataframe.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">,</span> <span class="s2">&quot;site&quot;</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="count_lines"><a class="viewcode-back" href="../../source/packages/benthicnet.io.html#benthicnet.io.count_lines">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">count_lines</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Count the number of lines in a file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        Path to file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        Number of lines in file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">_i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">_i</span> <span class="o">+</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="file_size"><a class="viewcode-back" href="../../source/packages/benthicnet.io.html#benthicnet.io.file_size">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">file_size</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the size of a file, in human readable units.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        Path to file.</span>
+<span class="sd">    sf : int, optional</span>
+<span class="sd">        Number of significant figures to include. Default is `3`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        The size of the file in human readable format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">convert_bytes</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert units of bytes into human readable kB, MB, GB, or TB.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;bytes&quot;</span><span class="p">,</span> <span class="s2">&quot;kB&quot;</span><span class="p">,</span> <span class="s2">&quot;MB&quot;</span><span class="p">,</span> <span class="s2">&quot;GB&quot;</span><span class="p">,</span> <span class="s2">&quot;TB&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="mi">1024</span><span class="p">:</span>
+                <span class="n">num</span> <span class="o">/=</span> <span class="mi">1024</span>
+                <span class="k">continue</span>
+            <span class="n">digits</span> <span class="o">=</span> <span class="n">sf</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">digits</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">digits</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="n">digits</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">:</span>
+                <span class="n">digits</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">digits</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">digits</span><span class="p">)</span>
+            <span class="n">fmt</span> <span class="o">=</span> <span class="s2">&quot;{:.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">digits</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;f} </span><span class="si">{}</span><span class="s2">&quot;</span>
+            <span class="k">return</span> <span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">convert_bytes</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="sanitize_filename"><a class="viewcode-back" href="../../source/packages/benthicnet.io.html#benthicnet.io.sanitize_filename">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">sanitize_filename</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">allow_dotfiles</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sanitise strings in a Series, to remove characters forbidden in filenames.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    text : str</span>
+<span class="sd">        A string.</span>
+<span class="sd">    allow_dotfiles : bool, optional</span>
+<span class="sd">        Whether to allow leading periods. Leading periods indicate hidden files</span>
+<span class="sd">        on Linux. Default is `False`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.Series</span>
+<span class="sd">        Sanitised version of `series`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Replace NaN values with empty string</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="c1"># Remove non-ascii characters</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">,</span> <span class="s2">&quot;ignore&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Folder names cannot end with a period in Windows. In Unix, a leading</span>
+    <span class="c1"># period means the file or folder is normally hidden.</span>
+    <span class="c1"># For this reason, we trim away leading and trailing periods as well as</span>
+    <span class="c1"># spaces.</span>
+    <span class="k">if</span> <span class="n">allow_dotfiles</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; .&quot;</span><span class="p">)</span>
+
+    <span class="c1"># On Windows, a filename cannot contain any of the following characters:</span>
+    <span class="c1"># \ / : * ? &quot; &lt; &gt; |</span>
+    <span class="c1"># Other operating systems are more permissive.</span>
+    <span class="c1"># Replace / with a hyphen</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+    <span class="c1"># Use a blacklist to remove any remaining forbidden characters</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[\/:*?&quot;&lt;&gt;|]+&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span></div>
+
+
+<div class="viewcode-block" id="sanitize_filename_series"><a class="viewcode-back" href="../../source/packages/benthicnet.io.html#benthicnet.io.sanitize_filename_series">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">sanitize_filename_series</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">allow_dotfiles</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sanitise strings in a Series, to remove characters forbidden in filenames.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    series : pandas.Series</span>
+<span class="sd">        Input Series of values.</span>
+<span class="sd">    allow_dotfiles : bool, optional</span>
+<span class="sd">        Whether to allow leading periods. Leading periods indicate hidden files</span>
+<span class="sd">        on Linux. Default is `False`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.Series</span>
+<span class="sd">        Sanitised version of `series`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Make a copy so we do not modify the original</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="c1"># Replace NaN values with empty string</span>
+    <span class="n">series</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">series</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="c1"># Remove non-ascii characters</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">,</span> <span class="s2">&quot;ignore&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Folder names cannot end with a period in Windows. In Unix, a leading</span>
+    <span class="c1"># period means the file or folder is normally hidden.</span>
+    <span class="c1"># For this reason, we trim away leading and trailing periods as well as</span>
+    <span class="c1"># spaces.</span>
+    <span class="k">if</span> <span class="n">allow_dotfiles</span><span class="p">:</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; .&quot;</span><span class="p">)</span>
+
+    <span class="c1"># On Windows, a filename cannot contain any of the following characters:</span>
+    <span class="c1"># \ / : * ? &quot; &lt; &gt; |</span>
+    <span class="c1"># Other operating systems are more permissive.</span>
+    <span class="c1"># Replace / with a hyphen</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># Use a blacklist to remove any remaining forbidden characters</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[\/:*?&quot;&lt;&gt;|]+&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">series</span></div>
+
+
+<div class="viewcode-block" id="row2basename"><a class="viewcode-back" href="../../source/packages/benthicnet.io.html#benthicnet.io.row2basename">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">row2basename</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">use_url_extension</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Map row to image basename, with extension as per the URL.</span>
+
+<span class="sd">    The basename is taken from the image field, extension from the URL field.</span>
+<span class="sd">    If the image field is empty, the basename of the URL is used instead.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    row : dict</span>
+<span class="sd">        Pandas row or otherwise dictionary-like object with field ``&quot;url&quot;``</span>
+<span class="sd">        and, optionally, ``&quot;image&quot;``.</span>
+<span class="sd">    use_url_extension : bool, default=True</span>
+<span class="sd">        Whether to override the file extension in the image column with the</span>
+<span class="sd">        extension in the URL.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    basename : str</span>
+<span class="sd">        The basename of the image to download.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;image&quot;</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+        <span class="n">basename</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;image&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">basename</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">basename</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">basename</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]):</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">basename</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">basename</span> <span class="o">=</span> <span class="n">sanitize_filename</span><span class="p">(</span><span class="n">basename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">use_url_extension</span> <span class="ow">or</span> <span class="s2">&quot;url&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">row</span> <span class="ow">or</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="n">basename</span>
+    <span class="k">if</span> <span class="s2">&quot;url&quot;</span> <span class="ow">in</span> <span class="n">row</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]):</span>
+        <span class="c1"># Ensure we enclude the extension from the URL</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">basename</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">expected_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">expected_ext</span> <span class="ow">and</span> <span class="n">ext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="n">expected_ext</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">ext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;.jpeg&quot;</span><span class="p">}:</span>
+                <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">basename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">expected_ext</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">basename</span> <span class="o">=</span> <span class="n">basename</span> <span class="o">+</span> <span class="n">expected_ext</span>
+    <span class="k">return</span> <span class="n">basename</span></div>
+
+
+<div class="viewcode-block" id="determine_outpath"><a class="viewcode-back" href="../../source/packages/benthicnet.io.html#benthicnet.io.determine_outpath">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">determine_outpath</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">use_url_extension</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine output path (assuming non-tar file output) to each image.</span>
+
+<span class="sd">    The output path is in the format &lt;dataset&gt;/&lt;site&gt;/&lt;imagename.jpg&gt;.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pandas.DataFrame</span>
+<span class="sd">        Dataset with columns ``&quot;dataset&quot;``,  ``&quot;site&quot;``, ``&quot;url&quot;`` and</span>
+<span class="sd">        (optionally) ``&quot;image&quot;``.</span>
+<span class="sd">    use_url_extension : bool, default=True</span>
+<span class="sd">        Whether to override the file extension in the image column with the</span>
+<span class="sd">        extension in the URL.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    df : pandas.Series of str</span>
+<span class="sd">        Output paths to each image in the dataset.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">sanitize_filename_series</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">])</span>
+        <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+        <span class="o">+</span> <span class="n">sanitize_filename_series</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">])</span>
+        <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+        <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">row2basename</span><span class="p">,</span> <span class="n">use_url_extension</span><span class="o">=</span><span class="n">use_url_extension</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="fixup_repeated_output_paths"><a class="viewcode-back" href="../../source/packages/benthicnet.io.html#benthicnet.io.fixup_repeated_output_paths">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">fixup_repeated_output_paths</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rename image values to prevent output path collisions.</span>
+
+<span class="sd">    The new name takes extra content from the url field to prevent collisions.</span>
+<span class="sd">    If more than 4 components of the URL would be needed, image is padded with</span>
+<span class="sd">    an incrementing counter instead (_0, _1, ..., _N).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pandas.DataFrame</span>
+<span class="sd">        Dataset with columns ``&quot;dataset&quot;``,  ``&quot;site&quot;``, ``&quot;url&quot;`` and</span>
+<span class="sd">        (optionally) ``&quot;image&quot;``.</span>
+<span class="sd">    inplace : bool, default=True</span>
+<span class="sd">        Whether to overwrite the contents of the input dataframe.</span>
+<span class="sd">    verbose : int, default=1</span>
+<span class="sd">        Level of output verbosity.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    df : pandas.DataFrame</span>
+<span class="sd">        Like input, but with the content of the ``&quot;image&quot;`` field updated to</span>
+<span class="sd">        prevent collisions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;_outpath&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">determine_outpath</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">dup_outpaths</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;_outpath&quot;</span><span class="p">)][</span><span class="s2">&quot;_outpath&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dup_outpaths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are no duplicated output paths in this dataframe&quot;</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;_outpath&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span>
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dup_outpaths</span><span class="p">)</span><span class="si">}</span><span class="s2"> duplicated output paths in this dataframe&quot;</span>
+        <span class="p">)</span>
+    <span class="k">for</span> <span class="n">dup_outpath</span> <span class="ow">in</span> <span class="n">dup_outpaths</span><span class="p">:</span>
+        <span class="n">is_bad</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;_outpath&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">dup_outpath</span>
+        <span class="n">n_bad</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">is_bad</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Trying to fix up </span><span class="si">{</span><span class="n">n_bad</span><span class="si">}</span><span class="s2"> repetitions of the path </span><span class="si">{</span><span class="n">dup_outpath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># 1. Try taking the basename from the URL instead</span>
+        <span class="c1"># We will try taking just the last bit (photoname.jpg), then including preceding bits</span>
+        <span class="c1"># of the URL (subsite/photoname.jpg, site/subsite/photoname.jpg)</span>
+        <span class="n">subdf</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">is_bad</span><span class="p">]</span>
+        <span class="n">resolved</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+            <span class="n">new_basenames</span> <span class="o">=</span> <span class="n">subdf</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">sanitize_filename</span><span class="p">(</span>
+                    <span class="s2">&quot;-&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="n">k</span><span class="p">:])</span>  <span class="c1"># noqa: B023</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="c1"># All URL basenames are unique, so we are done</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_basenames</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_basenames</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">is_bad</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_basenames</span>
+            <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Using last </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> part(s) of the URL as the basename&quot;</span><span class="p">)</span>
+            <span class="n">resolved</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">resolved</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c1"># 2. If that didn&#39;t work, just append _0, _1, ... _N to the image names</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Appending a suffix to the basename to prevent collisions&quot;</span><span class="p">)</span>
+        <span class="n">new_basenames</span> <span class="o">=</span> <span class="n">subdf</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">row2basename</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">new_basenames</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">new_basenames</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="o">+</span> <span class="s2">&quot;_&quot;</span>
+            <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bad</span><span class="p">)],</span> <span class="n">index</span><span class="o">=</span><span class="n">new_basenames</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">new_basenames</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">is_bad</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_basenames</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;_outpath&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Scott C. Lowe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Scott C. Lowe.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1397 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>benthicnet.subsample &#8212; benthicnet 0.1.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/rtd_sphinx_search.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/js/rtd_search_config.js"></script>
+    <script src="../../_static/js/rtd_sphinx_search.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/benthicnet/subsample';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">benthicnet 0.1.dev0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../source/programs/programs.html">CLI Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/download_images.html">benthicnet-download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/download_images_tar.html">benthicnet-download-tar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/convert_images_tar.html">benthicnet-convert-tar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/subsample.html">benthicnet-subsample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/programs/tar2tar.html">benthicnet-tar2tar</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../source/packages/modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../source/packages/benthicnet.html">benthicnet package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.aphia_ID_processing.html">benthicnet.aphia_ID_processing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.convert_images_tar.html">benthicnet.convert_images_tar module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.download_images.html">benthicnet.download_images module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.download_images_tar.html">benthicnet.download_images_tar module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.io.html">benthicnet.io module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.kde_tools.html">benthicnet.kde_tools module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.partition.html">benthicnet.partition module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.plotting.html">benthicnet.plotting module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.subsample.html">benthicnet.subsample module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.tar2tar.html">benthicnet.tar2tar module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/packages/benthicnet.utils.html">benthicnet.utils module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../py-modindex.html">Module Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for benthicnet.subsample</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Tools for subsampling datasets.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">haversine</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sklearn.neighbors</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tqdm</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">benthicnet.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">benthicnet.utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benthicnet</span><span class="w"> </span><span class="kn">import</span> <span class="n">__meta__</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.kde_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">EARTH_RADIUS</span>
+
+
+<div class="viewcode-block" id="subsample_distance"><a class="viewcode-back" href="../../source/packages/benthicnet.subsample.html#benthicnet.subsample.subsample_distance">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">subsample_distance</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;closest&quot;</span><span class="p">,</span>
+    <span class="n">exhaustive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">exclude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude_dist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">include_last</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">tree</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">tree_exclude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">return_tree</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subsample data based on distance between records.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pandas.DataFrame</span>
+<span class="sd">        Dataframe to process, with latitude and longitude columns. Data must be</span>
+<span class="sd">        ordered with sequential samples in sequence.</span>
+<span class="sd">    threshold : float, optional</span>
+<span class="sd">        Minimum distance between samples, in metres. Default is ``2.5``.</span>
+<span class="sd">    method : {&quot;closest&quot;, &quot;threshold&quot;}, optional</span>
+<span class="sd">        Which method to use when subsampling. Default is ``&quot;closest&quot;``.</span>
+
+<span class="sd">        threshold</span>
+<span class="sd">            A row must be at least ``threshold`` metres from the last included</span>
+<span class="sd">            row to be included.</span>
+<span class="sd">        closest</span>
+<span class="sd">            The distance ``threshold`` is treated as a target distance.</span>
+<span class="sd">            The closest row to the target distance from the last included row</span>
+<span class="sd">            is included. This may be closer or further away from the last row</span>
+<span class="sd">            than ``threshold``.</span>
+
+<span class="sd">    exhaustive : bool, default=True</span>
+<span class="sd">        Whether to check the distance to all previous points before marking a</span>
+<span class="sd">        new point point to be included in the subsampled series.</span>
+<span class="sd">    exclude : array-like, optional</span>
+<span class="sd">        A set of latitude/longitude coordinates to avoid.</span>
+<span class="sd">    exclude_dist : float, optional</span>
+<span class="sd">        Distance by which to exclude coordinates specified in ``exclude``.</span>
+<span class="sd">        Default is ``threshold / 2``.</span>
+<span class="sd">    verbose : int, optional</span>
+<span class="sd">        Verbosity level. Default is ``0``.</span>
+<span class="sd">    include_last : bool or None, optional</span>
+<span class="sd">        Whether to include the last row regardless of its distance from the</span>
+<span class="sd">        preceding included row.</span>
+<span class="sd">        If ``False``, the last row in `df` is included only if it is further than</span>
+<span class="sd">        ``threshold`` metres from the preceding included row.</span>
+<span class="sd">        If ``None``, the last row in `df` is included only if it is further than</span>
+<span class="sd">        ``threshold / 2`` metres from the preceding included row.</span>
+<span class="sd">        If ``True``, the last row in `df` is always included.</span>
+<span class="sd">        Default is ``None``.</span>
+<span class="sd">    tree : sklearn.neighbors.BallTree or None, optional</span>
+<span class="sd">        Pre-built BallTree object, made from this set of latitude and longitude</span>
+<span class="sd">        coordinates.</span>
+<span class="sd">    tree_exclude : sklearn.neighbors.BallTree or None, optional</span>
+<span class="sd">        Pre-built BallTree object, made from the set of latitude and longitude</span>
+<span class="sd">        coordinates given in ``exclude``.</span>
+<span class="sd">    return_tree : bool, default=False</span>
+<span class="sd">        Whether to return the compiled BallTree object.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    df_subsampled : pandas.DataFrame</span>
+<span class="sd">        Dataframe like `df`, but with only a subset of the rows included.</span>
+<span class="sd">    tree : sklearn.neighbors.BallTree, optional</span>
+<span class="sd">        Pre-built BallTree object, made from this set of latitude and longitude</span>
+<span class="sd">        coordinates.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Remove entries without latitude/longitude</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+    <span class="c1"># Only two entries, so return both</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">return_tree</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">df</span>
+    <span class="c1"># Measure distance between entries using Haversine method</span>
+    <span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">haversine</span><span class="o">.</span><span class="n">haversine_vector</span><span class="p">(</span><span class="n">xy</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">xy</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">unit</span><span class="o">=</span><span class="n">haversine</span><span class="o">.</span><span class="n">Unit</span><span class="o">.</span><span class="n">METERS</span><span class="p">)</span>
+
+    <span class="c1"># If all entries are further apart than the threshold, return everything</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;closest&quot;</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">distances</span> <span class="o">&gt;</span> <span class="n">threshold</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span>
+        <span class="n">distances</span> <span class="o">&gt;=</span> <span class="n">threshold</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="n">return_tree</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">df</span>
+    <span class="c1"># Create ball tree for fast search</span>
+    <span class="k">if</span> <span class="n">exhaustive</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">tree</span><span class="p">:</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">neighbors</span><span class="o">.</span><span class="n">BallTree</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">xy</span><span class="p">),</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;haversine&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">exclude</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">tree_exclude</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">neighbors</span><span class="o">.</span><span class="n">BallTree</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">exclude</span><span class="p">),</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;haversine&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">tree_exclude</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">exhaustive</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Can&#39;t perform global exclusion with exhaustive mode disabled.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">exclude_dist</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">exclude_dist</span> <span class="o">=</span> <span class="n">threshold</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="c1"># Create list of indices of entries to include</span>
+    <span class="c1"># Always include the first image</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">indices_to_keep</span> <span class="o">=</span> <span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="c1"># Determine cumulative distance traversed</span>
+    <span class="n">cumulative_distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Added row </span><span class="si">{}</span><span class="s2">. </span><span class="si">{}</span><span class="s2"> records remaining to traverse.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">idx</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cumulative_distances</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="c1"># Find where the distance travelled exceeds threshold</span>
+    <span class="k">while</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">first_nonzero</span><span class="p">(</span><span class="n">cumulative_distances</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;threshold&quot;</span><span class="p">:</span>
+            <span class="n">offset</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;closest&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">offset</span> <span class="o">==</span> <span class="mi">0</span>
+                <span class="ow">or</span> <span class="n">cumulative_distances</span><span class="p">[</span><span class="n">offset</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">threshold</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="ow">or</span> <span class="n">cumulative_distances</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span> <span class="o">-</span> <span class="n">threshold</span>
+                <span class="o">&lt;=</span> <span class="n">threshold</span> <span class="o">-</span> <span class="n">cumulative_distances</span><span class="p">[</span><span class="n">offset</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="p">):</span>
+                <span class="n">offset</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unsupported method: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">exhaustive</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;threshold&quot;</span><span class="p">:</span>
+                <span class="n">exhaustive_thr</span> <span class="o">=</span> <span class="n">threshold</span>
+            <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;closest&quot;</span><span class="p">:</span>
+                <span class="n">exhaustive_thr</span> <span class="o">=</span> <span class="n">threshold</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">set_to_keep</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">indices_to_keep</span><span class="p">)</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">idx</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+                    <span class="k">break</span>
+                <span class="n">this_coord</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="n">offset</span><span class="p">][</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span>
+                    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="n">offset</span><span class="p">][</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span>
+                <span class="p">]</span>
+                <span class="n">neighbours</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query_radius</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">this_coord</span><span class="p">)],</span>
+                    <span class="n">exhaustive_thr</span> <span class="o">/</span> <span class="n">EARTH_RADIUS</span><span class="p">,</span>
+                <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">set_to_keep</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">neighbours</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">tree_exclude</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">break</span>
+                    <span class="c1"># Check there are no neighbours in the exclusion list</span>
+                    <span class="n">global_neighbours</span> <span class="o">=</span> <span class="n">tree_exclude</span><span class="o">.</span><span class="n">query_radius</span><span class="p">(</span>
+                        <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">this_coord</span><span class="p">)],</span>
+                        <span class="n">exclude_dist</span> <span class="o">/</span> <span class="n">EARTH_RADIUS</span><span class="p">,</span>
+                    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">global_neighbours</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">break</span>
+                <span class="n">offset</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">offset</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cumulative_distances</span><span class="p">):</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+                <span class="k">break</span>
+        <span class="n">idx</span> <span class="o">+=</span> <span class="n">offset</span>
+        <span class="n">indices_to_keep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+        <span class="n">this_distance</span> <span class="o">=</span> <span class="n">cumulative_distances</span><span class="p">[</span><span class="n">offset</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">cumulative_distances</span> <span class="o">=</span> <span class="n">cumulative_distances</span><span class="p">[</span><span class="n">offset</span><span class="p">:]</span> <span class="o">-</span> <span class="n">this_distance</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Added row </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> (moved </span><span class="si">{</span><span class="n">this_distance</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> m).&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cumulative_distances</span><span class="p">)</span><span class="si">}</span><span class="s2"> records remaining to traverse.&quot;</span>
+            <span class="p">)</span>
+    <span class="k">if</span> <span class="n">indices_to_keep</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="p">(</span>
+        <span class="n">include_last</span>
+        <span class="ow">or</span> <span class="p">(</span><span class="n">include_last</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">cumulative_distances</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">threshold</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">):</span>
+        <span class="c1"># Add the last frame</span>
+        <span class="n">indices_to_keep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added row </span><span class="si">{}</span><span class="s2"> (last row).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">indices_to_keep</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="k">if</span> <span class="n">return_tree</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">indices_to_keep</span><span class="p">],</span> <span class="n">tree</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">indices_to_keep</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="subsample_index"><a class="viewcode-back" href="../../source/packages/benthicnet.subsample.html#benthicnet.subsample.subsample_index">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">subsample_index</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">target_population</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subsample data based on distance between records.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pandas.DataFrame</span>
+<span class="sd">        Dataframe to process. Data is assumed to be ordered by sample datetime.</span>
+<span class="sd">    target_population : int</span>
+<span class="sd">        Desired number of samples.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        Dataframe like `df`, but with only a subset of the rows included.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">target_population</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">target_population</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="coordinate_centroid"><a class="viewcode-back" href="../../source/packages/benthicnet.subsample.html#benthicnet.subsample.coordinate_centroid">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">coordinate_centroid</span><span class="p">(</span><span class="n">latitudes</span><span class="p">,</span> <span class="n">longitudes</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Take the center coordinate via normal vectors, $n_E$.</span>
+
+<span class="sd">    https://www.ffi.no/en/research/n-vector/n-vector-explained</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    latitudes : array-like</span>
+<span class="sd">        Latitude of coordinates.</span>
+<span class="sd">    longitudes : array-like</span>
+<span class="sd">        Longitudes of coordinates.</span>
+<span class="sd">    degrees : bool, default=True</span>
+<span class="sd">        Whether the inputs are in degrees, otherwise they are expected to be</span>
+<span class="sd">        radians.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    c_latitude : float</span>
+<span class="sd">        The latitude of the centroid, in degrees if ``degrees=True``,</span>
+<span class="sd">        otherwise in radians.</span>
+<span class="sd">    c_longitude : float</span>
+<span class="sd">        The longitude of the centroid, in degrees if ``degrees=True``,</span>
+<span class="sd">        otherwise in radians.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">latitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">latitudes</span><span class="p">)</span>
+        <span class="n">longitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">longitudes</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">latitudes</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">longitudes</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">latitudes</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">longitudes</span><span class="p">))</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">latitudes</span><span class="p">))</span>
+
+    <span class="n">c_longitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">c_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">c_latitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">c_norm</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">c_latitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">c_latitude</span><span class="p">)</span>
+        <span class="n">c_longitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">c_longitude</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">c_latitude</span><span class="p">,</span> <span class="n">c_longitude</span></div>
+
+
+<div class="viewcode-block" id="coordinate_center_independent"><a class="viewcode-back" href="../../source/packages/benthicnet.subsample.html#benthicnet.subsample.coordinate_center_independent">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">coordinate_center_independent</span><span class="p">(</span><span class="n">latitudes</span><span class="p">,</span> <span class="n">longitudes</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Take the center of latitude and longitude, independently.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    latitudes : array-like</span>
+<span class="sd">        Latitude of coordinates.</span>
+<span class="sd">    longitudes : array-like</span>
+<span class="sd">        Longitudes of coordinates.</span>
+<span class="sd">    degrees : bool, default=True</span>
+<span class="sd">        Whether the inputs are in degrees, otherwise they are expected to be</span>
+<span class="sd">        radians.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    c_latitude : float</span>
+<span class="sd">        The central latitude, in degrees if ``degrees=True``,</span>
+<span class="sd">        otherwise in radians.</span>
+<span class="sd">    c_longitude : float</span>
+<span class="sd">        The central longitude, in degrees if ``degrees=True``,</span>
+<span class="sd">        otherwise in radians.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">latitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">latitudes</span><span class="p">)</span>
+        <span class="n">longitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">longitudes</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">latitudes</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">latitudes</span><span class="p">))</span>
+    <span class="n">c_latitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">longitudes</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">longitudes</span><span class="p">))</span>
+    <span class="n">c_longitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">c_latitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">c_latitude</span><span class="p">)</span>
+        <span class="n">c_longitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">c_longitude</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">c_latitude</span><span class="p">,</span> <span class="n">c_longitude</span></div>
+
+
+<div class="viewcode-block" id="count_subsites"><a class="viewcode-back" href="../../source/packages/benthicnet.subsample.html#benthicnet.subsample.count_subsites">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">count_subsites</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">subsite_distance</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">return_tree</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Count the number of subsites, detected by distance between consecutive samples.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pandas.DataFrame</span>
+<span class="sd">    subsite_distance : float, default=500.0</span>
+<span class="sd">    return_tree : bool, optional</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    num_subsites : int</span>
+<span class="sd">        The number of subsites in the dataframe.</span>
+<span class="sd">    tree : sklearn.neighbors.BallTree or None, optional</span>
+<span class="sd">        The fitted BallTree object used to verify subsite, if there were any</span>
+<span class="sd">        to check.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Ensure there are coordinates to compare</span>
+    <span class="n">select</span> <span class="o">=</span> <span class="o">~</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">select</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">n_subsite</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># No lat/lon data to evaluate subsites with</span>
+        <span class="k">if</span> <span class="n">return_tree</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n_subsite</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">n_subsite</span>
+    <span class="c1"># Measure distance between entries using Haversine method</span>
+    <span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">df</span><span class="p">[</span><span class="n">select</span><span class="p">][</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">select</span><span class="p">][</span><span class="s2">&quot;longitude&quot;</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">haversine</span><span class="o">.</span><span class="n">haversine_vector</span><span class="p">(</span><span class="n">xy</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">xy</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">unit</span><span class="o">=</span><span class="n">haversine</span><span class="o">.</span><span class="n">Unit</span><span class="o">.</span><span class="n">METERS</span><span class="p">)</span>
+    <span class="c1"># Check where the distance between consecutive samples exceeds the subsite</span>
+    <span class="c1"># distance</span>
+    <span class="n">is_subsite_boundary</span> <span class="o">=</span> <span class="n">distances</span> <span class="o">&gt;</span> <span class="n">subsite_distance</span>
+    <span class="n">n_subsite</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">is_subsite_boundary</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n_subsite</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># All datapoints are in one subsite</span>
+        <span class="k">if</span> <span class="n">return_tree</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n_subsite</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">n_subsite</span>
+
+    <span class="c1"># Check these subsites to make sure there&#39;s actually a gap with no samples</span>
+    <span class="c1"># in between this pair</span>
+    <span class="n">xy_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">neighbors</span><span class="o">.</span><span class="n">BallTree</span><span class="p">(</span><span class="n">xy_r</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;haversine&quot;</span><span class="p">)</span>
+    <span class="n">boundary_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">is_subsite_boundary</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">n_true_subsite</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">boundary_indices</span><span class="p">:</span>
+        <span class="c1"># Find the point in the middle of these two coordinates</span>
+        <span class="n">c_r</span> <span class="o">=</span> <span class="n">coordinate_centroid</span><span class="p">(</span>
+            <span class="n">xy_r</span><span class="p">[</span><span class="n">idx</span> <span class="p">:</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="n">xy_r</span><span class="p">[</span><span class="n">idx</span> <span class="p">:</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">degrees</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># Check if there are any points within 40% of the subsite distance</span>
+        <span class="c1"># of the midpoint</span>
+        <span class="n">neighbours</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query_radius</span><span class="p">([</span><span class="n">c_r</span><span class="p">],</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">subsite_distance</span> <span class="o">/</span> <span class="n">EARTH_RADIUS</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># If there are any neighbours, this is not a true change in subsite,</span>
+        <span class="c1"># just a bad ordering of the original coordinates.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">neighbours</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">n_true_subsite</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">return_tree</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n_true_subsite</span><span class="p">,</span> <span class="n">tree</span>
+    <span class="k">return</span> <span class="n">n_true_subsite</span></div>
+
+
+<div class="viewcode-block" id="subsample_distance_sitewise"><a class="viewcode-back" href="../../source/packages/benthicnet.subsample.html#benthicnet.subsample.subsample_distance_sitewise">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">subsample_distance_sitewise</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">distance</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+    <span class="n">min_population</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+    <span class="n">allow_nonspatial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">target_population</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">max_factor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">factors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">exhaustive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">global_exclusion</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">inter_site_distance</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span>
+    <span class="n">subsite_distance</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span>
+    <span class="n">subsite_population_bonus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">subsite_min_population_bonus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">use_tqdm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subsample a dataframe by distance between entries, for each site separately.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pandas.DataFrame</span>
+<span class="sd">        Must contain columns named ``latitude``, ``longitude``, and ``site``.</span>
+<span class="sd">    distance : float, default=2.5</span>
+<span class="sd">        Target distance between consecutive entries in the dataframe.</span>
+<span class="sd">    min_population : int, default=500</span>
+<span class="sd">        Sites with fewer than this many entries will not be subsampled.</span>
+<span class="sd">    allow_nonspatial : bool, default=True</span>
+<span class="sd">        Handle sites with heavily duplicated coordinates with non-spatial</span>
+<span class="sd">        downsampling instead. The threshold is when the number of unique lat/lon</span>
+<span class="sd">        coordinates is higher than the number of samples per coordinate.</span>
+<span class="sd">    target_population : int or None, default=1000</span>
+<span class="sd">        Desired number of samples per site. The specified distance will</span>
+<span class="sd">        by multiplied by a factor 1, 2, 3, ..., `max_factor` until the population</span>
+<span class="sd">        falls below `target_population`; the largest factor before falling</span>
+<span class="sd">        below the `target_population` will be used.</span>
+<span class="sd">        Set to ``0``, ``-1``, or ``None`` to disable additional subsampling.</span>
+<span class="sd">    max_factor : int, default=4</span>
+<span class="sd">        Maximum distance factor to use when performing additional subsampling</span>
+<span class="sd">        for over populated sites.</span>
+<span class="sd">        The maximum distance at which to subsample is ``distance * max_factor``.</span>
+<span class="sd">    factors : list, default=None</span>
+<span class="sd">        Distance factors to use when performing additional subsampling</span>
+<span class="sd">        for over populated sites.</span>
+<span class="sd">        The distance will be multiplied by these factors to increase subsampling</span>
+<span class="sd">        for sites bearing more than the ``target_population``.</span>
+<span class="sd">    exhaustive : int, default=0</span>
+<span class="sd">        Whether to check the distance to all previous points before marking a</span>
+<span class="sd">        new point point to be included in the subsampled series.</span>
+<span class="sd">        If this is ``1``, an exhaustive search is performed for the initial</span>
+<span class="sd">        subsampling step.</span>
+<span class="sd">        If this is ``2``, an exhaustive search is performed for subsequent</span>
+<span class="sd">        subsampling steps to satisfy the target population limit as well.</span>
+<span class="sd">    global_exclusion : bool, default=False</span>
+<span class="sd">        Whether to ensure samples from all sites are sufficiently distant from</span>
+<span class="sd">        each other.</span>
+<span class="sd">    inter_site_distance : float, default=1000.0</span>
+<span class="sd">        Distance in meters between consecutive samples to detect a distinct</span>
+<span class="sd">        site.</span>
+<span class="sd">        Set to ``0`` or ``-1`` to disable.</span>
+<span class="sd">    subsite_distance : float, default=500.0</span>
+<span class="sd">        Distance in meters between consecutive samples to detect a subsite.</span>
+<span class="sd">    subsite_population_bonus : int or None, optional</span>
+<span class="sd">        Amount of increase in target population for every additional subsite</span>
+<span class="sd">        within the site.</span>
+<span class="sd">        Subsites are detected when there is a gap of at least</span>
+<span class="sd">        ``subsite_distance`` between samples.</span>
+<span class="sd">        Default is half of ``target_population``.</span>
+<span class="sd">        Set to ``0`` or ``-1`` to disable.</span>
+<span class="sd">    subsite_min_population_bonus : int or None, optional</span>
+<span class="sd">        Amount of increase in minimum population for every additional subsite</span>
+<span class="sd">        within the site.</span>
+<span class="sd">        Subsites are detected when there is a gap of at least</span>
+<span class="sd">        ``subsite_distance`` between samples.</span>
+<span class="sd">        Default is half of ``min_population``.</span>
+<span class="sd">        Set to ``0`` or ``-1`` to disable.</span>
+<span class="sd">    verbose : int, default=1</span>
+<span class="sd">        Verbosity level.</span>
+<span class="sd">    use_tqdm : bool, optional</span>
+<span class="sd">        Whether to use tqdm to print progress. Disable if stdout is sent to a</span>
+<span class="sd">        file. Default is ``True``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="n">site2indices</span> <span class="o">=</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">unique_map</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">])</span>
+    <span class="n">n_site</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">site2indices</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">factors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">max_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only one of factors and max_factor should be set.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">factors</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">max_factor</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">max_factor</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">factors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">max_factor</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">max_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">factors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_factor</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">max_factor</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">factors</span><span class="p">)</span>
+    <span class="n">factors</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">factors</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">factors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Factor can not be smaller than 1&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">factors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">factors</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">target_population</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">target_population</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">target_population</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">inter_site_distance</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">inter_site_distance</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">subsite_population_bonus</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">subsite_population_bonus</span> <span class="o">=</span> <span class="n">target_population</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">subsite_min_population_bonus</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">subsite_min_population_bonus</span> <span class="o">=</span> <span class="n">min_population</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">subsite_population_bonus</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">subsite_population_bonus</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">subsite_min_population_bonus</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">subsite_min_population_bonus</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Will subsample </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> records over </span><span class="si">{</span><span class="n">n_site</span><span class="si">}</span><span class="s2"> sites.&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  distance = </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s2">m&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  min_population = </span><span class="si">{</span><span class="n">min_population</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  target_population = </span><span class="si">{</span><span class="n">target_population</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  distance factors = </span><span class="si">{</span><span class="n">factors</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  allow_nonspatial = </span><span class="si">{</span><span class="n">allow_nonspatial</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  exhaustive = </span><span class="si">{</span><span class="n">exhaustive</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  inter_site_distance = </span><span class="si">{</span><span class="n">inter_site_distance</span><span class="si">}</span><span class="s2">m&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  subsite_distance = </span><span class="si">{</span><span class="n">subsite_distance</span><span class="si">}</span><span class="s2">m&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  subsite_population_bonus = </span><span class="si">{</span><span class="n">subsite_population_bonus</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  subsite_min_population_bonus = </span><span class="si">{</span><span class="n">subsite_min_population_bonus</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">n_below_thr</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_unchanged</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_subspatial</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_subindex</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">total_fullsite</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_fullsite_check</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_multiple_fullsite</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">total_subsite</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_subsite_check</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_multiple_subsite</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">tally_factors</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">:</span>
+        <span class="n">tally_factors</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">dfs_redacted</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">use_tqdm</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">sites_to_do_spatially</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">global_exclusion</span><span class="p">:</span>
+        <span class="n">global_coords_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">global_coords_list</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">global_tree</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Parse sites to find spatial datasets, and do non-spatial subsampling</span>
+    <span class="k">for</span> <span class="n">deployment</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span>
+        <span class="n">site2indices</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Preprocessing&quot;</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">use_tqdm</span>
+    <span class="p">):</span>
+        <span class="n">df_i</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">site2indices</span><span class="p">[</span><span class="n">deployment</span><span class="p">]]</span>
+        <span class="n">pre_population</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_i</span><span class="p">)</span>
+
+        <span class="n">n_coords</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_i</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;longitude&quot;</span><span class="p">]))</span>
+        <span class="n">samp_per_coord</span> <span class="o">=</span> <span class="n">pre_population</span> <span class="o">/</span> <span class="n">n_coords</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_nonspatial</span> <span class="ow">or</span> <span class="p">(</span>
+            <span class="n">target_population</span> <span class="ow">and</span> <span class="n">n_coords</span> <span class="o">&gt;=</span> <span class="n">target_population</span>
+        <span class="p">):</span>
+            <span class="n">use_spatial</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">use_spatial</span> <span class="o">=</span> <span class="n">n_coords</span> <span class="o">&gt;</span> <span class="n">samp_per_coord</span>
+
+        <span class="n">target_population_i</span> <span class="o">=</span> <span class="n">target_population</span>
+        <span class="n">min_population_i</span> <span class="o">=</span> <span class="n">min_population</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">target_population</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">inter_site_distance</span><span class="p">:</span>
+                <span class="n">n_fullsite</span><span class="p">,</span> <span class="n">tree</span> <span class="o">=</span> <span class="n">count_subsites</span><span class="p">(</span>
+                    <span class="n">df_i</span><span class="p">,</span> <span class="n">inter_site_distance</span><span class="p">,</span> <span class="n">return_tree</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">)</span>
+                <span class="n">total_fullsite</span> <span class="o">+=</span> <span class="n">n_fullsite</span>
+                <span class="n">n_fullsite_check</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">n_fullsite</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">n_multiple_fullsite</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">n_fullsite</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">subsite_population_bonus</span><span class="p">:</span>
+                <span class="n">n_subsite</span><span class="p">,</span> <span class="n">tree</span> <span class="o">=</span> <span class="n">count_subsites</span><span class="p">(</span>
+                    <span class="n">df_i</span><span class="p">,</span> <span class="n">subsite_distance</span><span class="p">,</span> <span class="n">return_tree</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">)</span>
+                <span class="n">total_subsite</span> <span class="o">+=</span> <span class="n">n_subsite</span>
+                <span class="n">n_subsite_check</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">n_subsite</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">n_multiple_subsite</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">n_subsite</span> <span class="o">=</span> <span class="n">n_fullsite</span>
+
+            <span class="n">target_population_i</span> <span class="o">=</span> <span class="n">target_population</span> <span class="o">*</span> <span class="n">n_fullsite</span>
+            <span class="n">target_population_i</span> <span class="o">+=</span> <span class="n">subsite_population_bonus</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span>
+                <span class="mi">0</span><span class="p">,</span> <span class="n">n_subsite</span> <span class="o">-</span> <span class="n">n_fullsite</span>
+            <span class="p">)</span>
+
+            <span class="n">min_population_i</span> <span class="o">=</span> <span class="n">min_population</span> <span class="o">*</span> <span class="n">n_fullsite</span>
+            <span class="n">min_population_i</span> <span class="o">+=</span> <span class="n">subsite_min_population_bonus</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span>
+                <span class="mi">0</span><span class="p">,</span> <span class="n">n_subsite</span> <span class="o">-</span> <span class="n">n_fullsite</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_i</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">min_population_i</span><span class="p">:</span>
+            <span class="n">n_below_thr</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">dfs_redacted</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_i</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">use_spatial</span> <span class="ow">and</span> <span class="n">global_exclusion</span><span class="p">:</span>
+                <span class="n">global_coords_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">df_i</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+                        <span class="o">~</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">df_i</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">df_i</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]),</span>
+                        <span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;longitude&quot;</span><span class="p">],</span>
+                    <span class="p">]</span>
+                <span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">use_spatial</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">target_population</span><span class="p">:</span>
+                <span class="n">df_i</span> <span class="o">=</span> <span class="n">subsample_index</span><span class="p">(</span><span class="n">df_i</span><span class="p">,</span> <span class="n">target_population_i</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_i</span><span class="p">)</span> <span class="o">==</span> <span class="n">pre_population</span><span class="p">:</span>
+                <span class="n">n_unchanged</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">n_subindex</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">dfs_redacted</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_i</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Add to the todo list, noting the target population</span>
+            <span class="n">sites_to_do_spatially</span><span class="p">[</span><span class="n">deployment</span><span class="p">]</span> <span class="o">=</span> <span class="n">target_population_i</span>
+
+    <span class="c1"># Do spatial subsampling.</span>
+    <span class="c1"># If global exclusion is enabled, we will avoid points added from sites</span>
+    <span class="c1"># below the threshold.</span>
+    <span class="k">for</span> <span class="n">deployment</span><span class="p">,</span> <span class="n">target_population_i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span>
+        <span class="n">sites_to_do_spatially</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Spatial subsampling&quot;</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">use_tqdm</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="n">global_exclusion</span><span class="p">:</span>
+            <span class="n">global_exclusion_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">global_coords_list</span><span class="p">)</span>
+            <span class="n">global_tree</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">neighbors</span><span class="o">.</span><span class="n">BallTree</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">global_exclusion_coords</span><span class="p">),</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;haversine&quot;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">global_exclusion_coords</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">global_tree</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">df_i</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">site2indices</span><span class="p">[</span><span class="n">deployment</span><span class="p">]]</span>
+        <span class="n">pre_population</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_i</span><span class="p">)</span>
+
+        <span class="n">df_i</span> <span class="o">=</span> <span class="n">subsample_distance</span><span class="p">(</span>
+            <span class="n">df_i</span><span class="p">,</span>
+            <span class="n">threshold</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="n">exhaustive</span><span class="o">=</span><span class="n">exhaustive</span><span class="p">,</span>
+            <span class="n">exclude</span><span class="o">=</span><span class="n">global_exclusion_coords</span><span class="p">,</span>
+            <span class="n">exclude_dist</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span>
+            <span class="n">tree</span><span class="o">=</span><span class="n">tree</span><span class="p">,</span>
+            <span class="n">tree_exclude</span><span class="o">=</span><span class="n">global_tree</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">factor_used</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">target_population</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">target_population_i</span><span class="p">:</span>
+            <span class="c1"># Try further subsampling at increased distances to reduce pop</span>
+            <span class="n">df_j</span> <span class="o">=</span> <span class="n">df_i</span>
+            <span class="n">tree2</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">i_factor</span><span class="p">,</span> <span class="n">factor</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">factors</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">factor</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">df_prev</span> <span class="o">=</span> <span class="n">df_j</span>
+                <span class="n">df_j</span><span class="p">,</span> <span class="n">tree2</span> <span class="o">=</span> <span class="n">subsample_distance</span><span class="p">(</span>
+                    <span class="n">df_i</span><span class="p">,</span>
+                    <span class="n">threshold</span><span class="o">=</span><span class="n">distance</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span>
+                    <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="n">exhaustive</span><span class="o">=</span><span class="n">exhaustive</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="n">exclude</span><span class="o">=</span><span class="n">global_exclusion_coords</span><span class="p">,</span>
+                    <span class="n">exclude_dist</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span>
+                    <span class="n">tree</span><span class="o">=</span><span class="n">tree2</span><span class="p">,</span>
+                    <span class="n">tree_exclude</span><span class="o">=</span><span class="n">global_tree</span><span class="p">,</span>
+                    <span class="n">return_tree</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_j</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">target_population_i</span><span class="p">:</span>
+                    <span class="n">df_j</span> <span class="o">=</span> <span class="n">df_prev</span>
+                    <span class="n">factor_used</span> <span class="o">=</span> <span class="n">factors</span><span class="p">[</span><span class="n">i_factor</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">factor_used</span> <span class="o">=</span> <span class="n">factor</span>
+            <span class="n">df_i</span> <span class="o">=</span> <span class="n">df_j</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_i</span><span class="p">)</span> <span class="o">==</span> <span class="n">pre_population</span><span class="p">:</span>
+            <span class="n">n_unchanged</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">n_subspatial</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">tally_factors</span><span class="p">[</span><span class="n">factor_used</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">dfs_redacted</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">global_exclusion</span><span class="p">:</span>
+            <span class="n">global_coords_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_i</span><span class="p">[[</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;longitude&quot;</span><span class="p">]])</span>
+
+    <span class="n">df_redacted</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dfs_redacted</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished downsampling in </span><span class="si">{:.1f}</span><span class="s2"> seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">inter_site_distance</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;There were </span><span class="si">{</span><span class="n">total_fullsite</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> auto-detected sites across&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">n_fullsite_check</span><span class="si">}</span><span class="s2"> annotated sites.&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">n_multiple_fullsite</span><span class="si">}</span><span class="s2"> annotated sites contained more than&quot;</span>
+                <span class="s2">&quot; one auto-detected site.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">subsite_population_bonus</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;There were </span><span class="si">{</span><span class="n">total_subsite</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> subsites across </span><span class="si">{</span><span class="n">n_subsite_check</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="s2">&quot; sites.&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">n_multiple_subsite</span><span class="si">}</span><span class="s2"> sites had more than one subsite.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">n_kept</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_redacted</span><span class="p">)</span>
+        <span class="n">out_str</span> <span class="o">=</span> <span class="s2">&quot;Kept </span><span class="si">{:5.2f}% o</span><span class="s2">f rows (</span><span class="si">{:7d}</span><span class="s2">/</span><span class="si">{:7d}</span><span class="s2">).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">n_kept</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">*</span> <span class="mf">100.0</span><span class="p">,</span> <span class="n">n_kept</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">out_str</span> <span class="o">+=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">There were </span><span class="si">{</span><span class="n">n_below_thr</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> sites below threshold (</span><span class="si">{</span><span class="n">min_population</span><span class="si">}</span><span class="s2">).&quot;</span>
+        <span class="p">)</span>
+        <span class="n">out_str</span> <span class="o">+=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">There were </span><span class="si">{</span><span class="n">n_unchanged</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> other sites which also remained unchanged.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">allow_nonspatial</span><span class="p">:</span>
+            <span class="n">out_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">There were </span><span class="si">{</span><span class="n">n_subindex</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> sites which were subsampled non-spatially.&quot;</span>
+        <span class="n">out_str</span> <span class="o">+=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">There were </span><span class="si">{</span><span class="n">n_subspatial</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> sites which were subsampled spatially.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">target_population</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">target_population</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tally_factors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">out_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">8d</span><span class="si">}</span><span class="s2"> sites subsampled at factor=</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">&gt;2d</span><span class="si">}</span><span class="s2"> (distance=</span><span class="si">{</span><span class="n">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">distance</span><span class="si">}</span><span class="s2">m)&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">out_str</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df_redacted</span></div>
+
+
+<div class="viewcode-block" id="subsample_distance_sitewise_from_csv"><a class="viewcode-back" href="../../source/packages/benthicnet.subsample.html#benthicnet.subsample.subsample_distance_sitewise_from_csv">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">subsample_distance_sitewise_from_csv</span><span class="p">(</span>
+    <span class="n">input_csv</span><span class="p">,</span>
+    <span class="n">output_csv</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subsample a CSV file by distance between records.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    input_csv : str</span>
+<span class="sd">        Path to input CSV file.</span>
+<span class="sd">    output_csv : str</span>
+<span class="sd">        Path to output CSV file.</span>
+<span class="sd">    verbose : int, default=1</span>
+<span class="sd">        Verbosity level</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Additional arguments as per subsample_distance_sitewise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Will subsample </span><span class="si">{</span><span class="n">input_csv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;            -&gt; </span><span class="si">{</span><span class="n">output_csv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Reading CSV file (</span><span class="si">{}</span><span class="s2">)...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">benthicnet</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">file_size</span><span class="p">(</span><span class="n">input_csv</span><span class="p">)),</span>
+            <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">benthicnet</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_csv</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loaded CSV file in </span><span class="si">{:.1f}</span><span class="s2"> seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="s2">&quot;latitude&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+        <span class="ow">and</span> <span class="s2">&quot;lat&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+        <span class="ow">and</span> <span class="s2">&quot;longitude&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+    <span class="p">):</span>
+        <span class="n">mapper</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="s2">&quot;latitude&quot;</span><span class="p">}</span>
+        <span class="k">if</span> <span class="s2">&quot;long&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">mapper</span><span class="p">[</span><span class="s2">&quot;long&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;longitude&quot;</span>
+        <span class="k">elif</span> <span class="s2">&quot;lon&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">mapper</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;longitude&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Must have a column named &#39;longitude&#39;, &#39;lon&#39;, or &#39;long&#39;, but&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; column names are: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">mapper</span><span class="p">)</span>
+        <span class="n">remapper</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">remapper</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="s2">&quot;latitude&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s2">&quot;longitude&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Latitude and longitude are required columns.&quot;</span><span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">subsample_distance_sitewise</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">remapper</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">remapper</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving CSV file </span><span class="si">{</span><span class="n">output_csv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">output_csv</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dirname</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_csv</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Total runtime: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)),</span>
+            <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_parser"><a class="viewcode-back" href="../../source/packages/benthicnet.subsample.html#benthicnet.subsample.get_parser">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_parser</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build CLI parser for downloading a dataset into tarfiles by dataset.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    parser : argparse.ArgumentParser</span>
+<span class="sd">        CLI argument parser.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+
+    <span class="n">prog</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">prog</span> <span class="o">==</span> <span class="s2">&quot;__main__.py&quot;</span> <span class="ow">or</span> <span class="n">prog</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+        <span class="n">prog</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">prog</span><span class="o">=</span><span class="n">prog</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            Subsample a dataframe, based on distance between samples.</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">,</span>
+        <span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-h&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--help&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;help&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Show this help message and exit.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--version&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-V&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;version&quot;</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(prog)s</span><span class="s2"> </span><span class="si">{version}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="n">__meta__</span><span class="o">.</span><span class="n">version</span><span class="p">),</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Show program&#39;s version number and exit.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;input_csv&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to input CSV file, in the BenthicNet format.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;output_csv&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to output CSV file.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--distance&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Target distance between consecutive entries in the dataframe.</span>
+<span class="sd">            Default is %(default)s.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--forbid-nonspatial&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;allow_nonspatial&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_false&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Disallow handling duplicated coordinates with non-spatial</span>
+<span class="sd">            downsampling.</span>
+<span class="sd">            If this is set, all sites will be spatially downsampled, even if</span>
+<span class="sd">            they have fewer samples per coordinate than unique coordinates.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--min-population&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Minimum number of samples in a single site for that site to be</span>
+<span class="sd">            subsampled. Default is %(default)s.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--target-population&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Desired number of samples per site. The specified distance will</span>
+<span class="sd">            by multiplied by a factor 1, 2, 3, ..., MAX_FACTOR until the</span>
+<span class="sd">            population falls below TARGET_POPULATION; the largest factor before</span>
+<span class="sd">            falling below the TARGET_POPULATION will be used.</span>
+<span class="sd">            Set to 0 or -1 to disable.</span>
+<span class="sd">            Default is %(default)s.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">()</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--max-factor&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Maximum distance factor to use when performing additional subsampling</span>
+<span class="sd">            for over populated sites.</span>
+<span class="sd">            The maximum distance at which to subsample is DISTANCE * MAX_FACTOR.</span>
+<span class="sd">            Default is [2, 3, 4].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--factors&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Set of distance factors consider when performing additional</span>
+<span class="sd">            subsampling for over populated sites.</span>
+<span class="sd">            Default is %(default)s.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--exhaustive&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">const</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Perform an exhaustive search of the previous</span>
+<span class="sd">            samples to ensure none are within DISTANCE/2 before including the</span>
+<span class="sd">            next sample.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--global&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;global_exclusion&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Ensure no samples are within DISTANCE/2 of each other, even across</span>
+<span class="sd">            multiple sites.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--site-distance&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--inter-site-distance&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;inter_site_distance&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Distance in meters between consecutive samples to detect a site.</span>
+<span class="sd">            Each site grants an increase in the target population equal to</span>
+<span class="sd">            TARGET_POPULATION.</span>
+<span class="sd">            Default is %(default)s.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--subsite-distance&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Distance in meters between consecutive samples to detect a subsite.</span>
+<span class="sd">            Each subsite grants an increase in the target population equal to</span>
+<span class="sd">            SUBSITE_POPULATION_BONUS.</span>
+<span class="sd">            Default is %(default)s.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--subsite-population-bonus&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Amount of increase in target population for every additional subsite</span>
+<span class="sd">            within the site.</span>
+<span class="sd">            Subsites are detected when there is a gap of at least</span>
+<span class="sd">            SUBSITE_DISTANCE between samples.</span>
+<span class="sd">            Default is half of TARGET_POPULATION.</span>
+<span class="sd">            Set to ``0`` or ``-1`` to disable.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--subsite-min-population-bonus&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Amount of increase in minimum population threshold for every</span>
+<span class="sd">            additional subsite within the site.</span>
+<span class="sd">            Default is half of MIN_POPULATION.</span>
+<span class="sd">            Set to ``0`` or ``-1`` to disable.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--no-progress-bar&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;use_tqdm&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_false&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Disable tqdm progress bar.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--verbose&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-v&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Increase the level of verbosity of the program. This can be</span>
+<span class="sd">            specified multiple times, each will increase the amount of detail</span>
+<span class="sd">            printed to the terminal. The default verbosity level is %(default)s.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--quiet&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-q&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Decrease the level of verbosity of the program. This can be</span>
+<span class="sd">            specified multiple times, each will reduce the amount of detail</span>
+<span class="sd">            printed to the terminal.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">parser</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../source/packages/benthicnet.subsample.html#benthicnet.subsample.main">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run command line interface for subsampling dataframe by distance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">get_parser</span><span class="p">()</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;verbose&quot;</span><span class="p">]</span> <span class="o">-=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;quiet&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">subsample_distance_sitewise_from_csv</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Scott C. Lowe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Scott C. Lowe.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
