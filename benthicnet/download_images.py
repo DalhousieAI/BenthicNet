@@ -167,7 +167,7 @@ def download_images_from_dataframe(
                     break
                 if r.status_code in [429, 500, 503]:
                     # Could also retry on [408, 502, 504, 599]
-                    if r.status_code == 429:
+                    if r.status_code == 429 or "pangaea.de/" in row["url"]:
                         # PANGAEA has a maximum of 180 requests within a 30s period
                         # Wait for this to cool off
                         t_wait = 30
